@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const apiPort = (
     process.env.VITE_DEV_API_PORT ||
     env.VITE_DEV_API_PORT ||
-    '8000'
+    '8001'
   ).trim()
 
   return {

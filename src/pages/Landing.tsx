@@ -92,9 +92,9 @@ const REASONING_STATUS_LINES = [
 
 function agentLabel(id: string): string {
   const map: Record<string, string> = {
-    orchestrator: 'Orchestrator',
+    orchestrator: 'NEOM analyst',
     clarification_agent: 'Clarification agent',
-    data_extraction: 'Orchestrator',
+    data_extraction: 'NEOM analyst',
     value_lens: 'Value lens agent',
     delivery_engine: 'Delivery engine agent',
     risk_radar: 'Risk radar agent',

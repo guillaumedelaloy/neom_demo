@@ -1,6 +1,11 @@
 from __future__ import annotations
 
 from api.services.data_cache import get_schedules
+from api.services.neom_sector_map import (
+    SECTOR_OVERVIEW_ORDER,
+    api_bundle_from_internal_disk_key,
+    neom_label_for_schedule_key,
+)
 
 # Internal keys in schedules.json still use legacy mining-era bundle names.
 _LEGACY_TO_INTERNAL = {"hospitality": "gold"}
@@ -14,9 +19,8 @@ def _normalize_bu_code(bu_code: str) -> str:
 
 
 def _public_bu_key(internal: str) -> str:
-    if internal == "gold":
-        return "hospitality"
-    return internal
+    return api_bundle_from_internal_disk_key(internal)
+
 
 TOOL_SCHEMAS = [
     {
@@ -24,8 +28,9 @@ TOOL_SCHEMAS = [
         "function": {
             "name": "get_schedule_overview",
             "description": (
-                "Cross-BU schedule health: milestone counts by RAG status per BU. "
-                "Use for portfolio-level schedule risk questions."
+                "Cross-sector IMP schedule health: milestone counts by RAG status **per NEOM sector**. "
+                "Return payload `schedule_overview` is keyed by **canonical NEOM sector names** (not legacy bundle codes). "
+                "Cite those keys verbatim in answers — never substitute words like aluminum, copper, REE, or hospitality."
             ),
             "parameters": {"type": "object", "properties": {}},
         },
@@ -35,10 +40,10 @@ TOOL_SCHEMAS = [
         "function": {
             "name": "get_bu_schedule",
             "description": (
-                "RAG status breakdown, milestones, and flagged tasks for one BU. "
+                "RAG status breakdown, milestones, and flagged tasks for one NEOM sector schedule bundle. "
                 "rag_summary counts ALL tasks (milestones are a subset). "
                 "When rag_filter is set, returns matching milestones AND non-milestone flagged_tasks separately. "
-                "Use for questions about a specific BU's project schedule or delays."
+                "Responses include `neom_sector` (executive name) — use that in answers; `bu_code` is only an internal tool argument."
             ),
             "parameters": {
                 "type": "object",
@@ -46,7 +51,14 @@ TOOL_SCHEMAS = [
                     "bu_code": {
                         "type": "string",
                         "enum": ["phosphate", "aluminum", "hospitality", "copper", "ree"],
-                        "description": "Sector schedule bundle (lowercase). Use `hospitality` for Luxury Tourism & Hospitality.",
+                        "description": (
+                            "Internal IMP bundle key (API only). Map from the user's wording: "
+                            "Urban Development & Smart Communities → phosphate; "
+                            "Special Economic Zone & Investment Platform / OXAGON → aluminum; "
+                            "Luxury Tourism & Hospitality → hospitality; "
+                            "Clean Energy & Green Industry → copper; "
+                            "Digital Infrastructure & AI → ree."
+                        ),
                     },
                     "rag_filter": {
                         "type": "string",
@@ -65,23 +77,35 @@ def get_schedule_overview() -> dict:
     bus_data = get_schedules().get("bus", {})
     if not bus_data:
         return {"error": "Schedule data not loaded. Run scripts/process_schedule_data.py first."}
-    overview = {}
+    by_neom: dict[str, dict] = {}
     for bu, data in bus_data.items():
         rag: dict[str, int] = {"Blue": 0, "Green": 0, "Amber": 0, "Red": 0, "Gray": 0}
         for t in data.get("tasks", []):
             rag[t.get("rag_status", "Gray")] = rag.get(t.get("rag_status", "Gray"), 0) + 1
         pub = _public_bu_key(bu)
-        overview[pub] = {"total_milestones": len(data.get("milestones", [])), "rag_summary": rag, "total_tasks": len(data.get("tasks", []))}
+        neom = neom_label_for_schedule_key(pub)
+        by_neom[neom] = {
+            "total_milestones": len(data.get("milestones", [])),
+            "rag_summary": rag,
+            "total_tasks": len(data.get("tasks", [])),
+        }
+    overview: dict[str, dict] = {}
+    for name in SECTOR_OVERVIEW_ORDER:
+        if name in by_neom:
+            overview[name] = by_neom[name]
+    for name, payload in by_neom.items():
+        if name not in overview:
+            overview[name] = payload
     return {"schedule_overview": overview}
 
 
 def get_bu_schedule(bu_code: str, rag_filter: str = "all") -> dict:
     raw = bu_code.strip().lower()
     if raw not in VALID_BUS_API:
-        return {"error": f"Unknown BU: {bu_code}. Valid options: {sorted(VALID_BUS_API)}"}
+        return {"error": f"Unknown sector bundle key: {bu_code}. Valid options: {sorted(VALID_BUS_API)}"}
     internal = _normalize_bu_code(raw)
     if internal not in _VALID_INTERNAL:
-        return {"error": f"Unknown BU: {bu_code}. Valid options: {sorted(VALID_BUS_API)}"}
+        return {"error": f"Unknown sector bundle key: {bu_code}. Valid options: {sorted(VALID_BUS_API)}"}
     data = get_schedules().get("bus", {}).get(internal)
     if data is None:
         return {"error": f"No schedule data for {bu_code}. Run scripts/process_schedule_data.py first."}
@@ -104,8 +128,8 @@ def get_bu_schedule(bu_code: str, rag_filter: str = "all") -> dict:
     else:
         flagged_tasks = []
 
-    result = {
-        "bu_code": raw,
+    result: dict = {
+        "neom_sector": neom_label_for_schedule_key(raw),
         "rag_summary": rag,
         "milestones": milestones,
         "total_tasks": len(all_tasks),
@@ -114,5 +138,3 @@ def get_bu_schedule(bu_code: str, rag_filter: str = "all") -> dict:
     if flagged_tasks:
         result["flagged_tasks"] = flagged_tasks
     return result
-
-

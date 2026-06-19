@@ -10,6 +10,8 @@ from api.schemas.chatbot_config import load_config
 from api.services import llm_client
 from api.services.llm_client import _safe_llm_err
 from api.services.prompt_loader import load_runtime_messages
+from api.services.neom_sector_map import neom_label_for_schedule_key
+from api.services.thinking_sanitize import sanitize_thinking_text
 from api.services.tools import TOOL_REGISTRY, TOOL_SCHEMAS
 
 _DEBUG = os.getenv("DEBUG_AGENT", "").lower() in ("1", "true", "yes")
@@ -52,7 +54,7 @@ _CONSOLIDATION_THINKING: str = _RUNTIME_MESSAGES.get(
 )
 _LLM_UNAVAILABLE: str = _RUNTIME_MESSAGES.get("llm_unavailable", "LLM unavailable")
 _BU_SCHEDULE_THINKING: str = _RUNTIME_MESSAGES.get(
-    "bu_schedule_thinking", "Loading schedule for {bu_code}…"
+    "bu_schedule_thinking", "Loading IMP schedule — {sector_label}…"
 )
 
 # Tiered pressure messages — fall back to legacy single template
@@ -107,7 +109,10 @@ def _thinking_msg(tool_name: str, args: dict) -> str | None:
         return None
     if tool_name == "get_bu_schedule":
         bu = args.get("bu_code", "")
-        return _BU_SCHEDULE_THINKING.format(bu_code=bu) if bu else _PROGRESS[tool_name]
+        if not bu:
+            return _PROGRESS[tool_name]
+        label = neom_label_for_schedule_key(str(bu))
+        return _BU_SCHEDULE_THINKING.format(sector_label=label)
     return _PROGRESS[tool_name]
 
 
@@ -208,7 +213,7 @@ async def stream_agent_response(
             history.append(_assistant_msg(msg))
             # Surface any model reasoning emitted alongside tool calls
             if msg.content and msg.content.strip():
-                yield f"data: {json.dumps({'type': 'thinking', 'content': msg.content.strip()})}\n\n"
+                yield f"data: {json.dumps({'type': 'thinking', 'content': sanitize_thinking_text(msg.content)})}\n\n"
             for tc in msg.tool_calls:
                 tool_calls_made.append(tc.function.name)
                 args = json.loads(tc.function.arguments or "{}")
@@ -217,7 +222,7 @@ async def stream_agent_response(
                 )
                 thinking = _thinking_msg(tc.function.name, args)
                 if thinking:
-                    yield f"data: {json.dumps({'type': 'thinking', 'content': thinking})}\n\n"
+                    yield f"data: {json.dumps({'type': 'thinking', 'content': sanitize_thinking_text(thinking)})}\n\n"
                 with logfire.span("tool call {tool}", tool=tc.function.name, args=args):
                     result = registry.get(tc.function.name)
                     tool_result = (

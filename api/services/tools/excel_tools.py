@@ -80,8 +80,8 @@ def describe_workbook() -> str:
         f"{meta.get('total_sheets', 0)} sheets total"
     ]
 
-    # BU alias map
-    lines.append("\nBU ALIASES (use these sheet names for financial queries):")
+    # Sector / consolidate sheet alias map (internal workbook labels)
+    lines.append("\nSECTOR SHEET ALIASES (use these sheet names for financial queries):")
     for alias, sheet in bu_aliases.items():
         lines.append(f"  {alias} → {sheet}")
 
@@ -135,7 +135,7 @@ TOOL_SCHEMAS = [
         "function": {
             "name": "describe_workbook",
             "description": (
-                "Returns a compact overview of the financial workbook: BU alias map, all sheet "
+                "Returns a compact overview of the financial workbook: sector sheet alias map, all sheet "
                 "names with dimensions and year ranges, and top labels for each sheet. Use this "
                 "to identify which sheet to preview — then call preview_sheet to see actual values."
             ),

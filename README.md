@@ -7,7 +7,7 @@ AI-native strategy execution cockpit for NEOM’s portfolio review cycle. Ingest
 ## Prerequisites
 
 - [uv](https://docs.astral.sh/uv/) — Python package manager (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
-- [Node.js](https://nodejs.org/) 18+ and [pnpm](https://pnpm.io/) — for the Vite frontend (`npm i -g pnpm`)
+- [Node.js](https://nodejs.org/) **20.19+**, **22.12+**, or **24.x** (LTS recommended; see `.nvmrc`) and [pnpm](https://pnpm.io/) — for the Vite 8 frontend (`npm i -g pnpm`). **Avoid Node 25** until Vite/Rolldown officially support it; if `pnpm dev` fails with `Cannot find module ... rolldown/parseAst`, use Node 22 and run `rm -rf node_modules && pnpm install`.
 - An **Anthropic API key** (Claude) — required for the agent
 - An **OpenAI API key** — required for RAG document search (embeddings)
 
@@ -121,21 +121,29 @@ Processed outputs land in `data_extract/processed/`. The RAG index is written to
 
 ## 5. Run the app
 
-The app has two processes. Start each in a separate terminal.
+The app has two processes. **The Vite proxy only forwards HTTP — it does not start Python.** If you see `http proxy error` / `ECONNREFUSED` on `127.0.0.1:8001`, nothing is listening on that port yet (start the backend below, or match `VITE_DEV_API_PORT` to the port you actually use).
 
-**Backend (FastAPI):**
+**Option A — one terminal (API + Vite together):**
 ```bash
-uv run uvicorn api.index:app --reload --reload-dir api --host 127.0.0.1 --port 8000
+pnpm install   # once, after pulling (adds concurrently)
+pnpm dev:stack
 ```
-Runs on `http://127.0.0.1:8000` by default. If port **8000** is already in use, pick another port (e.g. **8001**) and set the same value in `.env` as **`VITE_DEV_API_PORT=8001`** so the Vite proxy forwards `/api` to the correct process.
+
+**Option B — two terminals (recommended for clearer logs):**
+
+Terminal 1 — **Backend (FastAPI):**
+```bash
+uv run uvicorn api.index:app --reload --reload-dir api --host 127.0.0.1 --port 8001
+```
+Runs on `http://127.0.0.1:8001` by default in this repo — **Vite’s dev proxy defaults to the same port** (`vite.config.ts`). If your API listens on **8000** instead, set **`VITE_DEV_API_PORT=8000`** in `.env` or the shell and restart **`pnpm dev`**.
 
 > **Note:** `--reload` without `--reload-dir` watches the whole project folder, including `.venv/`, which can cause endless reloads right after `uv sync`. Restrict reload to `api/` as above (add more `--reload-dir` paths if you edit other Python packages used by the app).
 
-**Frontend (Vite):**
+Terminal 2 — **Frontend (Vite):**
 ```bash
 pnpm dev --host 127.0.0.1
 ```
-Runs on `http://127.0.0.1:5173` (or the next free port — check the terminal). With **`VITE_API_BASE_URL` unset**, the dev server proxies `/api/*` to **`http://127.0.0.1:${VITE_DEV_API_PORT}`** (default **8000**). For production or a remote API, set **`VITE_API_BASE_URL`** to the full backend origin (no trailing slash); that bypasses the proxy.
+Runs on `http://127.0.0.1:5173` (or the next free port — check the terminal). With **`VITE_API_BASE_URL` unset**, the dev server proxies `/api/*` to **`http://127.0.0.1:${VITE_DEV_API_PORT}`** (default **8001** in `vite.config.ts`). For production or a remote API, set **`VITE_API_BASE_URL`** to the full backend origin (no trailing slash); that bypasses the proxy.
 
 Open `http://127.0.0.1:5173` in your browser (use the URL Vite prints if the port differs).
 
@@ -231,7 +239,7 @@ Both Vercel and Cloud Run auto-deploy from their respective branches. Cloud Run 
 
 ### Frontend → Backend connection
 
-All frontend API calls use `getApiBase()` from `src/lib/api.ts`, which reads `VITE_API_BASE_URL` (set in Vercel env vars for production). For local dev, leave **`VITE_API_BASE_URL` empty** — the Vite dev server proxies `/api/*` to **`127.0.0.1`**, port **`VITE_DEV_API_PORT`** (default **8000**). If your API listens on **8001**, set `VITE_DEV_API_PORT=8001` in `.env` and restart **`pnpm dev`** (Vite reads this when the dev server starts).
+All frontend API calls use `getApiBase()` from `src/lib/api.ts`, which reads `VITE_API_BASE_URL` (set in Vercel env vars for production). For local dev, leave **`VITE_API_BASE_URL` empty** — the Vite dev server proxies `/api/*` to **`127.0.0.1`**, port **`VITE_DEV_API_PORT`** (default **8001** in `vite.config.ts`). If your API listens on **8000**, set `VITE_DEV_API_PORT=8000` in `.env` and restart **`pnpm dev`**.
 
 ### API authentication
 

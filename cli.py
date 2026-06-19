@@ -12,7 +12,7 @@ load_repo_dotenv()
 
 logfire.configure(send_to_logfire='if-token-present')
 
-API_BASE = os.environ.get("VITE_API_BASE_URL", "http://localhost:8000").rstrip("/")
+API_BASE = os.environ.get("VITE_API_BASE_URL", "http://localhost:8001").rstrip("/")
 QUERY_URL = f"{API_BASE}/api/query"
 
 

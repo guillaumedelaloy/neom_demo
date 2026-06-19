@@ -7,7 +7,7 @@ TOOL_SCHEMAS = [
         "function": {
             "name": "search_documents",
             "description": (
-                "Search Ma'aden strategy, execution, investor relations, and risk documents. "
+                "Search NEOM strategy, execution, investor relations, and risk documents. "
                 "Use for questions about strategic plans, project status, earnings, board updates, or risk reports."
             ),
             "parameters": {

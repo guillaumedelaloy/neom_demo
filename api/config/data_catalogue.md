@@ -9,7 +9,7 @@ NEOM is a Saudi giga-project under Vision 2030 — a clean-sheet region powered 
 
 ## Internal Data-Key Mapping (NEVER expose to users)
 
-The underlying data files predate the current sector naming and still use legacy sector-coded keys on disk for some bundles. When routing schedule and financial queries, map the NEOM sector to its **API** schedule key in the table below (`hospitality`, not legacy mining-era labels). These keys are technical identifiers only — never surface raw file basenames or obsolete mining terminology in any user-facing answer.
+The underlying data files predate the current sector naming and still use legacy sector-coded keys on disk for some bundles. When routing schedule and financial queries, map the NEOM sector to its **API** schedule key in the table below (`hospitality`, not legacy mining-era labels). These keys are technical identifiers only — never surface raw file basenames or obsolete mining terminology in any user-facing answer **or in inter-step reasoning shown in the CEO UI**.
 
 | NEOM Sector | Flagship destination(s) | Internal schedule key | Internal financial summary sheet |
 |---|---|---|---|
@@ -85,7 +85,7 @@ When sources conflict, defer to the higher authority:
 - **Source files:** Two schedule files per sector (for the five main sectors) — V18 (current schedule: task status, RAG UDF type 489, planned dates) and V16 (baseline: `baseline_finish` dates and `baseline_rag_status` values, RAG type 487 with literal values Green/Amber/Red). Each sector entry in `schedules.json` carries both `planned_finish` (from V18) and `baseline_finish` (from V16), enabling direct variance computation. *Urban Development flagship — Phase 1 is different — see below: it uses three single-file snapshots; its baseline derives from the Sep 2024 snapshot, not a V16 schedule.*
 - **Authority:** HIGHEST — supersedes all other sources on project status and milestone timing
 - **Agents:** DELIVERY ENGINE (primary), RISK RADAR, DATA RETRIEVAL
-- **Tools:** `get_schedule_overview`, `get_bu_schedule`
+- **Tools:** `get_schedule_overview`, `get_bu_schedule` — these return **NEOM sector names** (`neom_sector` and `schedule_overview` keys). Never translate them into legacy commodity or bundle labels in answers.
 
 **What it contains:**
 The IMP is a backwards-framing of the 2040 strategy: starting from each sector's 2040 targets, it works backwards to determine when every milestone must be achieved. It covers both growth projects and enablers (Utilities, Infrastructure, Finance, Government — e.g. when land allocation letters must be secured, when government tariff negotiations must conclude, when engineering must be commissioned).

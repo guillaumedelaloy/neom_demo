@@ -35,21 +35,24 @@ function delay(ms: number, signal: AbortSignal): Promise<void> {
  */
 export function createMockQueryResponse(messages: BackendMessage[], signal: AbortSignal): Response {
   const topic = lastUserQuestion(messages)
+  const devApiPort = (import.meta.env.VITE_DEV_API_PORT || '8001').trim()
   const topicLine = topic ? `You asked: *“${topic.slice(0, 200)}${topic.length > 200 ? '…' : ''}”*.\n\n` : ''
 
   const bodyMarkdown =
     `${topicLine}` +
-    `**No early warning —** this is **mock CEO intelligence** (the real API did not answer). Use it to iterate on layout, streaming, and actions.\n\n` +
-    `## Key Basis\n` +
-    `- Placeholder narrative only — no live tools or files.\n` +
-    `- Start the backend: \`uv run uvicorn api.index:app --reload\` on port **8000** (Vite proxies \`/api\`).\n\n` +
-    `## Action\n` +
-    `- **Owner:** Strategy PMO (demo)\n` +
-    `- **Move:** Turn off mock (\`VITE_MOCK_BACKEND\`) when the API is up; confirm chat end-to-end.\n` +
-    `- **By when:** Next working session\n` +
-    `- **Urgency:** P2 — UI iteration\n\n` +
-    `## Sources\n` +
-    `- NEOM POC — mock stream (no underlying file)\n`
+    '**No early warning —** this is **mock CEO intelligence** (the real API did not answer). ' +
+    'Common causes: `VITE_MOCK_BACKEND=true`, or the Vite dev proxy could not reach FastAPI (wrong port / server not running).\n\n' +
+    '## Key Basis\n' +
+    '- Placeholder only — no live tools or files.\n' +
+    `- Right now the dev proxy sends \`/api\` to **http://127.0.0.1:${devApiPort}** (from \`VITE_DEV_API_PORT\` or default 8001). Your uvicorn port must match, **or** set \`VITE_DEV_API_PORT\` to your API port in \`.env\` and restart \`pnpm dev\`.\n` +
+    '- Ensure `VITE_MOCK_BACKEND` is unset or `false`.\n\n' +
+    '## Action\n' +
+    '- **Owner:** Strategy PMO (demo)\n' +
+    '- **Move:** Fix proxy/port + mock flags; retry chat.\n' +
+    '- **By when:** This session\n' +
+    '- **Urgency:** P1 — unblock live API\n\n' +
+    '## Sources\n' +
+    '- NEOM POC — mock stream (no underlying file)\n'
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
