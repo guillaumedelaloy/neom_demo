@@ -108,13 +108,13 @@ export function StrategyStatus() {
     <div className="space-y-8">
       <header>
         <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ma-muted">
-          Focus · Portfolio & enablers
+          Foundation · Latest status on execution
         </p>
-        <h1 className="text-[22px] font-semibold tracking-tight text-ma-ink">Strategy Status</h1>
+        <h1 className="text-[22px] font-semibold tracking-tight text-ma-ink">Latest status on execution</h1>
         <p className="mt-1 max-w-[48rem] text-[13px] leading-snug text-ma-muted">
-          Quantified view of portfolio progress, delivery health, enabler readiness, capital
-          deployment, and extended strategic KPIs. Use this page for reviews; the strategy realization
-          cockpit stays at attention and decisions only.
+          Portfolio progress, delivery health, capital deployment, and strategic KPIs in one view. Pair
+          with NEOM intelligence for document-grounded follow-ups — this demo does not include legacy
+          schedule or financial workbook tooling.
         </p>
       </header>
 

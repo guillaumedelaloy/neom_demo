@@ -23,22 +23,43 @@ const PAGE_CONTEXT_MAP: Record<string, PageContextEntry> = {
     reportingPeriod: REPORTING_PERIOD,
     pageEntities: ['Portfolio KPI', 'Delivery health', 'Risk posture', 'Value delivery'],
     suggestedQuestions: [
-      'Across all initiatives, where are we most behind?',
-      'What should the CEO focus on this month?',
-      'What is the total capex planned on strategy initiatives this year?',
-      'Summarize key risks to the 2030 EBITDA target',
+      'Across initiatives, what does the strategy corpus emphasize as critical?',
+      'What should leadership focus on this quarter according to indexed documents?',
+      'Summarize how growth and resilience are framed together in the materials.',
     ],
   },
-  '/strategy-status': {
+  '/execution-status': {
     scope: 'global',
-    page: 'Strategy Status',
+    page: 'Latest status on execution',
     reportingPeriod: REPORTING_PERIOD,
-    pageEntities: ['Horizon KPIs', 'EBITDA bridge', 'Growth trajectory', 'Capital commitment'],
+    pageEntities: ['Portfolio KPIs', 'Delivery health', 'Strategic KPIs', 'Capital deployment'],
     suggestedQuestions: [
-      'Are we on track against the strategy horizon targets?',
-      'What explains the Q2 2026 EBITDA variance vs budget?',
-      'Which flagship giga-projects are pulling the trajectory down?',
-      'What is the biggest risk to the 2030 plan right now?',
+      'How does the indexed strategy corpus describe overall delivery posture?',
+      'What are the main execution themes called out in recent materials?',
+      'Where do documents emphasize risk or resilience?',
+      'Summarize how flagship projects are discussed vs. enabling priorities.',
+    ],
+  },
+  '/strategy-before-2025': {
+    scope: 'global',
+    page: 'Strategy before 2025',
+    reportingPeriod: REPORTING_PERIOD,
+    pageEntities: ['Vision era', 'Masterplanning', 'Early proof points', 'Partnership patterns'],
+    suggestedQuestions: [
+      'What did early strategy documents emphasize as non-negotiable outcomes?',
+      'How is the long-term sector blueprint described in the corpus?',
+      'What partnership or governance patterns appear in pre-2025 materials?',
+    ],
+  },
+  '/strategy-2026-onwards': {
+    scope: 'global',
+    page: 'Re-vamped strategy 2026 onwards',
+    reportingPeriod: REPORTING_PERIOD,
+    pageEntities: ['Re-baselined priorities', 'Governance cadence', 'Narrative shift', 'Trade-offs'],
+    suggestedQuestions: [
+      'What changes in tone or priorities show up in 2026 strategy materials?',
+      'How is the operating model described after the reset?',
+      'What trade-offs does leadership highlight for the next horizon?',
     ],
   },
   '/portfolio': {
@@ -47,9 +68,9 @@ const PAGE_CONTEXT_MAP: Record<string, PageContextEntry> = {
     reportingPeriod: REPORTING_PERIOD,
     pageEntities: ['Project register', 'CAPEX variance', 'Schedule health', 'Milestone delivery'],
     suggestedQuestions: [
-      'Which flagship project has the largest schedule slip?',
-      'What happens to 2030 EBITDA if Urban Development flagship Phase 1 is delayed by six months?',
-      'Give a schedule overview across all sectors.',
+      'Which flagship projects are called out most prominently in the documents?',
+      'What delivery or risk themes appear across sectors in search results?',
+      'How does the corpus describe dependencies between giga-projects?',
     ],
   },
   '/enablers': {
@@ -70,10 +91,9 @@ const PAGE_CONTEXT_MAP: Record<string, PageContextEntry> = {
     reportingPeriod: REPORTING_PERIOD,
     pageEntities: ['Land permits', 'Mobilization', 'Delivery milestones', 'Hospitality pipeline'],
     suggestedQuestions: [
-      'Summarize development pipeline KPIs vs plan from dashboard and workbook evidence.',
-      'Which land permits are behind the mobilization plan?',
-      'What does the hospitality sector schedule show for upcoming milestones?',
-      'What is the investment-to-delivery conversion outlook this quarter?',
+      'What does the development pipeline narrative stress in the indexed documents?',
+      'How are land readiness and investment themes described?',
+      'What tourism or energy angles show up most in search results?',
     ],
   },
   '/technology': {
@@ -166,9 +186,9 @@ function defaultGlobalContext(): CeoContext {
     scope: 'global',
     reportingPeriod: REPORTING_PERIOD,
     suggestedQuestions: [
-      'Across all initiatives, where are we most behind?',
-      'What would happen to 2030 EBITDA if Urban Development flagship Phase 1 is delayed by 6 months?',
-      'What is the total capex planned on strategy initiatives this year?',
+      'Across initiatives, what does the strategy corpus emphasize as critical?',
+      'What themes in indexed documents best explain current execution posture?',
+      'How is sustainability or energy transition discussed in the materials?',
     ],
   })
 }

@@ -40,7 +40,7 @@ export function createMockQueryResponse(messages: BackendMessage[], signal: Abor
 
   const bodyMarkdown =
     `${topicLine}` +
-    '**No early warning —** this is **mock CEO intelligence** (the real API did not answer). ' +
+    '**No early warning —** this is **mock NEOM intelligence** (the real API did not answer). ' +
     'Common causes: `VITE_MOCK_BACKEND=true`, or the Vite dev proxy could not reach FastAPI (wrong port / server not running).\n\n' +
     '## Key Basis\n' +
     '- Placeholder only — no live tools or files.\n' +

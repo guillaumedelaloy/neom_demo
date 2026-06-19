@@ -5,7 +5,9 @@ import { useTheme } from '../../hooks/useTheme'
 
 const TITLES: Record<string, string> = {
   '/': 'Strategy realization cockpit',
-  '/strategy-status': 'Strategy Status',
+  '/execution-status': 'Latest status on execution',
+  '/strategy-before-2025': 'Strategy before 2025',
+  '/strategy-2026-onwards': 'Re-vamped strategy 2026 onwards',
   '/portfolio': 'Giga-Project Execution',
   '/enablers': 'Enablers',
   '/exploration': 'Development Pipeline',
@@ -38,7 +40,7 @@ export function TopBar() {
           <button
             type="button"
             onClick={() => openChat()}
-            title="Ask about portfolio health, projects, risks, and financials. Uses the same context as the page you are on."
+            title="Ask NEOM intelligence about strategy and execution. Uses the same page context when focus is on."
             className="group inline-flex items-center gap-1.5 rounded-sm border border-ma-line bg-ma-elevated px-3 py-1.5 text-[12px] font-semibold text-ma-ink shadow-[0_1px_0_rgba(0,0,0,0.04)] transition duration-150 hover:border-ma-teal/45 hover:bg-ma-surface hover:shadow-[0_2px_10px_rgba(0,0,0,0.06)] active:translate-y-px active:shadow-none dark:border-white/15 dark:bg-white/[0.06] dark:text-white dark:hover:border-ma-teal/50 dark:hover:bg-white/[0.1]"
           >
             <MessageSquareText

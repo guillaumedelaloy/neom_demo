@@ -1,116 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import {
-  Brain,
-  ChevronDown,
-  ChevronRight,
-  ClipboardCheck,
-  Filter,
-  LineChart,
-  Package,
-  Plus,
-  ScanSearch,
-  Target,
-  X,
-} from 'lucide-react'
+import { Brain, Plus, X } from 'lucide-react'
 import type { AgentId, AgentLogEvent, ChartSpec, CeoContext } from './types'
 import type { ChatMessage } from './CeoIntelligenceContext'
 import { AnswerMarkdownBody } from './answerMarkdown'
 
 const BROAD_SUGGESTIONS = [
-  'Summarize Q2 2026 EBITDA actual vs budget from the financial workbook.',
-  'What is the schedule overview across all sectors?',
-  'What are the top three enterprise risks by impact this period?',
-  'Across flagship giga-projects, where is delivery most behind plan?',
+  'How is NEOM positioning itself as a global logistics and trade hub, and what recent partnerships support this ambition?',
+  "Across NEOM's different programs and initiatives, what is the evidence that NEOM is genuinely delivering on Saudi Vision 2030's economic diversification goals?",
+  "What is the Lighthouse Operating System developed at Oxagon, and what does the WEF agreement signal about NEOM's role in shaping global industrial standards?",
+  "What is the measurable social and economic return NEOM SR generated for the Tabuk region in 2023, and how does this compare to the project's broader development goals?",
+  'How is NEOM building self-sustaining startup ecosystems across sectors like gaming and entrepreneurship, and what does the survival rate of its accelerator programs reveal about execution quality?',
 ]
-
-const REASONING_STATUS_LINES = [
-  'Checking how schedule slips could move through the plan…',
-  'Estimating EBITDA and cash effects from the latest snapshot…',
-  'Scoring risks against the current register…',
-  'Testing where the plan might be wrong…',
-  'Prioritizing next steps for 30, 60, and 90 days…',
-] as const
-
-function ReasoningStatusFooter({ active }: { active: boolean }) {
-  const [i, setI] = useState(0)
-  useEffect(() => {
-    if (!active) return
-    const id = window.setInterval(() => {
-      setI((x) => (x + 1) % REASONING_STATUS_LINES.length)
-    }, 2400)
-    return () => window.clearInterval(id)
-  }, [active])
-  const line = REASONING_STATUS_LINES[i] ?? REASONING_STATUS_LINES[0]
-  if (!active) return null
-  return (
-    <div className="mt-2 border-t border-ma-line/80 pt-2 pl-1">
-      <p className="text-[11px] leading-snug text-ma-muted transition-opacity duration-300">{line}</p>
-      <p className="mt-2 flex items-center gap-1 text-[10px] font-medium uppercase tracking-wide text-ma-accent-muted">
-        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-        <span className="ml-1.5 normal-case tracking-normal text-ma-muted">Still working…</span>
-      </p>
-    </div>
-  )
-}
-
-function agentAvatar(agent: AgentId): { Icon: typeof Brain; shell: string } {
-  switch (agent) {
-    case 'orchestrator':
-      return { Icon: Brain, shell: 'border-ma-accent/45 bg-ma-accent/15 text-ma-accent' }
-    case 'clarification_agent':
-      return { Icon: Filter, shell: 'border-ma-graphite/35 bg-ma-surface text-ma-muted' }
-    case 'data_extraction':
-      return { Icon: Brain, shell: 'border-ma-accent/45 bg-ma-accent/15 text-ma-accent' }
-    case 'value_lens':
-      return { Icon: LineChart, shell: 'border-ma-teal/40 bg-ma-teal/12 text-ma-teal' }
-    case 'delivery_engine':
-      return { Icon: Package, shell: 'border-ma-graphite/35 bg-ma-surface text-ma-ink' }
-    case 'risk_radar':
-      return { Icon: Target, shell: 'border-ma-amber-warn/45 bg-ma-amber-warn/12 text-ma-amber-warn' }
-    case 'gap_finder':
-      return { Icon: ScanSearch, shell: 'border-ma-risk/35 bg-ma-risk/10 text-ma-risk' }
-    case 'action_desk':
-      return { Icon: ClipboardCheck, shell: 'border-ma-teal/35 bg-ma-teal/8 text-ma-teal' }
-    default:
-      return { Icon: Brain, shell: 'border-ma-accent/45 bg-ma-accent/15 text-ma-accent' }
-  }
-}
-
-function AgentActivityAvatar({ agent }: { agent: AgentId }) {
-  const { Icon, shell } = agentAvatar(agent)
-  return (
-    <span
-      className={`flex size-7 shrink-0 items-center justify-center rounded-full border shadow-[0_1px_0_rgba(15,18,16,0.06)] ${shell}`}
-      aria-hidden
-    >
-      <Icon className="size-3 stroke-[1.75]" />
-    </span>
-  )
-}
-
-function agentLabel(id: string): string {
-  const map: Record<string, string> = {
-    orchestrator:        'NEOM analyst',
-    clarification_agent: 'Clarification agent',
-    data_extraction:     'NEOM analyst',
-    value_lens:          'Value lens agent',
-    delivery_engine:     'Delivery engine agent',
-    risk_radar:          'Risk radar agent',
-    gap_finder:          'Gap finder agent',
-    action_desk:         'Action desk agent',
-  }
-  return map[id] ?? id
-}
-
-function formatTime(ts: number) {
-  return new Intl.DateTimeFormat('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  }).format(new Date(ts))
-}
 
 type CeoChatDrawerProps = {
   open: boolean
@@ -141,8 +41,9 @@ export function CeoChatDrawer({
   context,
   messages,
   charts,
-  activityLog,
+  activityLog: _activityLog,
   isRunning,
+  activeAgentId: _activeAgentId,
   streamedAnswer,
   error,
   clarification,
@@ -157,38 +58,27 @@ export function CeoChatDrawer({
     <AnswerMarkdownBody text={text} charts={charts} size="normal" streaming={streaming} />
   )
 
-  const logRef = useRef<HTMLDivElement>(null)
   const readoutRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
-  const [stepsOpen, setStepsOpen] = useState(false)
   const [confirmingNewChat, setConfirmingNewChat] = useState(false)
   const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const hasPageContext = !!(context.page || context.pageEntities?.length)
-  const hasEverSubmitted = messages.length > 0 || isRunning
-
-  // Auto-open analysis steps while a query is running, auto-close when done
-  const prevRunning = useRef(false)
-  useEffect(() => {
-    if (isRunning && !prevRunning.current) setStepsOpen(true)
-    if (!isRunning && prevRunning.current) setStepsOpen(false)
-    prevRunning.current = isRunning
-  }, [isRunning])
 
   const scopedSuggestions = useMemo(() => {
     if (context.suggestedQuestions?.length) return context.suggestedQuestions
     if (context.scope === 'project') {
       return [
-        'What happens if this is delayed by one quarter?',
-        'Is this milestone plan realistic?',
-        'What are root causes of delay on this project, and how do we mitigate them?',
+        'What does the strategy corpus highlight about this project or comparable flagship builds?',
+        'What risks or dependencies are described in indexed documents?',
+        'Summarize stakeholder messaging that relates to this initiative.',
       ]
     }
     if (context.scope === 'bu') {
       return [
-        'Where are we most at risk in this BU?',
-        'What should we prioritize this month?',
-        'What is the EBITDA impact of a commodity shock?',
+        'What themes in the documents are most relevant to this sector?',
+        'How does recent strategy material describe priorities for this area?',
+        'What execution or delivery narratives show up in search results?',
       ]
     }
     return BROAD_SUGGESTIONS
@@ -201,12 +91,6 @@ export function CeoChatDrawer({
     const t = window.setTimeout(() => inputRef.current?.focus(), 200)
     return () => window.clearTimeout(t)
   }, [open])
-
-  useEffect(() => {
-    const el = logRef.current
-    if (!el) return
-    el.scrollTop = el.scrollHeight
-  }, [activityLog, open])
 
   useEffect(() => {
     readoutRef.current?.scrollTo({
@@ -276,7 +160,7 @@ export function CeoChatDrawer({
             </span>
             <div className="min-w-0">
               <p id="ceo-chat-title" className="text-[14px] font-semibold text-ma-ink">
-                CEO Intelligence
+                NEOM intelligence
               </p>
               <p className="truncate text-[12px] text-ma-muted">
                 {contextAware ? context.contextBanner : 'Context: Global portfolio'}
@@ -406,57 +290,9 @@ export function CeoChatDrawer({
             </div>
           ) : null}
 
-          {/* ── Analysis steps (collapsible disclosure, auto-opens while running) ── */}
-          {hasEverSubmitted ? (
-            <div className="shrink-0 border-b border-ma-line">
-              <button
-                type="button"
-                className="flex w-full items-center gap-1.5 px-4 py-2 text-left text-[11px] font-semibold uppercase tracking-wide text-ma-muted transition-colors hover:bg-ma-surface/50"
-                onClick={() => setStepsOpen((v) => !v)}
-                aria-expanded={stepsOpen}
-              >
-                {stepsOpen
-                  ? <ChevronDown className="size-3.5 text-ma-muted/70" />
-                  : <ChevronRight className="size-3.5 text-ma-muted/70" />
-                }
-                Analysis steps
-                {isRunning ? (
-                  <span className="ml-2 flex items-center gap-1">
-                    <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-                    <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-                    <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-                  </span>
-                ) : activityLog.length > 0 ? (
-                  <span className="ml-auto text-[10px] font-normal normal-case tracking-normal text-ma-muted/60">
-                    {activityLog.length} {activityLog.length === 1 ? 'step' : 'steps'}
-                  </span>
-                ) : null}
-              </button>
-              <div className="ceo-intel-steps-body" data-open={stepsOpen}>
-                <div>
-                  <div
-                    ref={logRef}
-                    className="max-h-[240px] overflow-y-auto border-t border-ma-line/50 px-4 py-2 text-[11px] leading-relaxed text-ma-ink"
-                  >
-                    {activityLog.map((line, idx) => (
-                      <div
-                        key={line.id}
-                        className={`group mb-2 flex gap-2 border-l-2 border-ma-accent/35 pl-2 last:mb-1 ${idx === activityLog.length - 1 ? 'ceo-intel-activity-row-in' : ''}`}
-                      >
-                        <AgentActivityAvatar agent={line.agent} />
-                        <div className="min-w-0 flex-1 font-mono">
-                          <p className="text-[10px] text-ma-muted">
-                            {formatTime(line.ts)}{' '}
-                            <span className="font-semibold text-ma-teal">{agentLabel(line.agent)}</span>
-                          </p>
-                          <p className="mt-0.5 text-[11px] leading-relaxed text-ma-ink">{line.message}</p>
-                        </div>
-                      </div>
-                    ))}
-                    {isRunning ? <ReasoningStatusFooter active={isRunning} /> : null}
-                  </div>
-                </div>
-              </div>
+          {messages.length > 0 && isRunning ? (
+            <div className="shrink-0 border-b border-ma-line px-4 py-2.5">
+              <p className="text-[11px] text-ma-muted">Generating answer…</p>
             </div>
           ) : null}
 

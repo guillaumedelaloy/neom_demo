@@ -1,33 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  AlertTriangle,
+  Activity,
   ArrowRight,
   Brain,
-  Building2,
-  ChevronDown,
-  ChevronRight,
-  ClipboardCheck,
   Compass,
-  Cpu,
-  Filter,
   FolderKanban,
-  Landmark,
+  History,
   LayoutDashboard,
-  LineChart,
   MessageSquareText,
-  Package,
   Plus,
-  ScanSearch,
+  RefreshCw,
   Send,
-  ShieldCheck,
   Sparkles,
-  Target,
-  Users,
 } from 'lucide-react'
 import { AnswerMarkdownBody } from '../intelligence/answerMarkdown'
 import { useCeoIntelligence } from '../intelligence/CeoIntelligenceContext'
-import type { AgentId } from '../intelligence/types'
 import neomLogoUrl from '../assets/neom-logo.png'
 
 /* ── nav data (mirrors Sidebar) ── */
@@ -56,75 +44,39 @@ const focusAreas: NavEntry[] = [
   {
     to: '/portfolio',
     label: 'Giga-Project Execution',
-    description: 'Portfolio KPIs, project register, CAPEX & schedule variance',
+    description: 'Portfolio KPIs, project register, CAPEX & delivery posture',
     icon: FolderKanban,
   },
 ]
 
 const foundationAreas: NavEntry[] = [
-  { to: '/enablers', label: 'Enablers', description: 'Permitting, utilities, power, water & critical dependencies', icon: Building2 },
-  { to: '/financials', label: 'Financials', description: 'QBR Q2 2026 — investment, cash flow, sector snapshots & CAPEX', icon: Landmark },
-  { to: '/technology', label: 'Technology', description: 'Cognitive city platform, digital twin & innovation pipeline', icon: Cpu },
-  { to: '/people', label: 'People', description: 'Talent pipeline, succession, L&D and capability gaps', icon: Users },
-  { to: '/safety-esg', label: 'Sustainability & ESG', description: 'Renewable energy, environmental & governance metrics', icon: ShieldCheck },
-  { to: '/risks', label: 'Risks', description: 'Enterprise risk register, funding gap & leverage trajectory', icon: AlertTriangle },
+  {
+    to: '/strategy-before-2025',
+    label: 'Strategy before 2025',
+    description: 'Vision, masterplanning, and early proof points that shaped the programme',
+    icon: History,
+  },
+  {
+    to: '/strategy-2026-onwards',
+    label: 'Re-vamped strategy 2026 onwards',
+    description: 'Sharper priorities, governance cadence, and narrative after the reset',
+    icon: RefreshCw,
+  },
+  {
+    to: '/execution-status',
+    label: 'Latest status on execution',
+    description: 'Portfolio progress, delivery health, capital deployment & strategic KPIs',
+    icon: Activity,
+  },
 ]
 
 const EXAMPLE_QUESTIONS = [
-  'Summarize Q2 2026 EBITDA actual vs budget from the financial workbook.',
-  'What is the schedule overview across all sectors?',
-  'What is the status of OXAGON Port Phase 1 in the project data?',
-  'What does the hospitality sector schedule show for key milestones?',
-  'What would happen to 2030 EBITDA if Urban Development flagship Phase 1 slips by six months?',
-  'Search strategy documents for the main funding gap narrative.',
-  'What are the top three enterprise risks by impact this period?',
+  'How is NEOM positioning itself as a global logistics and trade hub, and what recent partnerships support this ambition?',
+  "Across NEOM's different programs and initiatives, what is the evidence that NEOM is genuinely delivering on Saudi Vision 2030's economic diversification goals?",
+  "What is the Lighthouse Operating System developed at Oxagon, and what does the WEF agreement signal about NEOM's role in shaping global industrial standards?",
+  "What is the measurable social and economic return NEOM SR generated for the Tabuk region in 2023, and how does this compare to the project's broader development goals?",
+  'How is NEOM building self-sustaining startup ecosystems across sectors like gaming and entrepreneurship, and what does the survival rate of its accelerator programs reveal about execution quality?',
 ]
-
-const REASONING_STATUS_LINES = [
-  'Checking how schedule slips could move through the plan…',
-  'Estimating EBITDA and cash effects from the latest snapshot…',
-  'Scoring risks against the current register…',
-  'Testing where the plan might be wrong…',
-  'Prioritizing next steps for 30, 60, and 90 days…',
-] as const
-
-/* ── agent helpers (mirrors CeoChatDrawer) ── */
-
-function agentLabel(id: string): string {
-  const map: Record<string, string> = {
-    orchestrator: 'NEOM analyst',
-    clarification_agent: 'Clarification agent',
-    data_extraction: 'NEOM analyst',
-    value_lens: 'Value lens agent',
-    delivery_engine: 'Delivery engine agent',
-    risk_radar: 'Risk radar agent',
-    gap_finder: 'Gap finder agent',
-    action_desk: 'Action desk agent',
-  }
-  return map[id] ?? id
-}
-
-function agentAvatar(agent: AgentId) {
-  switch (agent) {
-    case 'orchestrator': return { Icon: Brain, shell: 'border-ma-accent/45 bg-ma-accent/15 text-ma-accent' }
-    case 'clarification_agent': return { Icon: Filter, shell: 'border-ma-graphite/35 bg-ma-surface text-ma-muted' }
-    case 'data_extraction': return { Icon: Brain, shell: 'border-ma-accent/45 bg-ma-accent/15 text-ma-accent' }
-    case 'value_lens': return { Icon: LineChart, shell: 'border-ma-teal/40 bg-ma-teal/12 text-ma-teal' }
-    case 'delivery_engine': return { Icon: Package, shell: 'border-ma-graphite/35 bg-ma-surface text-ma-ink' }
-    case 'risk_radar': return { Icon: Target, shell: 'border-ma-amber-warn/45 bg-ma-amber-warn/12 text-ma-amber-warn' }
-    case 'gap_finder': return { Icon: ScanSearch, shell: 'border-ma-risk/35 bg-ma-risk/10 text-ma-risk' }
-    case 'action_desk': return { Icon: ClipboardCheck, shell: 'border-ma-teal/35 bg-ma-teal/8 text-ma-teal' }
-    default: return { Icon: Brain, shell: 'border-ma-accent/45 bg-ma-accent/15 text-ma-accent' }
-  }
-}
-
-function formatTime(ts: number) {
-  return new Intl.DateTimeFormat('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  }).format(new Date(ts))
-}
 
 /* ── sub-components ── */
 
@@ -150,30 +102,6 @@ function NavCard({ entry }: { entry: NavEntry }) {
         </p>
       </div>
     </Link>
-  )
-}
-
-function ReasoningStatusFooter({ active }: { active: boolean }) {
-  const [lineIndex, setLineIndex] = useState(0)
-  useEffect(() => {
-    if (!active) return
-    const id = window.setInterval(() => {
-      setLineIndex((i) => (i + 1) % REASONING_STATUS_LINES.length)
-    }, 2400)
-    return () => window.clearInterval(id)
-  }, [active])
-  if (!active) return null
-  const line = REASONING_STATUS_LINES[lineIndex] ?? REASONING_STATUS_LINES[0]
-  return (
-    <div className="mt-2 border-t border-ma-line/80 pt-2 pl-1">
-      <p className="text-[10px] leading-snug text-ma-muted transition-opacity duration-300">{line}</p>
-      <p className="mt-2 flex items-center gap-1 text-[9px] font-medium uppercase tracking-wide text-ma-accent-muted">
-        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-        <span className="ml-1.5 normal-case tracking-normal text-ma-muted">Still working…</span>
-      </p>
-    </div>
   )
 }
 
@@ -203,9 +131,7 @@ export function Landing() {
   const {
     messages,
     charts,
-    activityLog,
     isRunning,
-    reasoningSession,
     streamedAnswer,
     error,
     clarification,
@@ -215,10 +141,8 @@ export function Landing() {
     newChat,
     backendRuntime,
   } = useCeoIntelligence()
-  const logRef = useRef<HTMLDivElement>(null)
   const readoutRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [stepsOpen, setStepsOpen] = useState(false)
   const [confirmingNewChat, setConfirmingNewChat] = useState(false)
   const confirmTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -240,14 +164,6 @@ export function Landing() {
   }, [])
 
   const hasActivity = messages.length > 0 || isRunning || !!clarification
-  const hasEverSubmitted = messages.length > 0 || isRunning || !!clarification
-
-  const prevRunning = useRef(false)
-  useEffect(() => {
-    if (isRunning && !prevRunning.current) setStepsOpen(true)
-    if (!isRunning && prevRunning.current) setStepsOpen(false)
-    prevRunning.current = isRunning
-  }, [isRunning])
 
   useEffect(() => {
     readoutRef.current?.scrollTo({
@@ -261,12 +177,6 @@ export function Landing() {
     if (!q || isRunning) return
     submitQuestion(q)
   }
-
-  useEffect(() => {
-    const el = logRef.current
-    if (!el) return
-    el.scrollTop = el.scrollHeight
-  }, [activityLog])
 
   return (
     <div className="flex min-h-[100dvh] flex-col gap-0 lg:flex-row">
@@ -347,8 +257,8 @@ export function Landing() {
               <Brain className="size-5 stroke-[1.75]" aria-hidden />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-[14px] font-semibold text-ma-ink">CEO Intelligence</p>
-              <p className="text-[11px] text-ma-muted">Multi-agent reasoning system</p>
+              <p className="text-[14px] font-semibold text-ma-ink">NEOM intelligence</p>
+              <p className="text-[11px] text-ma-muted">Document-grounded Q&amp;A</p>
             </div>
             {canNewChat ? (
               <button
@@ -398,95 +308,11 @@ export function Landing() {
               </div>
             </div>
           ) : (
-            /* ── Active: collapsible analysis steps + hero answer ── */
+            /* ── Active: answer thread ── */
             <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-
-              {/* Analysis steps (collapsible, auto-opens while running) */}
-              {hasEverSubmitted ? (
-                <div className="shrink-0 border-b border-ma-line">
-                  <button
-                    type="button"
-                    className="flex w-full items-center gap-1.5 px-4 py-2 text-left text-[11px] font-semibold uppercase tracking-wide text-ma-muted transition-colors hover:bg-ma-surface/50"
-                    onClick={() => setStepsOpen((v) => !v)}
-                    aria-expanded={stepsOpen}
-                  >
-                    {stepsOpen
-                      ? <ChevronDown className="size-3.5 text-ma-muted/70" />
-                      : <ChevronRight className="size-3.5 text-ma-muted/70" />
-                    }
-                    Analysis steps
-                    {isRunning ? (
-                      <span className="ml-2 flex items-center gap-1">
-                        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-                        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-                        <span className="ceo-intel-typing-dot inline-block size-1 rounded-full bg-ma-accent/80" />
-                      </span>
-                    ) : activityLog.length > 0 ? (
-                      <span className="ml-auto text-[10px] font-normal normal-case tracking-normal text-ma-muted/60">
-                        {activityLog.length} {activityLog.length === 1 ? 'step' : 'steps'}
-                      </span>
-                    ) : null}
-                  </button>
-                  <div className="ceo-intel-steps-body" data-open={stepsOpen}>
-                    <div>
-                      <div
-                        ref={logRef}
-                        className="max-h-[200px] overflow-y-auto border-t border-ma-line/50 px-4 py-2 text-[10px] leading-relaxed text-ma-ink"
-                      >
-                        {activityLog.map((line, idx) => {
-                          const av = agentAvatar(line.agent)
-                          const Icon = av.Icon
-                          return (
-                            <div
-                              key={line.id}
-                              className={`group mb-2 flex gap-2 border-l-2 border-ma-accent/35 pl-2 last:mb-1 ${idx === activityLog.length - 1 ? 'ceo-intel-activity-row-in' : ''}`}
-                            >
-                              <span
-                                className={`flex size-7 shrink-0 items-center justify-center rounded-full border shadow-[0_1px_0_rgba(15,18,16,0.06)] ${av.shell}`}
-                                aria-hidden
-                              >
-                                <Icon className="size-3 stroke-[1.75]" />
-                              </span>
-                              <div className="min-w-0 flex-1 font-mono">
-                                <p className="text-[9px] text-ma-muted">
-                                  {formatTime(line.ts)}{' '}
-                                  <span className="font-semibold text-ma-teal">{agentLabel(line.agent)}</span>
-                                </p>
-                                <p className="mt-0.5 text-[10px] leading-relaxed text-ma-ink">{line.message}</p>
-                              </div>
-                            </div>
-                          )
-                        })}
-                        {isRunning ? (
-                          <ReasoningStatusFooter key={reasoningSession} active />
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-
-              {/* Suggested questions (only before first submission) */}
-              {messages.length === 0 && !isRunning && !streamedAnswer ? (
-                <div className="shrink-0 border-b border-ma-line px-4 py-3">
-                  <p className="mb-2 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-ma-muted">
-                    <Sparkles className="size-3" aria-hidden />
-                    Suggested questions
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {EXAMPLE_QUESTIONS.slice(0, 4).map((q, i) => (
-                      <button
-                        key={q}
-                        type="button"
-                        disabled={isRunning}
-                        onClick={() => handleSubmit(q)}
-                        className="ceo-intel-pill-in rounded-sm border border-ma-line/70 bg-ma-surface/30 px-2.5 py-1.5 text-left text-[11px] leading-snug text-ma-ink/80 transition-colors hover:border-ma-accent/40 hover:bg-ma-accent/[0.04] hover:text-ma-ink disabled:opacity-50"
-                        style={{ animationDelay: `${i * 60}ms` }}
-                      >
-                        {q}
-                      </button>
-                    ))}
-                  </div>
+              {isRunning ? (
+                <div className="shrink-0 border-b border-ma-line/80 px-4 py-2.5">
+                  <p className="text-[11px] text-ma-muted">Generating answer…</p>
                 </div>
               ) : null}
 

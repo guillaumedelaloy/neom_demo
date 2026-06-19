@@ -2,8 +2,9 @@
   "version": "1.0",
   "note": "Update this file to change which documents are indexed. Re-run scripts/build_rag_index.py after changes. Paths use NEOM-neutral filenames — when you still have legacy PDFs on disk, rename or symlink them to match these entries (or edit the paths to your local layout).",
   "documents": [
-    {"path": "strategy/NEOM SR report 2023 English.pdf",             "category": "execution"},
+    {"path": "strategy/NEOM_SR_Report_2023_TextOnly.pdf",             "category": "execution"},
     {"path": "strategy/Neom-City-A-Paradigm-Shift-in-Urban-Development-and-Economic-Transformation.pdf",             "category": "execution"},
-    {"path": "strategy/peter-terium.pdf",             "category": "execution"}
+    {"path": "strategy/peter-terium.pdf",         "category": "execution"},
+    {"path": "strategy/latest_news_Neom.pdf",     "category": "execution"}
   ]
 }

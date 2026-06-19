@@ -32,7 +32,7 @@ type GrowthProjectDetailPanelProps = {
   onNext: () => void
   hasPrev: boolean
   hasNext: boolean
-  /** Opens global CEO intelligence with this project preloaded */
+  /** Opens NEOM intelligence with this project preloaded */
   onAskDeeper?: () => void
 }
 

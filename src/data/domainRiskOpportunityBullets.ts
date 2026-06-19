@@ -5,6 +5,8 @@
 
 export type SpineDomainRoKey =
   | 'strategy-status'
+  | 'strategy-before-2025'
+  | 'strategy-2026-onwards'
   | 'exploration'
   | 'portfolio'
   | 'technology'
@@ -41,6 +43,28 @@ export function parseRiskOpportunityLine(line: string): RiskOpportunityBullet {
 
 function bullets(lines: string[]): RiskOpportunityBullet[] {
   return lines.map(parseRiskOpportunityLine)
+}
+
+const STRATEGY_BEFORE_2025 = {
+  risks: bullets([
+    'Legacy baseline drift — Early commitments and masterplans may not reflect 2026 operating realities | Use NEOM intelligence to contrast pre-2025 sources with current execution narrative.',
+    'Single-source narrative risk — If only one vintage of document is consulted, conclusions can skew | Cross-check multiple indexed sources before major decisions.',
+  ]),
+  opportunities: bullets([
+    'Stable north star — Vision and sector framing from the pre-2025 era still anchor investor and government dialogue | Leverage for continuity messaging.',
+    'Reusable partnership patterns — JV and co-development precedents shorten negotiation cycles on new deals | Cite specific documents when presenting options.',
+  ]),
+}
+
+const STRATEGY_2026_ONWARDS = {
+  risks: bullets([
+    'Execution–strategy gap — Re-vamped priorities only create value if milestones and ownership match | Ask NEOM intelligence to stress-test consistency across ExCom materials.',
+    'Communication overload — More frequent updates can obscure the critical few decisions | Keep questions focused on sector, horizon, or project.',
+  ]),
+  opportunities: bullets([
+    'Sharper trade-offs — Fewer parallel bets can improve capital and leadership focus | Document search helps surface where leadership already chose paths.',
+    'Faster escalation design — Clearer governance cadence reduces time-to-decision on blockers | Use indexed strategy text for evidence in reviews.',
+  ]),
 }
 
 const STRATEGY_STATUS = {
@@ -163,6 +187,8 @@ export const DOMAIN_RISK_OPPORTUNITY_BULLETS: Record<
   { risks: RiskOpportunityBullet[]; opportunities: RiskOpportunityBullet[] }
 > = {
   'strategy-status': STRATEGY_STATUS,
+  'strategy-before-2025': STRATEGY_BEFORE_2025,
+  'strategy-2026-onwards': STRATEGY_2026_ONWARDS,
   exploration: EXPLORATION,
   portfolio: PORTFOLIO,
   technology: TECHNOLOGY,

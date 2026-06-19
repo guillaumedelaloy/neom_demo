@@ -540,5 +540,113 @@
         "stressScore": 35
       }
     ]
+  },
+  "strategy-before-2025": {
+    "strategicObjectivesIntro": "The pre-2025 strategy era established the master vision, sector architecture, and early delivery proof points that set the scale and ambition for the programme — from land and masterplan foundations through first giga-project commitments and partnerships.",
+    "milestones": [
+      {
+        "title": "Vision, masterplanning, and sector blueprinting through the first reset window",
+        "whereWeStand": "Foundational narratives, sustainability commitments, and urban paradigms were locked that still anchor board and investor communications. Use NEOM intelligence to trace how early documents frame priorities vs. today’s delivery reality."
+      },
+      {
+        "title": "Early capital structure, flagship sequencing, and partnership archetypes",
+        "whereWeStand": "JV models, PIF alignment, and phased giga-project sequencing were defined to de-risk execution before full-scale construction. Evidence lives in the indexed strategy corpus rather than legacy schedule workbooks."
+      },
+      {
+        "title": "Proof-of-concept delivery and capability building ahead of the 2026 operating model shift",
+        "whereWeStand": "First operational assets, pilot districts, and technology platforms demonstrated feasibility; lessons from this period inform the re-vamped strategy from 2026 onward."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Indexed strategy corpus (pre-2025 themes)",
+        "value": "Searchable",
+        "target": "Ask NEOM intelligence for citations",
+        "status": "on_track",
+        "stressScore": 15
+      },
+      {
+        "label": "Board / investor narrative continuity",
+        "value": "High",
+        "target": "Aligned with 2040 arc",
+        "status": "on_track",
+        "stressScore": 20
+      },
+      {
+        "label": "Partnership & JV precedents",
+        "value": "Established",
+        "target": "Reusable patterns",
+        "status": "on_track",
+        "stressScore": 18
+      },
+      {
+        "label": "Land & masterplan readiness (historical)",
+        "value": "Baseline set",
+        "target": "See Development Pipeline for current",
+        "status": "neutral",
+        "stressScore": 35
+      },
+      {
+        "label": "Early technology & cognitive-city positioning",
+        "value": "Defined",
+        "target": "See Technology focus area",
+        "status": "on_track",
+        "stressScore": 22
+      }
+    ]
+  },
+  "strategy-2026-onwards": {
+    "strategicObjectivesIntro": "From 2026, the strategy is re-vamped around sharper delivery priorities, a tightened operating model, and clearer escalation paths — with emphasis on what must be true for giga-projects and sectors to hit the next horizon.",
+    "milestones": [
+      {
+        "title": "Re-baselined delivery priorities and fewer, higher-confidence bets",
+        "whereWeStand": "Management focus shifts to portfolio concentration, milestone truthfulness, and cross-sector dependencies expressed in current board and ExCom materials."
+      },
+      {
+        "title": "Operating model: decision rights, governance cadence, and escalation clarity",
+        "whereWeStand": "Weekly and monthly execution rhythms, risk appetite, and funding guardrails are articulated for the post–reset environment; NEOM intelligence can surface how documents describe trade-offs."
+      },
+      {
+        "title": "Narrative alignment across sectors, funding, and sustainability commitments",
+        "whereWeStand": "The 2026+ storyline ties growth, resilience, and reputation — use document search to compare how sectors phrase commitments vs. execution status on the Latest status view."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Strategic clarity (2026+ documents)",
+        "value": "Indexed",
+        "target": "RAG + analyst",
+        "status": "on_track",
+        "stressScore": 18
+      },
+      {
+        "label": "Delivery realism vs. prior baselines",
+        "value": "Under review",
+        "target": "Transparent variances",
+        "status": "at_risk",
+        "stressScore": 42
+      },
+      {
+        "label": "Cross-sector dependency visibility",
+        "value": "Improving",
+        "target": "Single cockpit narrative",
+        "status": "on_track",
+        "stressScore": 28
+      },
+      {
+        "label": "Governance & escalation hygiene",
+        "value": "Tightening",
+        "target": "ExCom-ready",
+        "status": "on_track",
+        "stressScore": 25
+      },
+      {
+        "label": "Stakeholder communications consistency",
+        "value": "Active",
+        "target": "One NEOM story",
+        "status": "on_track",
+        "stressScore": 20
+      }
+    ]
   }
 }

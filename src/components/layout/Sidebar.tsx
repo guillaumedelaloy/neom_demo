@@ -1,16 +1,13 @@
 import {
-  AlertTriangle,
-  Building2,
+  Activity,
   ChevronLeft,
   ChevronRight,
   Compass,
-  Cpu,
   FolderKanban,
+  History,
   Info,
-  Landmark,
   LayoutDashboard,
-  ShieldCheck,
-  Users,
+  RefreshCw,
 } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
@@ -33,12 +30,9 @@ const SIDEBAR_DISCLAIMER_FULL =
   'All insights are derived from available data sources and not yet connected to raw live data - responses may be incomplete, outdated, or incorrect.'
 
 const foundationAreaItems: NavItem[] = [
-  { to: '/enablers', label: 'Enablers', icon: Building2 },
-  { to: '/financials', label: 'Financials', icon: Landmark },
-  { to: '/technology', label: 'Technology', icon: Cpu },
-  { to: '/people', label: 'People', icon: Users },
-  { to: '/safety-esg', label: 'Sustainability & ESG', icon: ShieldCheck },
-  { to: '/risks', label: 'Risks', icon: AlertTriangle },
+  { to: '/strategy-before-2025', label: 'Strategy before 2025', icon: History },
+  { to: '/strategy-2026-onwards', label: 'Re-vamped strategy 2026 onwards', icon: RefreshCw },
+  { to: '/execution-status', label: 'Latest status on execution', icon: Activity },
 ]
 
 function routeActive(pathname: string, to: string) {

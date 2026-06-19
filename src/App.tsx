@@ -12,6 +12,8 @@ import { RiskFinance } from './pages/RiskFinance'
 import { SafetyEsg } from './pages/SafetyEsg'
 import { StrategyStatus } from './pages/StrategyStatus'
 import { Technology } from './pages/Technology'
+import { StrategyBefore2025 } from './pages/StrategyBefore2025'
+import { StrategyFrom2026Onwards } from './pages/StrategyFrom2026Onwards'
 
 export default function App() {
   return (
@@ -21,7 +23,10 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route index element={<Landing />} />
           <Route path="dashboard" element={<ExecutiveSummary />} />
-          <Route path="strategy-status" element={<StrategyStatus />} />
+          <Route path="strategy-before-2025" element={<StrategyBefore2025 />} />
+          <Route path="strategy-2026-onwards" element={<StrategyFrom2026Onwards />} />
+          <Route path="execution-status" element={<StrategyStatus />} />
+          <Route path="strategy-status" element={<Navigate to="/execution-status" replace />} />
           <Route path="portfolio" element={<GrowthPortfolio />} />
           <Route path="enablers" element={<Enablers />} />
           <Route path="exploration" element={<Exploration />} />
