@@ -1,0 +1,617 @@
+{
+  "phos3-ph1": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 12,
+      "production": "1.5M m² GFA",
+      "ebitdaSarB": 0.8,
+      "firstProductionFocus": "June 2026 — first handover ramp",
+      "fullProductionTarget": "1.5M m² gross floor area delivered"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Utilities & infrastructure path", "period": "2025 Q4", "state": "complete" },
+      { "lane": "Studies", "label": "Construction readiness", "period": "2026 Q1", "state": "complete" },
+      { "lane": "Execution", "label": "Structure & MEP fit-out", "period": "2026 Q2", "state": "current" },
+      { "lane": "Activity", "label": "Structural topping-out", "period": "Jun 2026", "state": "planned" },
+      { "lane": "Activity", "label": "First handover", "period": "Jun 2026", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Commercial",
+        "bottleneck": "Steel & façade material costs still elevated",
+        "unlockRequired": "Agreed pricing envelope with escalation and pass-through clarity"
+      },
+      {
+        "dimension": "Logistics",
+        "bottleneck": "Material logistics capacity during peak",
+        "unlockRequired": "Joint ops plan with integrated scheduling window"
+      }
+    ],
+    "overview": {
+      "updateBullets": [
+        "Construction pace aligned to structural topping-out gate in June.",
+        "Fit-out resources mobilized; vendor punch-list governance tightened."
+      ],
+      "upcomingActivities": [
+        "Structural topping-out milestone review",
+        "Readiness gate for utilities and handover inspections"
+      ],
+      "completedMilestones": ["Major structural works complete", "Fit-out plan baselined"],
+      "upcomingMilestones": ["Structural Topping-Out — Jun 2026", "First handover declaration"]
+    },
+    "risks": [
+      { "text": "Material price volatility vs budgeted construction cost", "severity": "high" },
+      { "text": "Contractor density on site during peak fit-out", "severity": "medium" }
+    ]
+  },
+  "phos3-ph2-phos4": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 24.3,
+      "production": "3.0M m² GFA",
+      "ebitdaSarB": 1.6,
+      "firstProductionFocus": "Post gate-2 FID cluster sequencing",
+      "fullProductionTarget": "Urban Development flagship Phases 2–3 integrated delivery"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Main works pricing secured", "period": "2026 Q2", "state": "current" },
+      { "lane": "Studies", "label": "BFS gate 2", "period": "2026 Q2", "state": "current" },
+      { "lane": "Execution", "label": "FID packages", "period": "2026 Q3", "state": "planned" },
+      { "lane": "Activity", "label": "Water supply line", "period": "2026 Q4", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Procurement",
+        "bottleneck": "Main works pricing not agreed; BFS pending gate 2",
+        "unlockRequired": "Executive alignment on commercial terms and contingency sourcing"
+      },
+      {
+        "dimension": "Studies",
+        "bottleneck": "BFS scope freeze delayed vs plan",
+        "unlockRequired": "Decision on parallel work packages under risk-based governance"
+      },
+      {
+        "dimension": "Water supply",
+        "bottleneck": "Allocation and capex timing for new supply route",
+        "unlockRequired": "Integrated water master plan sign-off with Gov. enablers track"
+      }
+    ],
+    "overview": {
+      "updateBullets": [
+        "Cluster economics refreshed; optionality preserved for phased FID.",
+        "Procurement workstream escalated to monthly CEO forum."
+      ],
+      "upcomingActivities": ["Gate 2 readiness pack", "Water supply pre-FEED award"],
+      "completedMilestones": ["Concept selection for Module 3"],
+      "upcomingMilestones": ["Main works pricing secured — Jun 2026", "BFS gate 2"]
+    },
+    "risks": [
+      { "text": "Procurement commercial deadlock extends FID", "severity": "high" },
+      { "text": "Funding gap if cluster FID slips to 2027", "severity": "medium" }
+    ]
+  },
+  "recycling1": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 4.148,
+      "production": "400 kt/yr",
+      "ebitdaSarB": 1.339,
+      "firstProductionFocus": "FID → construction mobilization",
+      "fullProductionTarget": "400 kt/yr recycled construction materials capacity"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "Technology & feedstock strategy", "period": "2025 Q4", "state": "complete" },
+      { "lane": "Enablers", "label": "Feedstock / waste policy", "period": "2026 Q1", "state": "current" },
+      { "lane": "Execution", "label": "FID & EPC award", "period": "2026 Q1", "state": "current" },
+      { "lane": "Activity", "label": "Construction start", "period": "2026 Q3", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Policy",
+        "bottleneck": "Construction-waste feedstock supply agreement not yet secured",
+        "unlockRequired": "Policy carve-out or regional feedstock pooling agreement"
+      },
+      {
+        "dimension": "Technology",
+        "bottleneck": "Sortation technology selection",
+        "unlockRequired": "Pilot results sign-off and performance guarantees in EPC scope"
+      }
+    ],
+    "overview": {
+      "updateBullets": [
+        "FID package cleared internal hurdle; board date coordinated.",
+        "Circular economics storyline aligned with Technology pillar."
+      ],
+      "upcomingActivities": ["FID approval session", "EPC long-lead equipment list freeze"],
+      "completedMilestones": ["Technology down-select"],
+      "upcomingMilestones": ["FID — Mar 2026", "Construction NTP"]
+    },
+    "risks": [
+      { "text": "Feedstock policy uncertainty delays financing", "severity": "high" },
+      { "text": "Merchant feedstock price volatility", "severity": "medium" }
+    ]
+  },
+  "line3-4": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 35.1,
+      "production": "1.2M TEU",
+      "ebitdaSarB": 5.748,
+      "firstProductionFocus": "Quay wall commitment prior to FID",
+      "fullProductionTarget": "OXAGON Port Phase 1 container terminal"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "PFS / BFS", "period": "2026 Q1", "state": "current" },
+      { "lane": "Enablers", "label": "Utility supply ≤ target tariff", "period": "2026 Q2", "state": "current" },
+      { "lane": "Execution", "label": "Terminal equipment package freeze", "period": "2026 Q3", "state": "planned" },
+      { "lane": "Activity", "label": "FID readiness", "period": "2027 Q1", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Studies / PFS-BFS",
+        "bottleneck": "Long-lead equipment choices vs schedule",
+        "unlockRequired": "Equipment board with vendor down-payment milestones"
+      },
+      {
+        "dimension": "Utility supply",
+        "bottleneck": "Non-competitive tariff vs global port benchmark",
+        "unlockRequired": "Regulatory pathway for competitive industrial tariff"
+      },
+      {
+        "dimension": "Technology",
+        "bottleneck": "Crane & automation package alignment",
+        "unlockRequired": "Single integrated EPC interface and performance tests"
+      }
+    ],
+    "overview": {
+      "updateBullets": [
+        "Utility workstream on weekly steering with Corporate Affairs.",
+        "BFS maturity improving; still short of FID quality gate."
+      ],
+      "upcomingActivities": ["Utility term sheet draft", "Terminal equipment RFP release"],
+      "completedMilestones": ["Site wide master plan v2"],
+      "upcomingMilestones": ["Quay wall contract commitment — Jun 2026"]
+    },
+    "risks": [
+      { "text": "Non-competitive utility cost vs peer ports", "severity": "high" },
+      { "text": "National infrastructure strategy linkage to utility allocation", "severity": "medium" }
+    ]
+  },
+  "aerospace": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 12.33,
+      "production": "200k m² floorspace",
+      "ebitdaSarB": 1.5,
+      "firstProductionFocus": "IPR completion → FID Q4 2026",
+      "fullProductionTarget": "Advanced manufacturing & aerospace cluster floorspace"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "IPR", "period": "2026 Q1", "state": "current" },
+      { "lane": "Enablers", "label": "Cash incentive allocation", "period": "2026 Q2", "state": "planned" },
+      { "lane": "Execution", "label": "FID", "period": "2026 Q4", "state": "planned" },
+      { "lane": "Activity", "label": "EPC kickoff", "period": "2027 Q2", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Funding",
+        "bottleneck": "Cash incentive not yet allocated; FID delayed",
+        "unlockRequired": "Finance committee slot and incentive structure approval"
+      },
+      {
+        "dimension": "Commercial",
+        "bottleneck": "Tenant qualification runway",
+        "unlockRequired": "Tenant MOUs with space flex and quality bands"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["IPR workstreams converging; incentive remains gating item."],
+      "upcomingActivities": ["IPR completion gate", "Incentive paper to board"],
+      "completedMilestones": ["Technology partner shortlist"],
+      "upcomingMilestones": ["IPR completion — Mar 2026"]
+    },
+    "risks": [
+      { "text": "Incentive timing pushes FID into late 2026", "severity": "high" },
+      { "text": "Aerospace tenant certification cycle longer than base case", "severity": "medium" }
+    ]
+  },
+  "wadi-al-jaww": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 7.6,
+      "production": "120 keys",
+      "ebitdaSarB": 1.573,
+      "firstProductionFocus": "Masterplan → feasibility gate",
+      "fullProductionTarget": "Leyja Eco-Resort nameplate keys"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "Masterplan concept", "period": "2026 Q1", "state": "current" },
+      { "lane": "Enablers", "label": "Utilities & water baselines", "period": "2026 Q2", "state": "planned" },
+      { "lane": "Execution", "label": "Feasibility", "period": "2026 Q4", "state": "planned" },
+      { "lane": "Activity", "label": "Permitting package", "period": "2027 Q2", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Utilities",
+        "bottleneck": "Power & water based on high-level assumptions",
+        "unlockRequired": "Exec-supported utility study tied to regional grid expansion"
+      },
+      {
+        "dimension": "Capacity",
+        "bottleneck": "Potential room-count shortfall vs base case",
+        "unlockRequired": "Density study and masterplan refresh"
+      },
+      {
+        "dimension": "Studies",
+        "bottleneck": "Study sequencing vs permit milestones",
+        "unlockRequired": "Integrated studies roadmap with Gov. enablers alignment"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Masterplan program on track; environmental survey work expanded."],
+      "upcomingActivities": ["Final masterplan approval", "Utility concept selection"],
+      "completedMilestones": ["Geotech baseline"],
+      "upcomingMilestones": ["Final masterplan approval — Mar 2026"]
+    },
+    "risks": [
+      { "text": "Water pipeline assumptions may not hold at FS", "severity": "medium" },
+      { "text": "Permit cadence vs study spend", "severity": "medium" }
+    ]
+  },
+  "ar-rjum": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 7.7,
+      "production": "2,800 keys",
+      "ebitdaSarB": 2.089,
+      "firstProductionFocus": "Civil works at ski village",
+      "fullProductionTarget": "TROJENA Ski Village opening ramp"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Water pipeline contract", "period": "2026 Q2", "state": "current" },
+      { "lane": "Execution", "label": "Civil mobilization", "period": "2026 Q2", "state": "planned" },
+      { "lane": "Activity", "label": "Village steel", "period": "2026 Q4", "state": "planned" },
+      { "lane": "Activity", "label": "Commissioning", "period": "2027 Q4", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Resource mobilization",
+        "bottleneck": "Contractor mobilization density vs camp capacity",
+        "unlockRequired": "Camp expansion and logistics corridor secured"
+      },
+      {
+        "dimension": "Power supply",
+        "bottleneck": "Temporary power vs permanent substation timing",
+        "unlockRequired": "Phased energization plan with utility"
+      },
+      {
+        "dimension": "Water",
+        "bottleneck": "Water pipeline contract pending",
+        "unlockRequired": "Award acceleration with risk-shared delivery incentives"
+      },
+      {
+        "dimension": "Project",
+        "bottleneck": "Interface management across EPCM packages",
+        "unlockRequired": "Integrated 3-week lookahead with single owner"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Earthworks progressing; water award is pacing item for civil start."],
+      "upcomingActivities": ["Water pipeline award", "Bulk earthworks completion"],
+      "completedMilestones": ["Access road operational"],
+      "upcomingMilestones": ["Start civil works at ski village — May 2026"]
+    },
+    "risks": [
+      { "text": "Water pipeline delay cascades steel erection", "severity": "high" },
+      { "text": "Contractor productivity in summer heat", "severity": "medium" }
+    ]
+  },
+  "mm-cluster": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 6.1,
+      "production": "413 keys",
+      "ebitdaSarB": 1.739,
+      "firstProductionFocus": "PFS / FS consultant mobilization",
+      "fullProductionTarget": "SINDALAH Island Resort phased development"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "PFS consultant", "period": "2026 Q2", "state": "current" },
+      { "lane": "Enablers", "label": "Land & access", "period": "2026 Q3", "state": "planned" },
+      { "lane": "Execution", "label": "Marine works campaign", "period": "2027 Q1", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Studies",
+        "bottleneck": "Consultant market tight for resort PFS",
+        "unlockRequired": "Early award premium and partner JV option"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Resort framing agreed; awaiting consultant assignment."],
+      "upcomingActivities": ["RFP evaluation", "Data room refresh"],
+      "completedMilestones": ["Site survey database consolidation"],
+      "upcomingMilestones": ["Assign PFS & FS consultant — Jun 2026"]
+    },
+    "risks": [{ "text": "Consultant slot risk pushes FS into 2027", "severity": "medium" }]
+  },
+  "nagr-cluster": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 6.2,
+      "production": "330 keys",
+      "ebitdaSarB": 0.869,
+      "firstProductionFocus": "Scoping study completion",
+      "fullProductionTarget": "Epicon Resort Phase I opening"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "Scoping study", "period": "2026 Q2", "state": "current" },
+      { "lane": "Enablers", "label": "Community & land", "period": "2026 Q3", "state": "planned" },
+      { "lane": "Execution", "label": "Construction ramp", "period": "2027 Q1", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Studies",
+        "bottleneck": "Geotechnical variability across plots",
+        "unlockRequired": "Site investigation program with third-party lab SLA"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Scoping study on track; no material issues flagged."],
+      "upcomingActivities": ["Geotech test batch 2", "Hydrology update"],
+      "completedMilestones": ["Baseline environmental survey"],
+      "upcomingMilestones": ["Scoping study completion — Jun 2026"]
+    },
+    "risks": [{ "text": "Seasonal site access", "severity": "low" }]
+  },
+  "shayban": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": null,
+      "production": "1.2 GW",
+      "ebitdaSarB": null,
+      "firstProductionFocus": "Grid connection → permit path",
+      "fullProductionTarget": "ENOWA Solar Field 1.2 GW"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "Resource assessment", "period": "2026 Q2", "state": "current" },
+      { "lane": "Enablers", "label": "Grid connection submission", "period": "2026 Q2", "state": "current" },
+      { "lane": "Execution", "label": "Scoping / PFS", "period": "2027 Q1", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Enablers",
+        "bottleneck": "Grid connection submission quality",
+        "unlockRequired": "Joint session with regulators on monitoring plan"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Site assessment ahead of plan; grid connection packaging in progress."],
+      "upcomingActivities": ["Grid connection dossier", "Site assessment extension"],
+      "completedMilestones": ["Site survey SOP refresh"],
+      "upcomingMilestones": ["Grid connection submission — Jun 2026"]
+    },
+    "risks": [{ "text": "Regulatory review window extends into rainy season", "severity": "medium" }]
+  },
+  "suwaj-arc": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": null,
+      "production": "600 t/day H2",
+      "ebitdaSarB": null,
+      "firstProductionFocus": "Land lease secured",
+      "fullProductionTarget": "NEOM Green Hydrogen Plant capacity"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Land lease", "period": "2026 Q1", "state": "current" },
+      { "lane": "Studies", "label": "FEED program", "period": "2026 Q2", "state": "planned" },
+      { "lane": "Execution", "label": "Capacity update", "period": "2026 Q4", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Licensing",
+        "bottleneck": "Land lease potential delay",
+        "unlockRequired": "Gov. affairs escalation with fixed-date checkpoint reviews"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Lease application complete; awaiting authority response."],
+      "upcomingActivities": ["Stakeholder session with governorate", "EPC contractor standby"],
+      "completedMilestones": ["Desktop heritage review"],
+      "upcomingMilestones": ["Land lease secured — Mar 2026"]
+    },
+    "risks": [
+      { "text": "Land lease delay vs FEED window", "severity": "high" },
+      { "text": "Geopolitical noise on cross-border logistics", "severity": "medium" }
+    ]
+  },
+  "jabal-sayid": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": 10.875,
+      "production": "500,000 m³/day",
+      "ebitdaSarB": 1.2,
+      "firstProductionFocus": "PFS/BFS completion",
+      "fullProductionTarget": "Desalination Plant 1 / distribution network"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "PFS/BFS", "period": "2026 Q4", "state": "current" },
+      { "lane": "Enablers", "label": "Ownership transfer", "period": "2026 Q2", "state": "current" },
+      { "lane": "Execution", "label": "Energy supply linkage", "period": "2027 Q2", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Corporate",
+        "bottleneck": "Ownership transfer to NEOM pending",
+        "unlockRequired": "Legal close checklist with fixed weekly steering"
+      },
+      {
+        "dimension": "Commercial",
+        "bottleneck": "Energy pricing exposure on RO route",
+        "unlockRequired": "Hedge policy and power purchase structure options paper"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["BFS work packages issued; transfer workstream on critical path."],
+      "upcomingActivities": ["Transfer milestone 2", "RO pilot scale-up"],
+      "completedMilestones": ["Demand model v3"],
+      "upcomingMilestones": ["PFS/BFS completion — Dec 2026"]
+    },
+    "risks": [
+      { "text": "Energy pricing risk on RO economics", "severity": "high" },
+      { "text": "Transfer delays compress BFS calendar", "severity": "medium" }
+    ]
+  },
+  "j-abu-ad-dun": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": null,
+      "production": "TBD",
+      "ebitdaSarB": null,
+      "firstProductionFocus": "Development permit on government platform",
+      "fullProductionTarget": "Tonomus Cognitive Platform (TBD)"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Permit platform availability", "period": "2026 Q4", "state": "current" },
+      { "lane": "Studies", "label": "Platform design", "period": "2027 Q1", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Digital / licensing",
+        "bottleneck": "Permits not available on government platform",
+        "unlockRequired": "Manual workaround with regulator + IT sprint on submissions API"
+      },
+      {
+        "dimension": "Funding",
+        "bottleneck": "Funding decision not made for 2026 rollout",
+        "unlockRequired": "Portfolio committee slot with pre-approved spend envelope"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Platform design frozen pending permit and funding gates."],
+      "upcomingActivities": ["Permit platform readiness checkpoint", "Funding paper"],
+      "completedMilestones": ["Heritage walkdown"],
+      "upcomingMilestones": ["Development permit secured — Dec 2026"]
+    },
+    "risks": [
+      { "text": "Permit delays on government platform", "severity": "high" },
+      { "text": "Funding gap defers rollout", "severity": "high" }
+    ]
+  },
+  "jabal-hamra": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": null,
+      "production": "TBD",
+      "ebitdaSarB": null,
+      "firstProductionFocus": "Development permit",
+      "fullProductionTarget": "NEOM Data Center (TBD)"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Permit platform", "period": "2026 Q4", "state": "current" },
+      { "lane": "Studies", "label": "Build program", "period": "2027 Q2", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Licensing",
+        "bottleneck": "Permits not available on government platform",
+        "unlockRequired": "Parallel paper process with expedited countersign route"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Mirrors Tonomus dependency on permit platform readiness."],
+      "upcomingActivities": ["Joint regulator workshop"],
+      "completedMilestones": ["Desktop site selection"],
+      "upcomingMilestones": ["Development permit secured — Dec 2026"]
+    },
+    "risks": [{ "text": "Permit platform dependency risk across Digital Infrastructure & AI projects", "severity": "medium" }]
+  },
+  "umm-al-birak": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": null,
+      "production": "TBD",
+      "ebitdaSarB": null,
+      "firstProductionFocus": "Network design review & rollout",
+      "fullProductionTarget": "5G & IoT Network (TBD)"
+    },
+    "deliveryChain": [
+      { "lane": "Enablers", "label": "Development permit", "period": "2026 Q4", "state": "current" },
+      { "lane": "Studies", "label": "Rollout", "period": "2027 Q1", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Licensing",
+        "bottleneck": "Spectrum / development permit pending",
+        "unlockRequired": "Bi-weekly regulator touchpoint with issue log"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Network design workshop scheduled post-permit."],
+      "upcomingActivities": ["Tower site civil design"],
+      "completedMilestones": ["RF coverage survey interpretation"],
+      "upcomingMilestones": ["Network design review & rollout — Dec 2026"]
+    },
+    "risks": [{ "text": "Development permit pending", "severity": "medium" }]
+  },
+  "refinery2": {
+    "hasDeepDive": true,
+    "reportingMonth": "June 2026",
+    "footnote": "Milestone-based average %; planned completion per latest MSE update (mock).",
+    "strategicOutcome": {
+      "capexSarB": null,
+      "production": "TBD",
+      "ebitdaSarB": null,
+      "firstProductionFocus": "Terminal configuration option",
+      "fullProductionTarget": "OXAGON Port Phase 2 / terminal capacity (TBD)"
+    },
+    "deliveryChain": [
+      { "lane": "Studies", "label": "Terminal configuration options", "period": "2026 Q2", "state": "current" },
+      { "lane": "Enablers", "label": "National infrastructure strategy", "period": "2026 Q3", "state": "planned" }
+    ],
+    "bottlenecks": [
+      {
+        "dimension": "Policy",
+        "bottleneck": "National infrastructure strategy approval pending (power & utilities allocation)",
+        "unlockRequired": "Steerco with ministry and internal scenario planning"
+      }
+    ],
+    "overview": {
+      "updateBullets": ["Options narrowed to three corridors; economics refresh underway."],
+      "upcomingActivities": ["Scenario workshop with Commercial"],
+      "completedMilestones": ["Benchmarking vs import parity"],
+      "upcomingMilestones": ["Conclude terminal configuration option — Jun 2026"]
+    },
+    "risks": [{ "text": "Policy linkage to utility allocation uncertainty", "severity": "medium" }]
+  }
+}

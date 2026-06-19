@@ -1,0 +1,27 @@
+{
+  "hospitalityKeysTarget": { "min": 7.5, "max": 10.0, "unit": "SAR Bn", "ytdActual": 2.1 },
+  "copperTarget": { "min": 600, "max": 700, "unit": "km²", "ytdActual": 0 },
+  "hospitalitySites": [
+    { "name": "SINDALAH Marina District", "targetMoz": 2.5, "expectedDate": "Q2 2026", "cluster": "SINDALAH" },
+    { "name": "SINDALAH Luxury Villas", "targetMoz": 0.5, "expectedDate": "Q2 2026", "cluster": "SINDALAH" },
+    { "name": "SINDALAH Beach Club", "targetMoz": 0.3, "expectedDate": "Q3 2026", "cluster": "SINDALAH" },
+    { "name": "SINDALAH Wellness Resort", "targetMoz": 0.5, "expectedDate": "Q3 2026", "cluster": "SINDALAH" },
+    { "name": "TROJENA Lake District (New)", "targetMoz": 1.0, "expectedDate": "Q3 2026", "cluster": "TROJENA" },
+    { "name": "TROJENA Ski Village", "targetMoz": 0.8, "expectedDate": "Q3 2026", "cluster": "TROJENA" },
+    { "name": "Leyja Eco-Resort", "targetMoz": 1.8, "expectedDate": "Q2 2026", "cluster": "Leyja" },
+    { "name": "SINDALAH Conference Center", "targetMoz": 0.5, "expectedDate": "Q3 2026", "cluster": "SINDALAH" }
+  ],
+  "copperPrograms": [
+    { "name": "ENOWA Solar Cluster", "targetKt": 460, "totalMeters": 119500, "status": "construction" },
+    { "name": "NEOM Green Hydrogen Plant", "targetKt": null, "totalMeters": 46800, "status": "feasibility" },
+    { "name": "Desalination Plant 2", "targetKt": 50, "totalMeters": 46800, "status": "planned" }
+  ],
+  "drillingProgress": [
+    { "program": "SINDALAH Resort", "plannedMeters": 173279, "actualMeters": 68000 },
+    { "program": "TROJENA Ski Village", "plannedMeters": 46188, "actualMeters": 18000 },
+    { "program": "Leyja Eco-Resort", "plannedMeters": 16000, "actualMeters": 12000 },
+    { "program": "Epicon Resort", "plannedMeters": 13400, "actualMeters": 4500 },
+    { "program": "ENOWA Solar Field", "plannedMeters": 119500, "actualMeters": 22000 },
+    { "program": "NEOM Green Hydrogen", "plannedMeters": 46800, "actualMeters": 0 }
+  ]
+}

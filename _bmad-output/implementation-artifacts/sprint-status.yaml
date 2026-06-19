@@ -1,0 +1,138 @@
+# generated: 2026-04-09
+# last_updated: 2026-04-10
+# project: neom_demo
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - SM creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context recommended)
+#
+# GIT BRANCHING STRATEGY:
+# =======================
+# Sprint branch model (per epic):
+#   1. Epic integration branch: epic/{N}-{slug}  (cut from main at sprint start)
+#   2. Per story: agent opens git worktree on branch story/{N.M}-{slug}
+#   3. Story branch is merged into epic branch when story is 'done'
+#   4. Sprint end: single PR from epic/{N}-{slug} → main
+#
+# Epic 1 branches:
+#   Integration : epic/1-foundation-validation    (already created)
+#   Story 1.1   : story/1-1-project-init          (agent opens worktree from epic branch)
+#   Story 1.2   : story/1-2-ui-shell              (agent opens worktree from epic branch after 1.1 merged)
+#   Story 1.3   : no code — human checkpoint only
+#
+# Story sequence for Epic 1: 1.1 → 1.2 → 1.3  (sequential — 1.2 depends on 1.1)
+
+generated: 2026-04-09
+last_updated: 2026-04-14  # 7-6/7-7/7-8 review: streaming readout, mock engine deleted, E2E smoke ready; 4.8–4.10 → review (XER enrichment, activity code tagging, BU execution summary; schema 2.4)
+project: neom_demo
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+
+  # ── WORKSTREAM KEY ────────────────────────────────────────────────────────
+  # A: Data Foundation   (Python backend — parsers, RAG, financial tools)
+  # B: CEO Cockpit UI    (Frontend — agent menu, confidence TL, iPad, voice)
+  # C: Agent Layer       (Python backend — agent registry, rec card, PIF)
+  # D: What-If Engine    (Full-stack — Gantt sim, what-if UI)
+
+  # ── EPIC 1: Foundation & Stakeholder Validation ──────────────────────────
+  epic-1: done
+  1-1-project-initialization-and-repository-setup: done        # ws: A
+  1-2-full-ui-shell-with-hardcoded-kpi-data-for-stakeholder-review: done  # ws: B
+  1-3-stakeholder-alignment-checkpoint: done                   # human checkpoint — CEO Cockpit reframe (2026-04-10) constitutes completion
+  epic-1-retrospective: optional
+
+  # ── EPIC 2: Data Layer + KPI Dashboard ───────────────────────────────────
+  epic-2: in-progress
+  2-1-track-a-data-parsers-and-kpi-schema: review               # ws: A
+  2-2-kpi-scoring-engine-and-threshold-configuration: backlog  # ws: A
+  2-3-kpi-scorecards-and-trend-charts-ui: done                 # ws: B
+  2-4-track-b-chromadb-rag-pipeline: review                    # ws: A — ChromaDB + pypdf + python-pptx; index build needs OPENAI_API_KEY in .env
+  4-0-financial-data-ingestion-xer-and-excel-parser: review    # ws: A — moved from Epic 4; full TASK+TASKPRED+WBS; 767 tasks, 3048 deps; schedules.json 1.5MB
+  2-5-excel-agent-interactive-tools: review                    # ws: A — LazyExcelLoader + list_sheets/preview_sheet/run_python; adds pandas+numpy
+  2-6-data-pipeline-bootstrap: review                          # ws: A — run process_schedule_data.py + build_rag_index.py; smoke-test all data layers
+  2-7-batch-sheet-preview: review                              # ws: A — adds preview_sheets(list) tool; reduces multi-sheet round-trips to 1 call
+  2-8-sheet-label-map: review                                 # ws: A — get_sheet_labels(sheet) returns all string cells with (row,col); collapses 9-round Excel queries to 3
+  2-9-agent-progress-feedback: review                         # ws: A+B — _MAX_ROUNDS 10→20; "thinking" SSE events per tool call; one-line QueryBar.tsx handler
+  2-10-workbook-intelligence-index: review                     # ws: A — pre-built label index; describe_workbook() collapses 4 tools→1; financial.json pipeline removed
+  epic-2-retrospective: optional
+
+  # ── EPIC 3: AI Query Bar ─────────────────────────────────────────────────
+  epic-3: in-progress
+  3-1-litellm-client-and-provider-configuration: done          # ws: A
+  3-2-ai-narrative-headlines-and-suggested-interrogations: done # ws: C
+  3-3-conversational-query-bar-with-tool-calling-and-graceful-degradation: done    # ws: C — merged to main 2026-04-10; confidence done-event fix deferred to Story 6.3
+  3-4-query-bar-agent-router: done                             # ws: C — backend-only; extends agent_service.py; no frontend changes
+  3-5-pre-generation-answer-validator: done                    # ws: C — backend-only; depends on 3.4 (agent selected before validator runs)
+  3-6-skill-level-routing: done                                # ws: C — backend-only; depends on 3.4; adds skills to agents.yaml + single router call resolves agent+skill
+  3-8-conversation-history-context-passing: ready-for-dev      # ws: B+C — frontend fix: pass full chatHistory to /api/query on each turn; backend already supports it (Story 3.3 AC3)
+  3-9-implemented-skill-preference-routing: ready-for-dev     # ws: C — backend-only; LIVE/ROADMAP prompt sections in _build_agents_block(); prefers implemented skills; single-call, zero latency cost
+  3-10-data-source-citation: ready-for-dev                     # ws: C — guardrail blocks no-tool responses; strict footnote template appended programmatically
+  epic-3-retrospective: optional
+
+  # ── EPIC 4: Connect Agent to Data Layer ──────────────────────────────────
+  epic-4: in-progress
+  4-1-question-classifier-and-agent-router: backlog            # ws: C — classifier routes questions to named agent contexts
+  4-2-agent-identity-in-chat-ui: review                        # ws: B — agent badge on responses + active agent indicator below query bar
+  4-3-data-catalogue: done                                     # ws: A — data_catalogue.md; injected into classifier + agent system prompts
+  4-4-primavera-source-provenance: review                     # ws: A — source_file on every milestone/task; top-level sources manifest in schedules.json
+  4-5-workbook-full-text-index: review                        # ws: A — full text extraction all 125 sheets; text_tokens per sheet; 500KB→2MB limit
+  4-6-excel-tool-modernisation: review                        # ws: A — re-expose preview_sheet/preview_sheets/list_sheets; lightweight describe_workbook; run_python cap 4k→10k
+  4-7-agent-loop-reliability: review                          # ws: A — MAX_ROUNDS 20→15; calls_remaining in tool results; escalating pressure at round 12; updated system prompt
+  4-8-xer-task-milestone-enrichment: review                   # ws: A — float, status, act dates, duration, task baseline from V16; schema →2.2
+  4-9-activity-code-tagging: review                           # ws: A — TASKACTV+ACTVCODE join; actvcode_index top-level; schema →2.3
+  4-10-bu-execution-summary: review                           # ws: A — phos3-style summary on all BUs; progress_by_project; critical_path_candidates; schema →2.4
+  epic-4-retrospective: optional
+
+  # ── EPIC 5: Recommendation Card + PIF Statement ──────────────────────────
+  epic-5: backlog
+  5-1-action-recommendation-card-phosphate-bu-tier-3: backlog  # ws: C
+  5-2-pif-summary-statement-generation-tier-4: backlog         # ws: C
+  epic-5-retrospective: optional
+
+  # ── EPIC 6: CEO Cockpit Agent Layer ──────────────────────────────────────
+  epic-6: backlog
+  6-1-agent-registry-and-backend-api: backlog                  # ws: C — first task: add confidence to done event in agent_service.py
+  6-2-agent-menu-ui: backlog                                   # ws: B — can mock GET /api/agents from day 1
+  6-3-confidence-traffic-light-on-all-agent-and-query-bar-responses: backlog  # ws: B (frontend) + ws: C (backend done-event fix)
+  6-4-ipad-optimized-layout-and-daily-briefing-mock-page: backlog  # ws: B
+  epic-6-retrospective: optional
+
+  # ── EPIC 7: Vite Frontend Integration ───────────────────────────────────
+  # Goal: Replace Next.js frontend with Vite CEO cockpit design; wire to FastAPI backend via SSE
+  # Source: epic/7-design-frontend-backend-integration (design branch — unrelated git history, manual port)
+  epic-7: in-progress
+  7-1-chat-ux-iteration: done                                  # ws: B — superseded by Vite migration; completed on Next.js branch
+  7-2-vite-frontend-migration: review                          # ws: B — checkout src/ + root configs from design branch; remove Next.js; update package.json
+  7-3-vite-proxy-and-api-env-config: review                    # ws: B — vite.config.ts proxy to :8000; src/lib/api.ts getApiBase()
+  7-4-use-backend-chat-sse-hook: review                        # ws: B — src/intelligence/useBackendChat.ts ≤120 lines; owns full SSE lifecycle
+  7-5-wire-ceo-intelligence-provider: review                   # ws: B — replace runCeoReasoning() with useBackendChat; multi-turn history; ≤100 lines
+  7-6-streaming-readout-and-thread-display: review              # ws: B — token-by-token readout; remove StructuredAnswer; whitespace-pre-wrap; amber error state
+  7-7-delete-mock-reasoning-engine: review                     # ws: B — delete 9 intelligence files + dead types from types.ts
+  7-8-e2e-smoke-test: review                                   # ws: B — manual smoke: live chat, multi-turn, out-of-scope, static dashboard
+  epic-7-retrospective: optional

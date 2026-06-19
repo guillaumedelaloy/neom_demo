@@ -1,0 +1,55 @@
+{
+  "ebitdaBridge": {
+    "actualSarBn": 4.2,
+    "targetSarBn": 4.8,
+    "gapSarBn": 0.6,
+    "note": "Finance · consolidate from BU P&Ls + project models"
+  },
+  "capexCommitmentRatePct": 62.4,
+  "capexNote": "Procurement / Project Controls",
+  "weightedAvgIrrPct": 13.2,
+  "hurdleIrrPct": 12,
+  "irrNote": "Strategy / Finance · project models",
+  "safety": {
+    "ltifr": 0.08,
+    "trifr": 0.12,
+    "fatalitiesYtd": 0,
+    "safeManHoursMn": 22.3,
+    "note": "HSE function"
+  },
+  "esg": {
+    "carbonIntensityKgPerT": 2.1,
+    "waterRecyclingPct": 78,
+    "saudizationOperationalPct": 67.2,
+    "note": "Sustainability / HR"
+  },
+  "partnerPerformanceScore": 7.2,
+  "partnerScoreMax": 10,
+  "partnerNote": "PDE / Partner Management",
+  "regulatoryPipeline": {
+    "pendingApprovals": 14,
+    "avgProcessingDays": 186,
+    "escalated": 3,
+    "note": "Government Affairs / Legal"
+  },
+  "existingOperations": {
+    "revenueSarBn": 18.4,
+    "marginPct": 34.2,
+    "note": "Finance / BU operations"
+  },
+  "marketShare": [
+    { "product": "Clean Energy & Green Industry", "sharePct": 44.0, "rank": 1 },
+    { "product": "Digital Infrastructure & AI", "sharePct": 38.0, "rank": 2 },
+    { "product": "Luxury Tourism & Hospitality", "sharePct": 29.0, "rank": 3 },
+    { "product": "Urban Development & Smart Communities", "sharePct": 33.0, "rank": 4 },
+    { "product": "Special Economic Zone & Investment Platform", "sharePct": 26.0, "rank": 5 }
+  ],
+  "marketShareNote": "Strategy / PMO · % of 2030 sector build-out delivered",
+  "saudizationRatePct": 68.5,
+  "saudizationNote": "HR · Vision 2030 compliance",
+  "digitalAi": {
+    "aiUseCasesDeployed": 42,
+    "opsAutomationRatePct": 24,
+    "note": "Technology function"
+  }
+}

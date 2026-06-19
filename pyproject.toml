@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neom-demo"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "litellm>=1.83.10,<2",
+    "python-dotenv",
+    "pyyaml",
+    "logfire[fastapi,httpx]>=4.32.0",
+    "chromadb>=1.5.7",
+    "pandas>=3.0.2",
+    "openpyxl>=3.1.5",
+    "python-pptx>=1.0.2",
+    "pypdf>=6.10.0",
+    "xerparser>=0.13.9",
+    "numpy>=2.4.4"
+]
+
+[project.scripts]
+neom-chat = "cli:main"
+
+[tool.setuptools]
+py-modules = ["cli"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["api*"]

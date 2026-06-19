@@ -1,0 +1,603 @@
+{
+  "valueIdentified2030SarBn": 10.2,
+  "initiatives2026DefinedSarBn": 3.3,
+  "initiatives2026TargetSarBn": 2.5,
+  "initiatives2026InExecution": 70,
+  "initiatives2026InExecutionTarget": 100,
+  "ebitdaRealized2026SarBn": 0.4,
+  "ebitdaTarget2026SarBn": 2.5,
+  "wasteValue2026SarBn": 0,
+  "wasteTarget2026SarBn": 0.4,
+  "mosDeployment": 20,
+  "mosTarget": 90,
+  "talentHired": 19,
+  "talentTarget": 90,
+  "totalSpecializedRoles": 139,
+  "filledRoles": 12,
+  "activeRoles": 46,
+  "partnershipsFormed": 5,
+  "partnershipsTarget": 80,
+  "platformsCreated": 40,
+  "platformsTarget": 100,
+  "initiativePipeline": [
+    { "level": "L1: Identified", "count": 8, "sarMn": 0 },
+    { "level": "L2: Planned", "count": 15, "sarMn": 500 },
+    { "level": "L3: Trial", "count": 22, "sarMn": 700 },
+    { "level": "L4: Fully Deployed", "count": 18, "sarMn": 500 },
+    { "level": "L5: Fully Implemented", "count": 46, "sarMn": 1596 }
+  ],
+  "buBreakdown": [
+    { "bu": "Urban Development & Smart Communities", "sar2026Mn": 1160, "recurring2025Mn": 859 },
+    { "bu": "Special Economic Zone & Investment Platform", "sar2026Mn": 104, "recurring2025Mn": 508 },
+    { "bu": "Luxury Tourism & Hospitality", "sar2026Mn": 631, "recurring2025Mn": 543 },
+    { "bu": "NEOM HQ", "sar2026Mn": 350, "recurring2025Mn": 0 }
+  ],
+  "programStatusAsOf": "9 March 2026",
+  "programStatusWorkstreams": [
+    {
+      "name": "Value",
+      "rows": [
+        {
+          "kpi": "2026 TechOps & innovation initiatives defined",
+          "uom": "SAR Bn",
+          "actual": "3.3",
+          "target": "2.5",
+          "status": "on_track"
+        },
+        {
+          "kpi": "2026 EBITDA realized",
+          "uom": "SAR Bn",
+          "actual": "0.4",
+          "target": "2.5",
+          "status": "at_risk"
+        },
+        {
+          "kpi": "2026 value generated from waste",
+          "uom": "SAR Bn",
+          "actual": "0",
+          "target": "0.4",
+          "status": "on_track"
+        }
+      ],
+      "notes": [
+        "Volume full-potential assessment completed across all BUs; Cost assessed at Urban Development & Smart Communities.",
+        "Reimagined HQ domain accelerated.",
+        "72 tech and 7 innovation initiatives to generate value in 2026, projected to deliver >2.5 SAR Bn expected impact.",
+        "PD&E partnership incorporated in 2026 Innovation delivery."
+      ]
+    },
+    {
+      "name": "Management operating system",
+      "rows": [
+        {
+          "kpi": "Management Operating System executing across BUs, COE & HQ vs 2026 plan",
+          "uom": "%",
+          "actual": "20%",
+          "target": "90%",
+          "status": "at_risk"
+        }
+      ],
+      "notes": ["Transition from legacy ERP platform to new system underway."]
+    },
+    {
+      "name": "Talent",
+      "rows": [
+        {
+          "kpi": "Key talent hired vs 2026 plan",
+          "uom": "%",
+          "actual": "19%",
+          "target": "90%",
+          "status": "at_risk"
+        }
+      ],
+      "notes": [
+        "Across 139 total specialized roles, of which 46 key roles are active, 9 have been filled."
+      ]
+    },
+    {
+      "name": "Tech and platforms",
+      "rows": [
+        {
+          "kpi": "Domain & Platform Partnerships formed vs 2026 plan",
+          "uom": "%",
+          "actual": "5%",
+          "target": "80%",
+          "status": "at_risk"
+        },
+        {
+          "kpi": "Platforms created vs 2026 plans",
+          "uom": "%",
+          "actual": "40%",
+          "target": "100%",
+          "status": "at_risk"
+        }
+      ],
+      "notes": [
+        ">10 Domain partner demonstrations completed.",
+        "Tech stack strategy workshop completed."
+      ]
+    }
+  ],
+  "initiativeThemePipelineSlide": {
+    "headline": "Initiative status: 100+ initiatives in the pipeline, with planned SAR Mn by 2026",
+      "subline": "Initiatives in the pipeline, excluding PD&E and pre-development, 8 March 2026. All values SAR Mn.",
+    "themes": [
+      {
+        "title": "1. Sense the city",
+        "rows": [
+          {
+            "domain": "1. Accelerating master-planning to delivery",
+            "aluminium": null,
+            "phosphates": null,
+            "bmnm": 10,
+            "total": 10,
+            "contributingInitiatives": [
+              {
+                "id": "init-discovery-accel",
+                "label": "Master-planning acceleration portfolio",
+                "sarMn": 10,
+                "bu": "Luxury Tourism & Hospitality",
+                "headline": "Shorter path from concept to development gate",
+                "highlights": [
+                  "Planning time saved by integrating site surveys, GIS, and demand models in one workflow.",
+                  "Prioritises high-confidence development zones before major capital is committed."
+                ],
+                "narrative": "Representative 2026 pipeline slice for the domain; additional PD&E and early-stage destination initiatives roll up into the same theme."
+              }
+            ]
+          },
+          { "domain": "2. Autonomous platform deployable on demand", "aluminium": null, "phosphates": null, "bmnm": null, "total": null },
+          { "domain": "3. Environmental & IoT sensors", "aluminium": null, "phosphates": null, "bmnm": null, "total": null }
+        ]
+      },
+      {
+        "title": "2. Build the unbuildable",
+        "rows": [
+          {
+            "domain": "4. Lower-cost, lower-footprint, higher value-driven methods",
+            "aluminium": null,
+            "phosphates": null,
+            "bmnm": 306,
+            "total": 306,
+            "contributingInitiatives": [
+              {
+                "id": "init-hospitality-flow",
+                "label": "AI-driven visitor flow & crowd management",
+                "sarMn": 306,
+                "bu": "Luxury Tourism & Hospitality",
+                "headline": "Real-time crowd sensing to optimise visitor experience",
+                "highlights": [
+                  "Computer vision and sensor fusion track footfall across destinations and attractions.",
+                  "Project tech includes edge cameras, IoT gateways, and a real-time analytics layer.",
+                  "Lifts revenue per visitor without expanding the physical footprint of venues."
+                ],
+                "narrative": "Largest single initiative in this domain in the 2026 plan; value is sensitive to visitor arrivals, spend-per-visit assumptions, and launch date."
+              }
+            ]
+          },
+          {
+            "domain": "5. Value from circularity",
+            "aluminium": null,
+            "phosphates": null,
+            "bmnm": 157,
+            "total": 157,
+            "contributingInitiatives": [
+              {
+                "id": "init-water-circularity",
+                "label": "Circular water reuse (TROJENA & Sindalah)",
+                "sarMn": 157,
+                "bu": "Luxury Tourism & Hospitality",
+                "headline": "Value from circularity: treated water reuse across resorts",
+                "highlights": [
+                  "Greywater and condensate recovery for irrigation and cooling where permitted.",
+                  "Reduces freshwater demand while converting waste streams into operating savings.",
+                  "Pairs with water-balance and landscape management upgrades."
+                ],
+                "narrative": "Second-largest Luxury Tourism & Hospitality line item in the circularity theme; execution risk centres on permitting, treatment intensity, and logistics for reuse distribution."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3. Class-leading assets delivered with speed",
+        "rows": [
+          { "domain": "6. Faster future-ready solutions", "aluminium": null, "phosphates": null, "bmnm": null, "total": null },
+          {
+            "domain": "7. Accelerating asset delivery",
+            "aluminium": 2,
+            "phosphates": null,
+            "bmnm": null,
+            "total": 2,
+            "contributingInitiatives": [
+              {
+                "id": "init-al-digital-twin",
+                "label": "High-speed digital twin for process control, product development and product mix optimization",
+                "sarMn": 2,
+                "bu": "Special Economic Zone & Investment Platform",
+                "headline": "Live process twin + APC loop for faster product changes",
+                "highlights": [
+                  "Project tech: high-fidelity thermal and flow twin linked to plant historians and L2 APC.",
+                  "Reduces recipe trial time and energy intensity when switching product grades.",
+                  "Supports debottlenecking without long shutdown windows."
+                ],
+                "narrative": "Shown on the slide as the Special Economic Zone & Investment Platform flagship initiative; the SAR Mn figure here matches the pipeline row for this domain in the 2026 view."
+              }
+            ]
+          },
+          { "domain": "8. Accelerating asset ramp-up", "aluminium": null, "phosphates": null, "bmnm": null, "total": null }
+        ]
+      },
+      {
+        "title": "4. Hyper-productive, e2e orchestrated ops",
+        "rows": [
+          { "domain": "9. Integrated planning (incl. margin-driven services)", "aluminium": null, "phosphates": 10, "bmnm": null, "total": 5 },
+          {
+            "domain": "10. Site-to-service operations",
+            "aluminium": 31,
+            "phosphates": 79,
+            "bmnm": 158,
+            "total": 244,
+            "contributingInitiatives": [
+              {
+                "id": "init-digital-stockpile",
+                "label": "Development of a Digital Asset & Inventory Tracking System",
+                "sarMn": 54,
+                "bu": "Luxury Tourism & Hospitality",
+                "headline": "Real-time asset location, condition, and movement",
+                "highlights": [
+                  "Blends operations planning with port / rail dispatch — fewer mis-routes and less re-handling.",
+                  "Feeds margin-aware service decisions (integrated planning linkage).",
+                  "Telemetry + drone / survey fusion is the core project tech stack."
+                ],
+                "narrative": "Cuts logistics delays and idle inventory; benefits compound when tied to operations sequencing and dispatch set-points."
+              },
+              {
+                "id": "init-electronic-detonators",
+                "label": "Smart construction sequencing & automation (Sindalah/Leyja)",
+                "sarMn": 53,
+                "bu": "Luxury Tourism & Hospitality",
+                "headline": "Digital sequencing → better build quality and throughput",
+                "highlights": [
+                  "Digital work-packaging and sequencing reduce rework and idle time versus manual planning.",
+                  "Improves productivity and crew utilisation on the site-to-service chain.",
+                  "Safety and quality compliance are co-benefits with throughput."
+                ],
+                "narrative": "Often paired with digital site control; value is realised as build rates, crew productivity, and schedule stability improve."
+              }
+            ]
+          },
+          {
+            "domain": "11. Asset reliability",
+            "aluminium": 1,
+            "phosphates": 152,
+            "bmnm": null,
+            "total": 38,
+            "contributingInitiatives": [
+              {
+                "id": "init-grade-improvement",
+                "label": "Building systems efficiency",
+                "sarMn": 54,
+                "bu": "Urban Development & Smart Communities",
+                "headline": "Higher effective output from district utilities",
+                "highlights": [
+                  "Smart metering and controls (including demand-response routes) lift effective utilisation.",
+                  "Less energy and water consumed per unit of serviced floor area — direct margin lever.",
+                  "Reduces variability that otherwise drives unplanned outages."
+                ],
+                "narrative": "Urban Development & Smart Communities asset-reliability value is often expressed as margin per serviced m² rather than calendar uptime alone; this initiative is a major contributor in the 2026 plan."
+              },
+              {
+                "id": "init-ammonia-reliability",
+                "label": "District cooling reliability",
+                "sarMn": 33,
+                "bu": "Urban Development & Smart Communities",
+                "headline": "Steady chilled-water supply for continuous district services",
+                "highlights": [
+                  "Chiller plant and distribution stability and turnaround optimisation.",
+                  "Fewer trips on cooling-linked units protect nameplate capacity and service output.",
+                  "Potential value is mostly avoided outage cost and debottlenecked cooling-linked capacity."
+                ],
+                "narrative": "Shows up under reliability because the economic story is fewer forced derates and higher effective service days for the cooling-dependent network."
+              }
+            ]
+          },
+          {
+            "domain": "12. Autonomy and next-gen city tech",
+            "aluminium": 69,
+            "phosphates": null,
+            "bmnm": null,
+            "total": 69,
+            "contributingInitiatives": [
+              {
+                "id": "init-autonomy-basket",
+                "label": "Autonomy & next-gen city/process technology basket",
+                "sarMn": 69,
+                "bu": "Special Economic Zone & Investment Platform",
+                "headline": "APC, advanced analytics, and selective autonomy pilots",
+                "highlights": [
+                  "Roll-up of multiple smaller line items (e.g. hybrid APC, soft sensors, robotics pilots).",
+                  "Targets energy, yield, and labour productivity in hazardous or repetitive tasks.",
+                  "Planning time saved is indirect (fewer manual reconciliations, faster data release to planning)."
+                ],
+                "narrative": "The slide aggregates several initiatives into one domain row; click initiatives on other rows for concrete single-project narratives (crowd management, water reuse, asset digital twin, etc.)."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "5. People powered by technology",
+        "rows": [
+          {
+            "domain": "13. Reimagined HQ",
+            "aluminium": null,
+            "phosphates": null,
+            "bmnm": null,
+            "total": 350,
+            "contributingInitiatives": [
+              {
+                "id": "init-reimagined-hq",
+                "label": "Reimagined HQ enterprise programme",
+                "sarMn": 350,
+                "bu": "NEOM HQ",
+                "headline": "Operating model, platforms, and ways of working for the centre",
+                "highlights": [
+                  "Value is largely productivity, decision speed, and duplicated cost takeout — not a single plant asset.",
+                  "Includes enterprise data, workflow, and collaboration stack rationalisation.",
+                  "Potential contribution is staged across years; 2026 view is the booked pipeline slice."
+                ],
+                "narrative": "Represents HQ-side initiatives that do not sit in a single BU column but roll to Total in the pipeline table."
+              }
+            ]
+          },
+          { "domain": "14. Smart and efficient manager", "aluminium": null, "phosphates": null, "bmnm": null, "total": null },
+          { "domain": "15. Productive and safe worker", "aluminium": null, "phosphates": null, "bmnm": null, "total": null }
+        ]
+      }
+    ],
+    "totals": [
+      { "label": "2026 Pipeline", "aluminium": 104, "phosphates": 241, "bmnm": 631, "total": 1181 },
+      { "label": "2025 Recurring in 2026", "aluminium": 508, "phosphates": 859, "bmnm": 543, "total": 2115 },
+      { "label": "2026 Total", "aluminium": 612, "phosphates": 1160, "bmnm": 1174, "total": 3296 }
+    ],
+    "topContributors": [
+      {
+        "bu": "Luxury Tourism & Hospitality",
+        "items": [
+          { "id": "init-hospitality-flow", "label": "AI-driven visitor flow & crowd management", "sarMn": 306 },
+          { "id": "init-water-circularity", "label": "Circular water reuse (TROJENA & Sindalah)", "sarMn": 157 },
+          { "id": "init-digital-stockpile", "label": "Development of a Digital Asset & Inventory Tracking System", "sarMn": 54 },
+          { "id": "init-electronic-detonators", "label": "Smart construction sequencing & automation (Sindalah/Leyja)", "sarMn": 53 }
+        ]
+      },
+      {
+        "bu": "Special Economic Zone & Investment Platform",
+        "items": [
+          { "id": "init-al-digital-twin", "label": "High-speed digital twin for process control, product development and product mix optimization", "sarMn": 20 }
+        ]
+      },
+      {
+        "bu": "Urban Development & Smart Communities",
+        "items": [
+          { "id": "init-grade-improvement", "label": "Building systems efficiency", "sarMn": 54 },
+          { "id": "init-ammonia-reliability", "label": "District cooling reliability", "sarMn": 33 }
+        ]
+      }
+    ],
+    "domainDeliveryRoadmap": {
+      "sectionTitle": "Domain delivery roadmap",
+      "sectionSubline": "Prepare → Design → Implement gate status (source slide, 15 April 2026). Domains without dates on the slide are shown with all gates as To be started.",
+      "legend": [
+        { "status": "not_started", "label": "To be started" },
+        { "status": "in_progress", "label": "In progress" },
+        { "status": "completed", "label": "Completed" }
+      ],
+      "preparePhaseTitle": "Prepare",
+      "prepareSubheaders": ["Assign leads", "Domain full potential"],
+      "designPhaseTitle": "Design",
+      "designSubheaders": [
+        "Domain mission statement",
+        "Tech requirements",
+        "Domain business case",
+        "Team and partners"
+      ],
+      "implementPhaseTitle": "Implement",
+      "implementSubheaders": ["Value activation", "Scale"],
+      "rows": [
+        {
+          "theme": "1. Sense the city",
+          "domain": "1. Accelerating master-planning to delivery",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "1. Sense the city",
+          "domain": "2. Autonomous platform deployable on demand",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "1. Sense the city",
+          "domain": "3. Environmental & IoT sensors",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "2. Build the unbuildable",
+          "domain": "4. Lower-cost, lower-footprint, higher value-driven methods",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "2. Build the unbuildable",
+          "domain": "5. Value from circularity",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "3. Class-leading assets delivered with speed",
+          "domain": "6. Faster future-ready solutions",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "3. Class-leading assets delivered with speed",
+          "domain": "7. Accelerating asset delivery",
+          "prepare": [
+            { "status": "not_started", "caption": "Mar 31" },
+            { "status": "not_started", "caption": "Mar 31" }
+          ],
+          "design": [
+            { "status": "in_progress", "caption": "Mar 31" },
+            { "status": "in_progress", "caption": "Apr 9" },
+            { "status": "in_progress", "caption": "Apr 16" },
+            { "status": "in_progress", "caption": "May 15" }
+          ],
+          "implementLabel": "Start in June →"
+        },
+        {
+          "theme": "3. Class-leading assets delivered with speed",
+          "domain": "8. Accelerating asset ramp-up",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "4. Hyper-productive, e2e orchestrated ops",
+          "domain": "9. Integrated planning (incl. margin-driven services)",
+          "prepare": [
+            { "status": "in_progress", "caption": "Apr 16" },
+            { "status": "in_progress", "caption": "Mar 31" }
+          ],
+          "design": [
+            { "status": "in_progress", "caption": "Mar 31" },
+            { "status": "in_progress", "caption": "Apr 9" },
+            { "status": "in_progress", "caption": "Apr 16" },
+            { "status": "in_progress", "caption": "May 15" }
+          ],
+          "implementLabel": "Start in June →"
+        },
+        {
+          "theme": "4. Hyper-productive, e2e orchestrated ops",
+          "domain": "10. Site-to-service operations",
+          "prepare": [{ "status": "completed" }, { "status": "completed" }],
+          "design": [
+            { "status": "completed" },
+            { "status": "completed" },
+            { "status": "not_started", "caption": "Mar 31" },
+            { "status": "not_started", "caption": "Apr 30" }
+          ],
+          "implementLabel": "Start in Apr →"
+        },
+        {
+          "theme": "4. Hyper-productive, e2e orchestrated ops",
+          "domain": "11. Asset reliability",
+          "prepare": [
+            { "status": "not_started", "caption": "Mar 31" },
+            { "status": "in_progress", "caption": "Mar 31" }
+          ],
+          "design": [
+            { "status": "in_progress", "caption": "Mar 31" },
+            { "status": "in_progress", "caption": "Apr 9" },
+            { "status": "in_progress", "caption": "Apr 16" },
+            { "status": "in_progress", "caption": "May 15" }
+          ],
+          "implementLabel": "Start in June →"
+        },
+        {
+          "theme": "4. Hyper-productive, e2e orchestrated ops",
+          "domain": "12. Autonomy and next-gen city tech",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "5. People powered by technology",
+          "domain": "13. Reimagined HQ",
+          "prepare": [{ "status": "completed" }, { "status": "in_progress", "caption": "Mar 31" }],
+          "design": [
+            { "status": "completed" },
+            { "status": "in_progress", "caption": "Apr 9" },
+            { "status": "in_progress", "caption": "Apr 16" },
+            { "status": "in_progress", "caption": "Apr 16" }
+          ],
+          "implementLabel": "Start in Mar (quick wins) →"
+        },
+        {
+          "theme": "5. People powered by technology",
+          "domain": "14. Smart and efficient manager",
+          "prepare": [{ "status": "not_started" }, { "status": "not_started" }],
+          "design": [
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" },
+            { "status": "not_started" }
+          ],
+          "implementLabel": "To be started"
+        },
+        {
+          "theme": "5. People powered by technology",
+          "domain": "15. Productive and safe worker",
+          "prepare": [
+            { "status": "not_started", "caption": "Mar 31" },
+            { "status": "not_started", "caption": "Mar 31" }
+          ],
+          "design": [
+            { "status": "in_progress", "caption": "Mar 31" },
+            { "status": "in_progress", "caption": "Apr 9" },
+            { "status": "in_progress", "caption": "Apr 16" },
+            { "status": "in_progress", "caption": "May 15" }
+          ],
+          "implementLabel": "Start in June →"
+        }
+      ]
+    }
+  }
+}

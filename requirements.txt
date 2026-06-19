@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+litellm>=1.83.10,<2  # Claude Opus 4.7+ needs 1.83.10+ (day-0 Anthropic support)
+python-dotenv # Epic 3 (Story 3.1): load .env at FastAPI startup
+pyyaml        # Story 3.4: load agents.yaml for agent registry
+openpyxl      # Story 2.1: Excel financial model parsing
+chromadb      # Story 2.4: RAG pipeline
+pypdf         # Story 2.4: PDF text extraction
+python-pptx   # Story 2.4: PPTX text extraction
+openai        # Story 2.4: text-embedding-3-small
+xerparser     # Story 4.0: Primavera XER schedule parser
+pandas        # Story 2.5: Excel agent interactive tools
+numpy         # Story 2.5: run_python EXEC_ENV
+logfire[fastapi,httpx]  # observability instrumentation

@@ -1,0 +1,261 @@
+{
+  "programAsOf": "April 15, 2026",
+  "specializedRolesHiring": {
+    "hired": 50,
+    "target": 228,
+    "segments": "22/60 Development · 14/29 PDE · 14/139 T&I"
+  },
+  "pillarNarratives": [
+    {
+      "id": "attract",
+      "label": "Attract talent",
+      "headline": "ATTRACT TALENT",
+      "progress": [
+        "Interview tools and analytics dashboards finalized",
+        "50/228 specialized roles hired (22/60 Development; 14/29 PDE; 14/139 T&I)"
+      ],
+      "risks": [
+        "Relatively slower hiring for specialized roles in T&I (14/139)",
+        "Delays in EVP, benefits, and policy finalization",
+        "Geopolitical situation impacting international hiring"
+      ],
+      "mitigations": [
+        "Strengthen external sourcing for roles in T&I",
+        "Accelerate EVP and policy alignment",
+        "Scenario-based hiring strategy and diversified action plans"
+      ]
+    },
+    {
+      "id": "develop",
+      "label": "Develop leaders",
+      "headline": "DEVELOP LEADERS",
+      "progress": [
+        "Talent reviews for N-1s/N-2s completed and succession actions defined",
+        "Leadership Development Program (Track 1–4) launched with first cohort starting April 20th",
+        "Goal-setting process launched with interim system in place and training sessions conducted"
+      ],
+      "risks": [
+        "Limited clarity on successor readiness and gaps",
+        "Leadership program capacity and funding constraints",
+        "Compressed timeline and mindset shift constraint for performance rollout"
+      ],
+      "mitigations": [
+        "External support brought in for design of success profiles and building internal capability",
+        "Careful planning on LDP dates and cohorts; CEO approval for LDP funding",
+        "Phased performance sprints rollout with leadership and HR team capability building and IT alignment"
+      ]
+    },
+    {
+      "id": "build",
+      "label": "Build pipeline",
+      "headline": "BUILD PIPELINE",
+      "progress": [
+        "Future Leaders Program direction aligned and design underway",
+        "Talent review process launched and feeding into Succession Planning pipeline",
+        "Tracking dashboards under development with interim data sources in place"
+      ],
+      "risks": [
+        "Capability gaps within HR team to deliver FLP and incubate talent",
+        "Talent Management system not fully ready and requires customization"
+      ],
+      "mitigations": [
+        "Hire from the PDP program in 2026 and selective opportunistic graduate hiring",
+        "HRIS working to customize the Talent and Succession system to meet Talent Management needs"
+      ]
+    }
+  ],
+  "nextSteps": [
+    {
+      "action": "FLP promotional social campaigns launched",
+      "owner": "Initiative leads and teams",
+      "initiative": "Talent Acquisition",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Enterprise-wide goal setting and CDP launched via ORACLE",
+      "owner": "Initiative leads and teams",
+      "initiative": "Integrated Performance Management",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "End-to-end performance and development cycle to be redesigned",
+      "owner": "Initiative leads and teams",
+      "initiative": "Integrated Performance Management",
+      "due": "2026-05-31"
+    },
+    {
+      "action": "Follow up on MC talent review with clear action plan defined",
+      "owner": "Initiative leads and teams",
+      "initiative": "Succession-ready bench",
+      "due": "2026-05-31"
+    },
+    {
+      "action": "Design success profiles for all critical roles and compare successors",
+      "owner": "Initiative leads and teams",
+      "initiative": "Succession-ready bench",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Formalize career and development plans for 88 unique successors",
+      "owner": "Initiative leads and teams",
+      "initiative": "Succession-ready bench",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Finalize nomination for LDP tracks with business input",
+      "owner": "Initiative leads and teams",
+      "initiative": "NEOM Academy — LDP",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Launch Module 1 across Tracks 1–4 of LDP",
+      "owner": "Initiative leads and teams",
+      "initiative": "NEOM Academy — LDP",
+      "due": "2026-05-31"
+    },
+    {
+      "action": "Future Leaders Program design in progress",
+      "owner": "Initiative leads and teams",
+      "initiative": "Future Leaders Program",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Assessment center execution prepared for PDP participants/applicants",
+      "owner": "Initiative leads and teams",
+      "initiative": "Future Leaders Program",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Recruitment strategy for external hiring defined",
+      "owner": "Initiative leads and teams",
+      "initiative": "Talent Acquisition",
+      "due": "2026-04-30"
+    },
+    {
+      "action": "Continue building capability within HR and managers",
+      "owner": "Initiative leads and teams",
+      "initiative": "Talent Management Redesign",
+      "due": "2026-05-15"
+    },
+    {
+      "action": "Prioritize talent and succession management system solution to facilitate talent movement",
+      "owner": "Dedicated support from PMO Team",
+      "initiative": "Talent Management Redesign",
+      "due": "2026-04-30"
+    }
+  ],
+  "priorityInitiatives": [
+    {
+      "number": 1,
+      "name": "Talent Acquisition",
+      "owner": "Hamza Talal Maghrabi",
+      "actualPct": 51,
+      "plannedPct": 53,
+      "status": "on_track",
+      "footnote": "Calculated average % from milestone level; planned completion % as of April 13, 2026",
+      "challenges": [
+        "Regional geopolitical situation continues to impact hiring and candidate mobility",
+        "Delays in finalizing key enablers for hiring (EVP, benefits & policies)",
+        "Hiring of specialized technology roles (14/139 currently hired)"
+      ],
+      "mitigants": [
+        "Proactive development of responses and actions to support int'l hires across different scenarios",
+        "Internal alignment on finalizing EVP and strengthen narratives and policies",
+        "Increasing external search capabilities for specialized tech. roles"
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Succession-ready bench of 100–200 future leaders",
+      "owner": "Arnold Dhanesar",
+      "actualPct": 57,
+      "plannedPct": 49,
+      "status": "on_track",
+      "footnote": "Calculated average % from milestone level; planned completion % as of April 14, 2026",
+      "challenges": [
+        "Challenge in comparing successors to success profiles to determine real readiness and gaps",
+        "Decision required: Signoff on H&S support in designing success profiles relevant for 2030 ambitions"
+      ],
+      "mitigants": [
+        "Contacted H&S for consulting support on the design of success profiles and building internal capability"
+      ]
+    },
+    {
+      "number": 7,
+      "name": "NEOM Academy | Leadership Development Program",
+      "owner": "Arnold Dhanesar",
+      "actualPct": 50,
+      "plannedPct": 48,
+      "status": "on_track",
+      "footnote": "Calculated average % from milestone level; planned completion % as of April 14, 2026",
+      "challenges": [
+        "Delivering 5 tracks at the same time will require participants out of the business for an extended time",
+        "Approval required of SAR 120M for the leadership program delivery"
+      ],
+      "mitigants": [
+        "Careful planning of all dates, cohorts and alignment with the business",
+        "Decision required: CEO signoff on completed business case for funding requirements"
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Integrated Performance Management",
+      "owner": "Rene Thumbran",
+      "actualPct": 42,
+      "plannedPct": 29,
+      "status": "at_risk",
+      "footnote": "Calculated average % from milestone level; planned completion % as of April 13, 2026",
+      "challenges": [
+        "Compressed implementation timeline for Performance mgmt. and mindset shift required from HR, managers, and leaders",
+        "Deliver process in short sprints: goal setting, continuous conversation, tech. enablement, appraisal and calibration"
+      ],
+      "mitigants": [
+        "Establish clear expectation and share with both IT & Procurement leaders",
+        "Build capability within leaders and line managers, and upskill HR"
+      ]
+    },
+    {
+      "number": 11,
+      "name": "Future Leaders Program",
+      "owner": "Arnold Dhanesar",
+      "actualPct": 33,
+      "plannedPct": 49,
+      "status": "delayed",
+      "footnote": "Calculated average % from milestone level; planned completion % as of April 14, 2026",
+      "challenges": [
+        "A new team structure and relevant capabilities required",
+        "Alignment with the business on rotations, funding and time off for intense development required",
+        "Delay in completing the compensation and benefits survey may result in an uncompetitive rewards offering"
+      ],
+      "mitigants": [
+        "Hire from the PDP program in 2026 and opportunistic graduate hiring through social media and select schools"
+      ]
+    },
+    {
+      "number": 12,
+      "name": "Talent Management Redesign",
+      "owner": "Arnold Dhanesar",
+      "actualPct": 70,
+      "plannedPct": 69,
+      "status": "on_track",
+      "footnote": "Calculated average % from milestone level; planned completion % as of April 14, 2026",
+      "challenges": [
+        "Talent Management system solution is still in design and requires customization"
+      ],
+      "mitigants": [
+        "HRIS working to customize the Talent and Succession system to meet Talent Management needs"
+      ]
+    }
+  ],
+  "talentAcquisition": { "actual": 51, "planned": 53 },
+  "successionBench": { "actual": 57, "planned": 49, "target": 200 },
+  "criticalRoles": { "total": 228, "filled": 50, "inProgress": 89, "open": 89 },
+  "hiringPipeline": {
+    "cvsShared": 198,
+    "interviewed": 102,
+    "offersExtended": 27,
+    "joined": 12,
+    "onboarding": 5
+  },
+  "initiatives": []
+}

@@ -1,0 +1,544 @@
+{
+  "strategy-status": {
+    "strategicObjectivesIntro": "Integrated view of group portfolio delivery, balance sheet resilience through the CAPEX peak, government enablers, talent and execution readiness at scale, and development-led land replenishment against the 2030 growth arc.",
+    "milestones": [
+      {
+        "title": "Deliver first delivery from all 12 committed growth projects by 2030 across Urban Development & Smart Communities, Special Economic Zone & Investment Platform, and Luxury Tourism & Hospitality",
+        "whereWeStand": "Current: 9 on track; 7 at risk."
+      },
+      {
+        "title": "Build a financially resilient balance sheet capable of sustaining peak CAPEX through 2027",
+        "whereWeStand": "Net leverage stands at 1.4× today but is projected to reach 2.9× by 2027 as growth CAPEX peaks. The 2026 funding gap is SAR 10.2Bn in the base case and SAR 16.3Bn under stress. Securing diversified financing, executing the funding plan with discipline, and managing working capital tightly are prerequisites for sustaining the growth agenda without compromising financial stability."
+      },
+      {
+        "title": "Secure all critical government enablers (power, gas, water, permits, rail, berths) by agreed project milestones",
+        "whereWeStand": "Current: 78 of 142 on track; 34 at risk; 18 delayed."
+      },
+      {
+        "title": "Build the talent and organizational capability required to execute at scale",
+        "whereWeStand": "NEOM is simultaneously managing 12 growth projects, a technology transformation, and a development ramp-up — with critical role vacancies at 13% and succession plans still being developed. The 24-month People Strategy is underway but execution readiness across project teams, technical functions, and leadership pipelines must accelerate materially to match the pace of the capital program."
+      },
+      {
+        "title": "Establish development as a self-sustaining engine of long-term land replenishment",
+        "whereWeStand": "With SAR 1.5Bn in annual predevelopment expenditure targeting 7.5–10 million m² of GFA land readiness and 600–700 MW of Clean Energy & Green Industry capacity additions, development must transition from early-stage activity to a reliable pipeline of investment-ready projects. Master-planned coverage at 40%, permitting lead times averaging 13 months, and Digital Infrastructure & AI funding decisions still unresolved represent gaps that — if not closed — will create a delivery cliff beyond 2030."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Portfolio Progress KPI (weighted avg. across all growth projects)",
+        "value": "1.01",
+        "target": "1.00 (threshold 1.05; stretch 0.95)",
+        "status": "on_track",
+        "stressScore": 22
+      },
+      {
+        "label": "EBITDA bridge (Q1) — QBR consolidated",
+        "value": "—",
+        "target": "Vs Q1 budget ($M)",
+        "status": "at_risk",
+        "stressScore": 48
+      },
+      {
+        "label": "CAPEX commitment rate (% of approved envelope contractually committed)",
+        "value": "62.4%",
+        "target": "100%",
+        "status": "at_risk",
+        "stressScore": 58
+      },
+      {
+        "label": "Weighted average project IRR across portfolio",
+        "value": "13.2%",
+        "target": "≥12% hurdle rate",
+        "status": "on_track",
+        "stressScore": 28
+      },
+      {
+        "label": "Operating assets EBITDA margin",
+        "value": "34.2%",
+        "target": "≥46% by 2030",
+        "status": "at_risk",
+        "stressScore": 55
+      }
+    ],
+    "strategyHorizonKpis": [
+      {
+        "label": "EBITDA (SAR b)",
+        "cells": [
+          { "periodLabel": "Q1-26", "yearLabel": "26 F", "value": "12.0", "tone": "forecast" },
+          { "periodLabel": "Full year", "yearLabel": "26F¹", "value": "59.7", "tone": "forecast" },
+          { "periodLabel": "Full year", "yearLabel": "25A", "value": "60.6", "tone": "historical" },
+          { "periodLabel": "Target", "yearLabel": "2030", "value": "34", "tone": "target" },
+          { "periodLabel": "Target", "yearLabel": "2040", "value": "110–125", "tone": "target" }
+        ]
+      }
+    ]
+  },
+  "exploration": {
+    "strategicObjectivesIntro": "Advance tourism and energy delivery, the Digital Infrastructure & AI permit path, JV operating rhythm, technology-enabled site programs, and disciplined capital concentration.",
+    "milestones": [
+      {
+        "title": "Reach FID on the Leyja Eco-Resort following completion of the Final Master Plan",
+        "whereWeStand": "Current: On track; Master Plan targeted Q4 2026."
+      },
+      {
+        "title": "Secure all outstanding Digital Infrastructure & AI development permits (Tonomus Cognitive Platform, NEOM Data Center, 5G & IoT Network, Desalination Plant 1) to unblock project execution",
+        "whereWeStand": "Current: Delayed — not yet on the permits platform; funding decision not finalized."
+      },
+      {
+        "title": "Activate and embed all four strategic JV partnerships (Red Sea Global, Qiddiya, Diriyah, Masdar City) with clear work programmes underway",
+        "whereWeStand": "Current: All 4 active as of Q2 2026; varying stages of maturity."
+      },
+      {
+        "title": "Complete transition to technology-enabled development with digital twin and geospatial survey deployed at scale across priority sites",
+        "whereWeStand": "Current: Digital-twin modelling underway at Leyja Eco-Resort; geospatial survey expansion in progress."
+      },
+      {
+        "title": "Prioritize and concentrate predevelopment capital on highest-readiness, highest-value sites rather than maintaining a broad portfolio",
+        "whereWeStand": "Current: Rigorous site prioritization underway; Digital Infrastructure & AI funding decision pending."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Development permit coverage — # granted, under application, utilization",
+        "value": "40% coverage; lead time 13 months (improved from 18)",
+        "target": "Coverage increasing; lead time <13 months",
+        "status": "at_risk",
+        "stressScore": 50
+      },
+      {
+        "label": "Mobilization — site works metres completed vs. plan",
+        "value": "SINDALAH 40% (69,000 / 173,273m); TROJENA 100%",
+        "target": "100% per programme plan",
+        "status": "at_risk",
+        "stressScore": 52
+      },
+      {
+        "label": "Delivery — predevelopment expenditure vs. SAR 1.5Bn plan",
+        "value": "On track ~SAR 1.5Bn p.a.; cycle time 13 months",
+        "target": "SAR 1.5Bn; <13 months cycle",
+        "status": "on_track",
+        "stressScore": 25
+      },
+      {
+        "label": "Capacity per sector — GFA + Energy vs. programme targets",
+        "value": "GFA: 2.1 million m²; Energy: 0 MW",
+        "target": "GFA: 7.5–10 million m²; Energy: 600–700 MW",
+        "status": "at_risk",
+        "stressScore": 60
+      },
+      {
+        "label": "Replacement ratio per sector",
+        "value": "To be established",
+        "target": "To be benchmarked",
+        "status": "neutral",
+        "stressScore": 0
+      }
+    ]
+  },
+  "portfolio": {
+    "strategicObjectivesIntro": "Growth-project execution: first delivery, Urban Development flagship sequencing, OXAGON port FID, PDE operating model with Bechtel, and Project Elevate capability build.",
+    "milestones": [
+      {
+        "title": "Achieve first delivery from Urban Development flagship Phase 1 on approved schedule",
+        "whereWeStand": "Current: Under construction; on track; power tariff unresolved."
+      },
+      {
+        "title": "Reach BFS gate-2 approval for Urban Development flagship Phases 2–3 and progress to FID",
+        "whereWeStand": "Current: BFS started; gate-2 pending; power & water agreement with ENOWA required."
+      },
+      {
+        "title": "Reach FID on OXAGON Port — Phase 1 by Q4 2026",
+        "whereWeStand": "Current: PFS/BFS stage; power pricing and technology validation ongoing."
+      },
+      {
+        "title": "Stand up full PDE operating model with Bechtel partnership and master planning complete across all Tier 1 projects",
+        "whereWeStand": "Current: Contract signed; 60+ resources mobilized; Master Plan Phase 1 in progress."
+      },
+      {
+        "title": "Implement Project Elevate capability-building programme to close organizational and technical delivery gaps within 18 months",
+        "whereWeStand": "Current: On track; integrated planning, performance management KPIs, and governance framework being established."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Portfolio Progress KPI across growth projects",
+        "value": "1.01",
+        "target": "1.00 (threshold 1.05; stretch 0.95)",
+        "status": "on_track",
+        "stressScore": 22
+      },
+      {
+        "label": "Share of projects on track vs. at risk vs. delayed (of 16 active)",
+        "value": "9 on track; 7 at risk; 0 delayed",
+        "target": "All on track",
+        "status": "at_risk",
+        "stressScore": 52
+      },
+      {
+        "label": "CAPEX deployed vs. approved annual plan (SAR Bn / %)",
+        "value": "SAR 1.72Bn; 31.1%",
+        "target": "Per approved profiles",
+        "status": "neutral",
+        "stressScore": 38
+      },
+      {
+        "label": "IMP cost variance (actual vs. planned cost for projects in execution)",
+        "value": "Stable but rising (geopolitical disruption)",
+        "target": "Zero variance",
+        "status": "at_risk",
+        "stressScore": 55
+      },
+      {
+        "label": "IMP schedule variance (actual vs. planned schedule for projects in execution)",
+        "value": "Stable but rapidly increasing",
+        "target": "Zero variance",
+        "status": "at_risk",
+        "stressScore": 58
+      }
+    ]
+  },
+  "technology": {
+    "strategicObjectivesIntro": "TechOps & Innovation execution, MOS deployment, enterprise platforms and partnerships, 2030 portfolio definition, and PD&E acceleration in delivery.",
+    "milestones": [
+      {
+        "title": "Get all 2026 TechOps & Innovation initiatives to active execution stage and on track to deliver planned EBITDA impact",
+        "whereWeStand": "Current: 70% in execution vs. 100% target — at risk."
+      },
+      {
+        "title": "Deploy Management Operating System (MOS) across all sectors, CoE, and NEOM HQ",
+        "whereWeStand": "Current: 20% deploying vs. 90% target — significantly behind; transition underway."
+      },
+      {
+        "title": "Establish enterprise and domain technology platforms to underpin operations and data-driven decision-making",
+        "whereWeStand": "Current: 40% of platforms created vs. 100% target; 5 of 80 partnerships formed."
+      },
+      {
+        "title": "Define and lock full 2030 TechOps & Innovation initiative portfolio covering SAR 29Bn value unlock",
+        "whereWeStand": "Current: SAR 10.2Bn in 2030 initiatives defined vs. SAR 8Bn target — ahead."
+      },
+      {
+        "title": "Embed PD&E partnership into 2026 Innovation delivery to accelerate project-level technology deployment",
+        "whereWeStand": "Current: PD&E partnership incorporated; execution underway."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "2026 EBITDA realized from TechOps initiatives (SAR Bn)",
+        "value": "SAR 0.4Bn",
+        "target": "SAR 2.5Bn",
+        "status": "at_risk",
+        "stressScore": 72
+      }
+    ]
+  },
+  "people": {
+    "strategicObjectivesIntro": "Leadership academy launch, succession bench, Future Leaders Program, integrated performance via ORACLE, and Talent Management redesign through 2026.",
+    "milestones": [
+      {
+        "title": "Launch NEOM Academy Leadership Development Program with first cohort across all 5 tracks",
+        "whereWeStand": "Current: On track; first cohort launch April 20, 2026."
+      },
+      {
+        "title": "Build succession-ready bench of 100–200 identified and development-planned future leaders",
+        "whereWeStand": "Current: Succession planning for critical and N-1/N-2 roles complete; targeted development plans in progress."
+      },
+      {
+        "title": "Launch Future Leaders Program with first cohort selected, assessed, and placed across business units",
+        "whereWeStand": "Current: Assessment design finalized; program structure being finalized."
+      },
+      {
+        "title": "Establish a redesigned, technology-enabled integrated performance management cycle enterprise-wide via ORACLE",
+        "whereWeStand": "Current: 23% actual vs. 38% planned — behind; goal setting launched."
+      },
+      {
+        "title": "Complete Talent Management redesign with new competency framework, segmentation, and talent review cadence operational",
+        "whereWeStand": "Current: 67% actual vs. 66% planned — on track."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "#1 Talent Acquisition — specialized roles hired (target 228 by '26)",
+        "value": "50/228 hired · T&I 10% · Land & Dev 37% · Projects 48%",
+        "target": "228 by year-end 2026",
+        "status": "at_risk",
+        "stressScore": 55
+      },
+      {
+        "label": "#6 Succession bench strength — N-1 & N-2 for critical roles (target 60% by '26)",
+        "value": "N-1: 50% · N-2: 67% · Total: 61%",
+        "target": "60% by year-end 2026",
+        "status": "on_track",
+        "stressScore": 28
+      },
+      {
+        "label": "#7 NEOM Academy — LDP successors in targeted programs & applied learning rate",
+        "value": "0% (program commencing end of April) · Applied learning: 0% (commencing 3rd week of April)",
+        "target": "90% by '26 · 70% by '26",
+        "status": "at_risk",
+        "stressScore": 60
+      },
+      {
+        "label": "#8 Integrated Performance Management — 2026 goal setting & performance cycle milestones",
+        "value": "Goal setting by Apr 30 · Continuous conversations by Jun 2 · Formal check-ins by Jul 31",
+        "target": "Appraisal & calibration by Dec 31, 2026",
+        "status": "at_risk",
+        "stressScore": 48
+      },
+      {
+        "label": "#12 Talent Management Redesign — top talent acceleration & progression in succession",
+        "value": "To be confirmed",
+        "target": "100% by '26",
+        "status": "neutral",
+        "stressScore": 35
+      }
+    ]
+  },
+  "enablers": {
+    "strategicObjectivesIntro": "Close power & water pricing with ENOWA, secure competitive OXAGON industry power, obtain Digital Infrastructure & AI development permits, align material import policy for the Circular Materials Plant, and confirm water pipeline capacity for growth clusters.",
+    "milestones": [
+      {
+        "title": "Agree power & water pricing mechanism with ENOWA for Urban Development flagship phases at terms consistent with approved business case",
+        "whereWeStand": "Current: Not agreed; escalated to Board; IRR delta -7% to -9% vs. FID case."
+      },
+      {
+        "title": "Secure competitive long-term power pricing for OXAGON Port — Phase 1 and the Circular Materials Plant through MoE engagement",
+        "whereWeStand": "Current: Committed but not competitively priced; escalated to red."
+      },
+      {
+        "title": "Obtain all outstanding Digital Infrastructure & AI development permits to unblock the Desalination Plant 1 and associated programmes",
+        "whereWeStand": "Current: Delayed; not on the permits platform; government sprint required."
+      },
+      {
+        "title": "Secure the construction material import policy to establish viable economics for the Circular Materials Plant",
+        "whereWeStand": "Current: Not secured; escalated to PIF Board."
+      },
+      {
+        "title": "Confirm water pipeline allocation and infrastructure for flagship urban development, tourism, energy, and Digital Infrastructure & AI growth projects",
+        "whereWeStand": "Current: At risk; utility ramp-up slow; alternative supply plan under review."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Share of tracked enablers on track vs. at risk vs. delayed (of 142 total)",
+        "value": "78 on track; 34 at risk; 18 delayed",
+        "target": "All on track",
+        "status": "at_risk",
+        "stressScore": 50
+      },
+      {
+        "label": "Number of open escalations requiring PIF Board or government-level decision",
+        "value": "5",
+        "target": "0",
+        "status": "at_risk",
+        "stressScore": 58
+      },
+      {
+        "label": "Power & water tariff IRR delta vs. FID-approved business case",
+        "value": "-7% to -9%",
+        "target": "0% delta",
+        "status": "at_risk",
+        "stressScore": 65
+      },
+      {
+        "label": "Share of committed enabler milestones met on schedule in current quarter (%)",
+        "value": "55% of Q2 2026 milestones on track",
+        "target": "100%",
+        "status": "at_risk",
+        "stressScore": 52
+      },
+      {
+        "label": "Critical enablers at Secured or Deployed stage for Tier 1 projects (power, gas, water, permits)",
+        "value": "Urban Development flagship Phase 1: Gas Secured; Power Committed; Water at risk; Tariff at risk",
+        "target": "All Tier 1 at Secured or Deployed",
+        "status": "at_risk",
+        "stressScore": 55
+      }
+    ]
+  },
+  "risk": {
+    "strategicObjectivesIntro": "Restore risk rating stability across the enterprise and contain the 5 increasing risks before cascading impacts. Secure critical supply inputs, diversify logistics corridors, close the talent gap, and maintain financial resilience through the CAPEX peak.",
+    "milestones": [
+      {
+        "title": "Contain the 5 increasing risks and restore rating stability by Q3 2026",
+        "whereWeStand": "Current: 5 of 16 risks moved upward in Q2 2026 — all driven by regional conflict. Aggregate financial exposure across the 5 movers exceeds SAR 8Bn. Crisis Level 2 activated; Business Continuity protocols deployed."
+      },
+      {
+        "title": "Resolve power & water pricing with ENOWA and secure alternative supply to protect Urban Development & Smart Communities operations",
+        "whereWeStand": "Current: Pricing mechanism unresolved; import/transport approvals pending. Precast concrete plants 2 & 3 shut down; structural steel availability reduced. Parallel assessment of alternative material suppliers active."
+      },
+      {
+        "title": "Activate alternative logistics corridors to reduce single-point-of-failure exposure to Gulf maritime routes",
+        "whereWeStand": "Current: Yanbu opened as alternative import corridor; Bahri dry bulk vessels routing through Red Sea for Q3 2026; Jeddah Plan B activated for Special Economic Zone & Investment Platform; bulk cement re-routed via Cape of Good Hope."
+      },
+      {
+        "title": "Close critical talent vacancies and secure project delivery workforce pipeline",
+        "whereWeStand": "Current: 13% critical role vacancies; geopolitical uncertainty affecting international hiring pipelines. Hiring operational readiness at 24%. Succession strength at ~64% vs 60% target. SAR 100m invested in Leadership Development."
+      },
+      {
+        "title": "Maintain balance sheet leverage within 3× covenant through the CAPEX peak cycle",
+        "whereWeStand": "Current: Net leverage 1.4× (best in 10 years) but projected to reach 2.9× by 2027. SAR 10.2Bn funding gap in 2026 (SAR 16.3Bn stress). Cash flow deviation at 15.32%; liquidity ratio declining at 1.54×."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Net debt / EBITDA leverage ratio",
+        "value": "1.4×",
+        "target": "Green <2×; Red >3×",
+        "status": "on_track",
+        "stressScore": 28
+      },
+      {
+        "label": "Cash flow deviation vs. plan (%)",
+        "value": "15.32%",
+        "target": "<10%",
+        "status": "at_risk",
+        "stressScore": 52
+      },
+      {
+        "label": "Liquidity ratio (current assets / current liabilities)",
+        "value": "1.54×",
+        "target": "≥1.5× (declining — needs attention)",
+        "status": "neutral",
+        "stressScore": 40
+      },
+      {
+        "label": "Interest coverage ratio (EBITDA / interest expense)",
+        "value": "7.44×",
+        "target": "Green >2×; Red <2×",
+        "status": "on_track",
+        "stressScore": 18
+      },
+      {
+        "label": "Annual funding gap vs. approved CAPEX envelope (SAR Bn)",
+        "value": "SAR 10.2Bn base; SAR 16.3Bn stress",
+        "target": "Fully funded",
+        "status": "at_risk",
+        "stressScore": 68
+      }
+    ]
+  },
+  "financials": {
+    "strategicObjectivesIntro": "Deliver above-budget EBITDA despite geopolitical headwinds, maintain cash-generative position through the CAPEX peak, protect balance sheet leverage, execute cost discipline, and hold delivery within 3% of budget across all sectors.",
+    "milestones": [
+      {
+        "title": "Deliver FY26 EBITDA above budget despite geopolitical headwinds",
+        "whereWeStand": "On track — FY26F EBITDA of $15,922M is 6% above budget ($15,051M), driven by price tailwinds in Special Economic Zone & Investment Platform (+$1,294M) and Luxury Tourism & Hospitality (+$1,581M) that more than offset Urban Development & Smart Communities drag (-$1,743M). The assumption of conflict resolution by May is the key condition to hold."
+      },
+      {
+        "title": "Maintain a cash-generative position through the CAPEX peak cycle",
+        "whereWeStand": "On track — FY26 cash generation expected at $1,697M, $2,091M improvement vs. prior position, enabled by a $1,739M CAPEX reduction (Tonomus, T&I, non-growth rationalization). This is a deliberate capital discipline response to the crisis and funding pressure."
+      },
+      {
+        "title": "Protect the balance sheet and manage leverage through the growth investment cycle",
+        "whereWeStand": "Watch — The group entered 2026 with net leverage on a rising trajectory toward the projected 2.9× peak in 2027. The $10.2Bn 2026 funding gap remains a live issue. The QBR shows cash ending position ($12,506M) is 20% above budget, which provides some buffer, but needs active monitoring as CAPEX ramps in H2."
+      },
+      {
+        "title": "Execute cost discipline and corporate optimization in line with current business conditions",
+        "whereWeStand": "On track — Corporate costs are 6% below budget ($3,939M vs. $4,189M), with COE savings of $339M (predevelopment reprioritization) and contracted services down 14%. Exception: HR L&D program running 58% over budget — a deliberate investment in the people agenda."
+      },
+      {
+        "title": "Deliver full-year delivery within 3% of budget across all sectors",
+        "whereWeStand": "At risk — Total delivery forecast is 15,168 k m² vs. budget of 15,651 k m² (-3%), driven entirely by Urban Development & Smart Communities volume losses (fit-out -9%, GFA -4%) from the conflict. Special Economic Zone & Investment Platform and Luxury Tourism & Hospitality are on or above plan. Urban Development flagship Phase 1 commissioning delay (25 k m² forecast vs. 150 k m² budget) is the single largest discrete gap."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "FY26 EBITDA vs. budget",
+        "value": "$15,922M (+6% vs. budget)",
+        "target": "$15,051M budget",
+        "status": "on_track",
+        "stressScore": 22
+      },
+      {
+        "label": "FY26 cash generation",
+        "value": "$1,697M (+$2,091M vs. prior)",
+        "target": "Cash-positive through CAPEX peak",
+        "status": "on_track",
+        "stressScore": 20
+      },
+      {
+        "label": "Net leverage trajectory",
+        "value": "Rising toward 2.9× peak in 2027",
+        "target": "<3.0× through cycle",
+        "status": "at_risk",
+        "stressScore": 55
+      },
+      {
+        "label": "Corporate cost discipline",
+        "value": "$3,939M (-6% vs. $4,189M budget)",
+        "target": "At or below budget",
+        "status": "on_track",
+        "stressScore": 18
+      },
+      {
+        "label": "Total delivery vs. budget",
+        "value": "15,168 k m² (-3% vs. 15,651 k m²)",
+        "target": "Within 3% of budget",
+        "status": "at_risk",
+        "stressScore": 52
+      }
+    ]
+  },
+  "safety-esg": {
+    "strategicObjectivesIntro": "Dual-track agenda — achieve zero-harm safety culture through the HSS House transformation (Phase 1 complete, Phase 2 and 3 in progress), while executing a sustainability strategy that captures SAR 4.5Bn+ circular-economy EBITDA, SAR 10.3Bn annual renewable energy savings, and manages the 4× water demand increase by 2040.",
+    "milestones": [
+      {
+        "title": "Achieve zero fatalities and sustain LTI downward trajectory across all operations and contractors",
+        "whereWeStand": "Current: 2025 YTD fatalities at 1 (down from 4 in 2024); LTI count reduced to 2 (from 4 in 2024). Incident frequency at ~25% of 2020 baseline — ahead of Red Sea Global, Qiddiya, Diriyah, and Expo City Dubai."
+      },
+      {
+        "title": "Complete Safety Transformation Phase 2 — embed risk-based predictive management and a digital safety ecosystem across sectors",
+        "whereWeStand": "Current: Phase 1 complete (reactive → proactive). Phase 2 in progress: HSS House restructured with 6 sub-committees; digital safety platform deploying incident prediction AI, e-permit, BBS, and risk management modules."
+      },
+      {
+        "title": "Unlock SAR 10.3Bn annual renewable energy cost savings by 2040 through utility-scale solar and fleet electrification",
+        "whereWeStand": "Current: Renewable energy programme targeting 74M MWh grid-to-RE and 2.4M MWh diesel-to-RE by 2040. Assumptions based on 60% replacement at 2024 energy costs. Construction fleet electrification scoped for further reductions."
+      },
+      {
+        "title": "Scale circular-economy programme to SAR 4.5Bn+ EBITDA by 2040 across construction waste, treated wastewater, and desalination brine",
+        "whereWeStand": "Current: ~SAR 1.5Bn current potential (Special Economic Zone & Investment Platform SAR 750m, Urban Development & Smart Communities SAR 750m, Luxury Tourism & Hospitality SAR 56m). 2040 targets: Urban Development & Smart Communities SAR 3Bn, Special Economic Zone & Investment Platform SAR 1Bn, Luxury Tourism & Hospitality SAR 75m. Water-reuse NPV SAR 1.1Bn at 11% discount rate, IRR 12%."
+      },
+      {
+        "title": "Secure sustainable water supply for the 4× demand increase (40→165 Mn m³/year by 2040) without constraining growth",
+        "whereWeStand": "Current: Water demand at 40 Mn m³/year. Growth to 165 Mn m³ predominantly from flagship urban development and tourism resorts. Treated supply limited near operations; utility ramp-up slow; alternative supply under review."
+      }
+    ],
+    "businessKpis": [
+      {
+        "label": "Lost Time Injuries (LTI) — 2025 YTD",
+        "value": "2",
+        "target": "0 (zero harm)",
+        "status": "at_risk",
+        "stressScore": 40
+      },
+      {
+        "label": "Fatalities — 2025 YTD",
+        "value": "1",
+        "target": "0",
+        "status": "at_risk",
+        "stressScore": 55
+      },
+      {
+        "label": "Severity Rate (SR) — 2025 YTD",
+        "value": "1.27",
+        "target": "<1.0",
+        "status": "at_risk",
+        "stressScore": 45
+      },
+      {
+        "label": "Incident Frequency vs. 2020 baseline",
+        "value": "~25% of baseline",
+        "target": "Continuous improvement toward zero",
+        "status": "on_track",
+        "stressScore": 20
+      },
+      {
+        "label": "GHG emissions trajectory (Mt CO₂e)",
+        "value": "9 Mt current → 15 Mt by 2040 (3× with growth)",
+        "target": "Net zero by 2050; 2040 milestone achievable with RE",
+        "status": "on_track",
+        "stressScore": 35
+      }
+    ]
+  }
+}

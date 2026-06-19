@@ -1,0 +1,111 @@
+{
+  "topRisks": [
+    {
+      "name": "Power & Water Tariff with ENOWA",
+      "category": "Market",
+      "probability": 4,
+      "impact": 5,
+      "trend": "increasing",
+      "owner": "CFO / Corp Strategy"
+    },
+    {
+      "name": "Funding Gap (SAR 10.2Bn base case)",
+      "category": "Funding",
+      "probability": 5,
+      "impact": 4,
+      "trend": "stable",
+      "owner": "CFO"
+    },
+    {
+      "name": "Competitive Power for OXAGON Industry",
+      "category": "Enabler",
+      "probability": 4,
+      "impact": 5,
+      "trend": "stable",
+      "owner": "Corp Affairs"
+    },
+    {
+      "name": "Development Permit Delays (Digital Infrastructure & AI)",
+      "category": "Execution",
+      "probability": 4,
+      "impact": 3,
+      "trend": "increasing",
+      "owner": "Corp Affairs"
+    },
+    {
+      "name": "Geopolitical / Supply Chain (Regional Conflict)",
+      "category": "Geopolitical",
+      "probability": 4,
+      "impact": 5,
+      "trend": "increasing",
+      "owner": "CSO"
+    }
+  ],
+  "consolidatedRiskMap": [
+    { "id": 1, "name": "Land Readiness and Permitting Risk", "tier": "Strategic", "ratingLabel": "35 H", "score": 35, "ratingClass": "H", "movement": "stable", "gridCol": 4, "gridRow": 4 },
+    { "id": 2, "name": "Project Delivery Risk", "tier": "Strategic", "ratingLabel": "37 H", "score": 37, "ratingClass": "H", "movement": "increasing", "gridCol": 4, "gridRow": 5,
+      "movementRationale": "The likelihood has increased to \"almost certain\", with a high financial impact corresponding to a potential impact of 10%–30% of operating profit. Construction milestone delays on Urban Development flagship Phase 1 (approx. +2 to +3 months), Force Majeure from contractors and EPCM partners, limited availability of specialized vendors, and escalation in material and equipment prices." },
+    { "id": 3, "name": "Funding and Capital Allocation", "tier": "Strategic", "ratingLabel": "30 S", "score": 30, "ratingClass": "S", "movement": "stable", "gridCol": 3, "gridRow": 3 },
+    { "id": 4, "name": "Market and Input Cost Volatility", "tier": "Strategic", "ratingLabel": "31 S", "score": 31, "ratingClass": "S", "movement": "stable", "gridCol": 4, "gridRow": 2 },
+    { "id": 5, "name": "Geopolitical and Supply Chain Concentration", "tier": "Strategic", "ratingLabel": "37 H", "score": 37, "ratingClass": "H", "movement": "increasing", "gridCol": 4, "gridRow": 5,
+      "movementRationale": "The risk was reviewed to reflect the escalation of the war, including direct and indirect attacks across the Gulf region. Supply chain concentration risk elevated, with critical suppliers located within the conflict zone. De-facto disruption of Hormuz and key Gulf maritime corridors, exposure of assets and logistics infrastructure in Saudi Arabia's NEOM region (Tabuk) and along Red Sea corridors." },
+    { "id": 6, "name": "Government Enablers and Regulatory Bottlenecks", "tier": "Strategic", "ratingLabel": "31 S", "score": 31, "ratingClass": "S", "movement": "stable", "gridCol": 4, "gridRow": 2 },
+    { "id": 7, "name": "Talent and Capabilities Gap", "tier": "Strategic", "ratingLabel": "35 H", "score": 35, "ratingClass": "H", "movement": "stable", "gridCol": 4, "gridRow": 4 },
+    { "id": 8, "name": "Operational Performance", "tier": "Principal", "ratingLabel": "34 H", "score": 34, "ratingClass": "H", "movement": "increasing", "gridCol": 3, "gridRow": 4,
+      "movementRationale": "The operational performance risk has increased, with the likelihood moving from possible to likely, while the potential financial impact remains assessed as High. Urban Development & Smart Communities is affected by the shutdown of precast concrete plants 2 and 3, as well as reduced availability of structural steel. All sectors face increasing difficulty maintaining adequate construction material inventories." },
+    { "id": 9, "name": "Supply Chain Disruption", "tier": "Principal", "ratingLabel": "38 H", "score": 38, "ratingClass": "H", "movement": "increasing", "gridCol": 5, "gridRow": 4,
+      "movementRationale": "The supply chain disruption risk has increased, with the likelihood moving from possible to likely, and the financial impact remaining assessed as Major. Driven by shipment cancellations, port congestion, cargo handling restrictions, and Force Majeure declarations from suppliers and logistics providers." },
+    { "id": 10, "name": "Cost Escalation", "tier": "Principal", "ratingLabel": "33 S", "score": 33, "ratingClass": "S", "movement": "increasing", "gridCol": 3, "gridRow": 5,
+      "movementRationale": "The likelihood has increased to \"almost certain\", with the financial impact assessed as Moderate, corresponding to a potential impact of 3%–10% of operating profit. Primarily driven by freight and logistics expenses (+60% due to rerouting), war-risk and shipping insurance premiums, and energy price volatility (40–45% of operating costs)." },
+    { "id": 11, "name": "Cybersecurity", "tier": "Principal", "ratingLabel": "38 H", "score": 38, "ratingClass": "H", "movement": "stable", "gridCol": 4, "gridRow": 4 },
+    { "id": 12, "name": "Innovation and Technological Transformation", "tier": "Principal", "ratingLabel": "30 S", "score": 30, "ratingClass": "S", "movement": "stable", "gridCol": 3, "gridRow": 3 },
+    { "id": 13, "name": "Safety", "tier": "Principal", "ratingLabel": "35 H", "score": 35, "ratingClass": "H", "movement": "stable", "gridCol": 4, "gridRow": 4 },
+    { "id": 14, "name": "Sustainability", "tier": "Principal", "ratingLabel": "25 S", "score": 25, "ratingClass": "S", "movement": "stable", "gridCol": 2, "gridRow": 2 },
+    { "id": 15, "name": "Data Risk", "tier": "Principal", "ratingLabel": "24 S", "score": 24, "ratingClass": "S", "movement": "stable", "gridCol": 2, "gridRow": 3 },
+    { "id": 16, "name": "Regulatory Compliance", "tier": "Principal", "ratingLabel": "24 S", "score": 24, "ratingClass": "S", "movement": "stable", "gridCol": 2, "gridRow": 3 }
+  ],
+  "financialKris": {
+    "netLeverage": { "current": 1.4, "threshold": 2.0, "limit": 3.0, "trend": "stable" },
+    "cashFlowDeviation": { "current": 15.32, "threshold": 15, "limit": 20, "trend": "increasing" },
+    "liquidityRatio": { "current": 1.54, "threshold": 1.5, "limit": 1.0, "trend": "decreasing" },
+    "interestCoverage": { "current": 7.44, "threshold": 3.0, "limit": 2.0, "trend": "stable" }
+  },
+  "commodityPrices": [
+    {
+      "name": "Steel",
+      "current": 580,
+      "sixMonthAgo": 520,
+      "greenBelow": 600,
+      "redAbove": 550,
+      "unit": "$/t",
+      "trend": [520, 535, 548, 560, 575, 580]
+    },
+    {
+      "name": "Luxury Tourism & Hospitality ADR",
+      "current": 5300,
+      "sixMonthAgo": 4800,
+      "greenAbove": 4600,
+      "redBelow": 3800,
+      "unit": "$/night",
+      "trend": [4800, 4900, 5050, 5150, 5250, 5300]
+    },
+    {
+      "name": "Container Rate",
+      "current": 2850,
+      "sixMonthAgo": 2600,
+      "greenAbove": 2700,
+      "redBelow": 2400,
+      "unit": "$/FEU",
+      "trend": [2600, 2650, 2700, 2780, 2820, 2850]
+    },
+    {
+      "name": "Power",
+      "current": 310,
+      "sixMonthAgo": 280,
+      "greenBelow": 320,
+      "redAbove": 280,
+      "unit": "$/MWh",
+      "trend": [280, 285, 290, 295, 305, 310]
+    }
+  ]
+}

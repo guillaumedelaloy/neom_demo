@@ -1,0 +1,62 @@
+[
+  {
+    "id": "d1",
+    "title": "Sulfur pricing mandate with Aramco",
+    "detail": "Approve revised negotiation envelope or escalate to Board with IRR scenarios.",
+    "owner": "CFO / Corp Strategy",
+    "by": "June 2026",
+    "type": "decision",
+    "valueAtStakeSarBn": 2.4,
+    "urgency": "critical",
+    "impactedEbitdaSarBn": 1.6,
+    "links": "Risk: Sulfur pricing · Enabler: Sulfur · Projects: Phos 3 Ph2 & Phos 4"
+  },
+  {
+    "id": "d2",
+    "title": "Competitive power for Aluminum (Lines 3–4)",
+    "detail": "Commit to long-term tariff band (≤10 halalah/kWh) or defer FID with communicated trade-offs.",
+    "owner": "Corp Affairs",
+    "by": "Q2 2026",
+    "type": "decision",
+    "valueAtStakeSarBn": 6.9,
+    "urgency": "critical",
+    "impactedEbitdaSarBn": 5.748,
+    "links": "Risk: Power competitiveness · Enabler: Power · Projects: Line 3 & 4, Recycling 1"
+  },
+  {
+    "id": "d3",
+    "title": "REE exploration licensing (Tadeen)",
+    "detail": "Resource Government Affairs sprint; unblock J. Abu Ad Dun / Hamra / Umm Al Birak.",
+    "owner": "Corp Affairs / Legal",
+    "by": "Mar 2026",
+    "type": "decision",
+    "valueAtStakeSarBn": 1.2,
+    "urgency": "high",
+    "impactedEbitdaSarBn": 1.2,
+    "links": "Risk: REE license delays · Enabler: Exploration licenses · Projects: Jabal Sayid, REE cluster"
+  },
+  {
+    "id": "d4",
+    "title": "Funding envelope vs. CAPEX commitment gap",
+    "detail": "Align base-case funding gap (SAR 10.2 Bn) with procurement commitment pace.",
+    "owner": "CFO",
+    "by": "Mar 2026",
+    "type": "decision",
+    "valueAtStakeSarBn": 10.2,
+    "urgency": "high",
+    "impactedEbitdaSarBn": null,
+    "links": "Risk: Funding gap · Financials · Portfolio-wide commitment rate"
+  },
+  {
+    "id": "d5",
+    "title": "Phos 3 Phase 2 gate-2",
+    "detail": "BFS contingent on sulfur; confirm go / no-go criteria for gate-2 date.",
+    "owner": "Phosphate BU",
+    "by": "Jun 2026",
+    "type": "next_step",
+    "valueAtStakeSarBn": 0.8,
+    "urgency": "medium",
+    "impactedEbitdaSarBn": 0.8,
+    "links": "Project: Phos 3 Phase 1 · Gate for Phos 3 Ph2 & Phos 4 EBITDA path"
+  }
+]

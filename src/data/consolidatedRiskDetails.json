@@ -1,0 +1,182 @@
+{
+  "1": {
+    "riskOwner": "EVP, Land Readiness & Master Planning (LRMP)",
+    "influencedBy": "Funding, Gov. Enablers, Talent",
+    "influences": "Project, Funding",
+    "interdependencyQuadrant": "tl",
+    "highlightBullets": [
+      "Overview: residual readiness of the development portfolio shows continued progress, reflecting an improved trend supported by advanced technologies and strengthened partnerships.",
+      "Master-planned land coverage and permitting lead time remain below target, mainly due to the high volume of permit applications and the lengthy approval process.",
+      "Geopolitical context: the Aerial Survey program is delayed due to the conflict. No other major disruptions have been reported for land readiness activities. Cost pressure remains a key concern should the conflict persist, although no immediate impact has been observed.",
+      "Mitigate actions include (i) the Permitting Transformation Program to enhance development-area processes, (ii) key technologies implementation such as digital twin, geospatial survey, and aerial mapping, and (iii) joint ventures with four strategic partners."
+    ],
+    "portfolioStageRows": [
+      { "label": "Detailed design stage", "current": "0.29%", "target": "> 0.1%" },
+      { "label": "Early-stage design", "current": "29.4%", "target": "> 10%" },
+      { "label": "Early feasibility stage", "current": "69.7%", "target": "< 90%" }
+    ],
+    "probabilityNarrative": "5 — Possible",
+    "probabilityPct": "32.5%",
+    "impactNarrative": "5 — Major",
+    "impactPct": "30%",
+    "financialExposureMn": "1,576",
+    "exposureFootnote": "Individual risk exposure calculated based on the 2025 EBITDA and risk ratings validated by the risk owners."
+  },
+  "2": {
+    "riskOwner": "EVP, Projects & Technical (PD&T)",
+    "influencedBy": "Geopolitical, Supply chain, Government enablers",
+    "influences": "Funding, Operational performance, Cost escalation",
+    "interdependencyQuadrant": "tr",
+    "highlightBullets": [
+      "The likelihood has increased to \"almost certain\", with a high financial impact corresponding to a potential impact of 10%–30% of operating profit.",
+      "Construction milestone delays on Urban Development flagship Phase 1 (approx. +2 to +3 months), Force Majeure from contractors and EPCM partners, limited availability of specialized vendors, and escalation in material and equipment prices.",
+      "Seven of sixteen growth projects are currently at risk; portfolio-level schedule variance is increasing across IMP metrics."
+    ],
+    "probabilityNarrative": "5 — Almost certain",
+    "probabilityPct": "—",
+    "impactNarrative": "5 — Major",
+    "impactPct": "—",
+    "financialExposureMn": "3,070",
+    "exposureFootnote": "Illustrative exposure (SAR Mn) aligned to Excom materials; validate with Risk Owner."
+  },
+  "3": {
+    "riskOwner": "CFO / Treasury & Corporate Finance",
+    "influencedBy": "Project delivery, Input cost markets",
+    "influences": "Leverage, Liquidity, Credit",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "Net leverage remains strong today but is projected to rise through the CAPEX peak; funding gap and stress-case liquidity are central watch items.",
+      "Disciplined commitment pacing, diversified financing, and working capital management are prerequisites to sustain the growth agenda."
+    ]
+  },
+  "4": {
+    "riskOwner": "Chief Strategy & Market Intelligence",
+    "influencedBy": "Geopolitical, FX, Demand",
+    "influences": "Revenue, Hedging, Project returns",
+    "interdependencyQuadrant": "tl",
+    "highlightBullets": [
+      "Input cost pass-through and merchant exposure remain volatile; scenario planning ties directly to budget and covenant headroom."
+    ]
+  },
+  "5": {
+    "riskOwner": "Chief Strategy Officer",
+    "influencedBy": "Regional conflict, Maritime logistics",
+    "influences": "Supply chain, Cost escalation, Project delivery",
+    "interdependencyQuadrant": "tr",
+    "highlightBullets": [
+      "The risk was reviewed to reflect the escalation of the war, including direct and indirect attacks across the Gulf region.",
+      "Supply chain concentration risk elevated, with critical suppliers located within the conflict zone. De-facto disruption of Hormuz and key Gulf maritime corridors; exposure of assets and logistics infrastructure in Saudi Arabia's NEOM region (Tabuk) and along Red Sea corridors."
+    ],
+    "probabilityNarrative": "4 — Likely",
+    "probabilityPct": "—",
+    "impactNarrative": "5 — Major",
+    "impactPct": "—",
+    "financialExposureMn": "8,000+",
+    "exposureFootnote": "Aggregate financial exposure cited across upward-moving risks; reconcile to enterprise register."
+  },
+  "6": {
+    "riskOwner": "EVP, Corporate Affairs & Enablers",
+    "influencedBy": "Government stakeholders, Regulators",
+    "influences": "Project delivery, Land readiness, Special Economic Zone & Investment Platform",
+    "interdependencyQuadrant": "tl",
+    "highlightBullets": [
+      "Power, gas, water, permits, and rail/berth enablers remain the binding path for multiple Tier-1 projects.",
+      "Escalations to PIF Board / NIC persist where pricing, incentives, or policy decisions are unresolved."
+    ]
+  },
+  "7": {
+    "riskOwner": "Chief People Officer",
+    "influencedBy": "Growth portfolio, Technology transformation",
+    "influences": "Project delivery, Innovation",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "Critical role vacancies, succession depth, and execution readiness across project teams remain elevated versus the pace of the capital programme.",
+      "People Strategy execution and leadership pipeline development are prioritised to match delivery demand."
+    ]
+  },
+  "8": {
+    "riskOwner": "Chief Operating Officer",
+    "influencedBy": "Supply chain, Materials, Geopolitical",
+    "influences": "EBITDA, Customer commitments",
+    "interdependencyQuadrant": "tr",
+    "highlightBullets": [
+      "The operational performance risk has increased, with the likelihood moving from possible to likely, while the potential financial impact remains assessed as High.",
+      "Urban Development & Smart Communities is affected by the shutdown of precast concrete plants 2 and 3, as well as reduced availability of structural steel. All sectors face increasing difficulty maintaining adequate construction material inventories."
+    ]
+  },
+  "9": {
+    "riskOwner": "Chief Supply Chain Officer",
+    "influencedBy": "Geopolitical, Ports & logistics",
+    "influences": "Operational performance, Cost escalation",
+    "interdependencyQuadrant": "tr",
+    "highlightBullets": [
+      "The supply chain disruption risk has increased, with the likelihood moving from possible to likely, and the financial impact remaining assessed as Major.",
+      "Driven by shipment cancellations, port congestion, cargo handling restrictions, and Force Majeure declarations from suppliers and logistics providers."
+    ]
+  },
+  "10": {
+    "riskOwner": "CFO / Procurement governance",
+    "influencedBy": "Freight, Insurance, Energy",
+    "influences": "Margins, Project estimates",
+    "interdependencyQuadrant": "tr",
+    "highlightBullets": [
+      "The likelihood has increased to \"almost certain\", with the financial impact assessed as Moderate, corresponding to a potential impact of 3%–10% of operating profit.",
+      "Primarily driven by freight and logistics expenses (+60% due to rerouting), war-risk and shipping insurance premiums, and energy price volatility (40–45% of operating costs)."
+    ]
+  },
+  "11": {
+    "riskOwner": "Chief Information Security Officer",
+    "influencedBy": "OT/IT convergence, Geopolitical",
+    "influences": "Operations, Reputation",
+    "interdependencyQuadrant": "tr",
+    "highlightBullets": [
+      "Attack surface expands with MOS, enterprise platforms, and OT integration; NEOM region (Tabuk) infrastructure sits in a heightened exposure zone.",
+      "Material consequence scenario: short operational disruption across operating assets with significant EBITDA at stake."
+    ]
+  },
+  "12": {
+    "riskOwner": "Chief Technology Officer",
+    "influencedBy": "Talent, Vendor delivery",
+    "influences": "Productivity, Cost",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "Initiative throughput and deployment velocity remain the gating factors for realising technology value cases in-year."
+    ]
+  },
+  "13": {
+    "riskOwner": "Chief HSE Officer",
+    "influencedBy": "Contractor management, Commissioning",
+    "influences": "Operations, Reputation",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "HSS House transformation and field leadership routines remain the backbone for sustaining zero-harm ambition through peak construction."
+    ]
+  },
+  "14": {
+    "riskOwner": "Chief Sustainability Officer",
+    "influencedBy": "Regulation, Water, Energy transition",
+    "influences": "Licence to operate, Capital",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "Water demand trajectory and circular-economy programmes anchor the long-term sustainability agenda alongside decarbonisation investments."
+    ]
+  },
+  "15": {
+    "riskOwner": "Chief Data Officer",
+    "influencedBy": "Cybersecurity, Cloud adoption",
+    "influences": "Decisions, Compliance",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "Data quality, lineage, and access governance remain prerequisites for AI and enterprise analytics at scale."
+    ]
+  },
+  "16": {
+    "riskOwner": "General Counsel / Compliance",
+    "influencedBy": "Regulatory change, Investigations",
+    "influences": "Projects, Commercial",
+    "interdependencyQuadrant": "bl",
+    "highlightBullets": [
+      "Cross-border trade, sanctions, and permitting compliance require continuous alignment with growth market entry and JV structures."
+    ]
+  }
+}
