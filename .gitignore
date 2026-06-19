@@ -1,8 +1,5 @@
 .DS_Store
 context/
-data_extract/*
-!data_extract/.gitkeep
-!data_extract/rag_manifest.json
 .claude/settings.local.json
 
 # Build outputs
