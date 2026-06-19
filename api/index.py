@@ -44,7 +44,7 @@ async def check_api_key(request: Request, call_next):
     return await call_next(request)
 
 
-@app.get("/api/health")
+@app.api_route("/api/health", methods=["GET", "HEAD"])
 def health(request: Request):
     out: dict = {
         "status": "ok",

@@ -138,7 +138,7 @@ Processed outputs land in `data_extract/processed/`. The RAG index is written to
 
 ## 5. Run the app
 
-The app has two processes. **The Vite proxy only forwards HTTP — it does not start Python.** If you see `http proxy error` / `ECONNREFUSED` on `127.0.0.1:8001`, nothing is listening on that port yet (start the backend below, or match `VITE_DEV_API_PORT` to the port you actually use). **`ETIMEDOUT`** on the first request usually means Vite tried the proxy while the API was still importing (first load can take tens of seconds); **`pnpm dev:stack`** waits until TCP **8001** accepts before starting Vite to avoid that race.
+The app has two processes. **The Vite proxy only forwards HTTP — it does not start Python.** If you see `http proxy error` / `ECONNREFUSED` on `127.0.0.1:8001`, nothing is listening on that port yet (start the backend below, or match `VITE_DEV_API_PORT` to the port you actually use). **`ETIMEDOUT`** on the first request usually means Vite tried the proxy while the API was still importing (first load can take tens of seconds); **`pnpm dev:stack`** runs **`wait-on http-get://127.0.0.1:8001/api/health`** before starting Vite so the API is ready (plain **`http://`** would use **HEAD**; **`/api/health`** also accepts **HEAD** for probes).
 
 **Option A — one terminal (API + Vite together):**
 ```bash

@@ -9,9 +9,10 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:free-8001": "bash scripts/free-port.sh 8001",
     "dev:api": "uv run uvicorn api.index:app --reload --reload-dir api --host 127.0.0.1 --port 8001",
-    "dev:web:after-api": "wait-on -t 120000 tcp:127.0.0.1:8001 && vite",
-    "dev:stack": "concurrently -k -n api,web -c blue,green \"pnpm run dev:api\" \"pnpm run dev:web:after-api\"",
+    "dev:web:after-api": "wait-on -t 300000 http-get://127.0.0.1:8001/api/health && vite",
+    "dev:stack": "pnpm run dev:free-8001 && concurrently -k -n api,web -c blue,green \"pnpm run dev:api\" \"pnpm run dev:web:after-api\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

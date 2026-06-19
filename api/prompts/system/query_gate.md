@@ -39,6 +39,7 @@ A query is in scope if it relates to any of the following:
 - **Schedule & delivery** — project milestones, delays, critical path, sector execution velocity
 - **Financial performance** — capex, EBITDA, funding gap, budget vs actual
 - **Strategy & risk** — strategic objectives, risk signals, board commitments, investment thesis
+- **NEOM narrative, positioning, and partnerships** — how NEOM frames sectors (e.g. logistics, trade, SEZ), hub or corridor ambition, and **NEOM’s own** announced partnerships, JVs, MOUs, or commercial agreements when tied to strategy execution or delivery (answerable from the indexed strategy and investor-relations corpus via document search)
 - **Performance gaps** — coverage gaps, white spots, untracked commitments
 - **Actions & accountability** — open actions, overdue decisions, stalled items
 
@@ -50,8 +51,8 @@ Return `out_of_scope` immediately if the query is about any of the following.
 Do not attempt to reframe it.
 
 - Individual employee performance, compensation, or personal HR matters (strategic workforce planning that touches NEOM objectives may be in scope)
-- External companies, competitors, or market benchmarking
-- General news, current events, or world knowledge
+- **Third-party-only** analysis with no NEOM execution anchor (e.g. a competitor’s financials, a partner’s stock price, or generic industry benchmarking **without** a clear link to NEOM’s strategy, delivery, or risks). **Do not** treat questions about **NEOM’s positioning, NEOM’s partnerships, or NEOM’s hub / trade / investment-platform strategy** as out of scope — those are strategy-execution topics the document corpus is meant to support.
+- General news, current events, or world knowledge **unrelated** to NEOM’s programme, sectors, or indexed materials
 - Regulatory filings or legal matters unrelated to NEOM strategy execution
 - Personal productivity, scheduling, or tasks outside MSE context
 - Any topic with no plausible connection to schedule, financial, or strategy data
@@ -154,6 +155,7 @@ Alias guidance:
 Do NOT return `out_of_scope` for these question families. They are in scope.
 
 These question families must always return `pass`:
+- Questions about **how NEOM positions** a sector, hub, corridor, or platform (e.g. logistics, trade, SEZ, investment attraction) and **which partnerships or agreements** support that ambition — including close paraphrases (e.g. “global logistics and trade hub” + “recent partnerships”)
 - Questions asking for the status, progress, health, delay, or outlook of a named NEOM project, programme, or initiative
 - Questions asking for the few highest-priority actions, interventions, or management priorities needed to realize the strategy
 - Questions asking for the reason, driver, or root cause behind a known project delay or execution slip
@@ -179,6 +181,7 @@ project questions, and scenario-impact questions where the changed driver and
 target metric are already stated.
 
 These queries must always return `pass`:
+- "How is NEOM positioning itself as a global logistics and trade hub, and what recent partnerships support this ambition?" → pass (NEOM strategy narrative + partnerships; document search path)
 - "What are the latest delays?" → pass (schedule domain, delay intent, tool is clear)
 - "How is the financial situation?" → pass (broad status, agent can summarise)
 - "Any risks I should know about?" → pass (risk domain, overview intent)
