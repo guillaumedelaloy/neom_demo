@@ -18,6 +18,8 @@ AI-native strategy execution cockpit for NEOM’s portfolio review cycle. Ingest
 The root **`vercel.json`** builds **only the Vite frontend** (`dist/`). Scorecards and navigation work **without** `data_extract/` on Vercel. The analyst **chat** needs either **`VITE_MOCK_BACKEND=true`** on Vercel (demo stream, no server) or **`VITE_API_BASE_URL`** pointing at a FastAPI process you run elsewhere (still no S3/GCP required — files live next to the API). Full checklist, minimal `data_extract/` layout, and a slim RAG manifest example: **[docs/vercel-handoff.md](docs/vercel-handoff.md)**.  
 **Step-by-step (UI on Vercel, mock chat, no data_extract):** **[docs/vercel-light-deploy.md](docs/vercel-light-deploy.md)**.
 
+**Railway (FastAPI + optional static UI):** **[docs/railway-deploy.md](docs/railway-deploy.md)** — root **`railway.json`** configures the Docker API service and `/api/health` checks.
+
 ---
 
 ## 1. Clone and install
