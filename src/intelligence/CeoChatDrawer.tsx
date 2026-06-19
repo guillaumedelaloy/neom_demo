@@ -1,6 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import {
   Brain,
   ChevronDown,
@@ -16,7 +14,7 @@ import {
 } from 'lucide-react'
 import type { AgentId, AgentLogEvent, ChartSpec, CeoContext } from './types'
 import type { ChatMessage } from './CeoIntelligenceContext'
-import { ChatChart, createMarkdownComponents, splitChartSegments } from './answerMarkdown'
+import { AnswerMarkdownBody } from './answerMarkdown'
 
 const BROAD_SUGGESTIONS = [
   'Summarize Q2 2026 EBITDA actual vs budget from the financial workbook.',
@@ -152,14 +150,9 @@ export function CeoChatDrawer({
   contextAware,
   onContextAwareChange,
 }: CeoChatDrawerProps) {
-  const mdComponents = createMarkdownComponents('normal')
-
-  const renderAnswer = (text: string) =>
-    splitChartSegments(text).map((seg, i) =>
-      seg.type === 'chart' && charts[seg.id]
-        ? <ChatChart key={seg.id} spec={charts[seg.id]} />
-        : <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} components={mdComponents}>{seg.type === 'text' ? seg.content : ''}</ReactMarkdown>,
-    )
+  const renderAnswer = (text: string, streaming: boolean) => (
+    <AnswerMarkdownBody text={text} charts={charts} size="normal" streaming={streaming} />
+  )
 
   const logRef = useRef<HTMLDivElement>(null)
   const readoutRef = useRef<HTMLDivElement>(null)
@@ -213,8 +206,11 @@ export function CeoChatDrawer({
   }, [activityLog, open])
 
   useEffect(() => {
-    readoutRef.current?.scrollTo({ top: readoutRef.current.scrollHeight, behavior: 'smooth' })
-  }, [streamedAnswer, messages])
+    readoutRef.current?.scrollTo({
+      top: readoutRef.current.scrollHeight,
+      behavior: isRunning ? 'auto' : 'smooth',
+    })
+  }, [streamedAnswer, messages, isRunning])
 
   useEffect(() => {
     if (!open) return
@@ -481,7 +477,7 @@ export function CeoChatDrawer({
                           <Brain className="size-3" aria-hidden />
                         </span>
                         <div className={`min-w-0 flex-1 space-y-2.5 text-[14px] leading-relaxed text-ma-ink ${idx === messages.length - 1 ? 'ceo-intel-answer-in' : ''}`}>
-                          {renderAnswer(m.streamedAnswer)}
+                          {renderAnswer(m.streamedAnswer, false)}
                         </div>
                       </div>
                     )
@@ -493,7 +489,7 @@ export function CeoChatDrawer({
                         <Brain className="size-3" aria-hidden />
                       </span>
                       <div className="ceo-intel-answer-in min-w-0 flex-1 space-y-2.5 text-[14px] leading-relaxed text-ma-ink">
-                        {renderAnswer(streamedAnswer)}
+                        {renderAnswer(streamedAnswer, isRunning)}
                       </div>
                     </div>
                   ) : null}

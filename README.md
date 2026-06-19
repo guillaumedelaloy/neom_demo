@@ -39,16 +39,18 @@ cp .env.example .env
 Edit `.env`:
 
 ```env
-# LLM — required (LiteLLM ids; Anthropic uses anthropic/<claude-api-id>)
-# Main agent (default in api/config/config.yml):
-LLM_MODEL=anthropic/claude-3-5-sonnet-20241022
-# Query gate (first-turn classifier) — small / fast model recommended
-GATE_MODEL=anthropic/claude-3-5-haiku-20241022
-# Prefer LLM_API_KEY; ANTHROPIC_API_KEY / OPENAI_API_KEY are also picked up by the client.
-LLM_API_KEY=sk-ant-...
+# LLM — required (LiteLLM ids: openai/<model>, anthropic/<claude-id>, …)
+# Defaults in api/config/config.yml use OpenAI so one key can run chat + RAG embeddings.
+LLM_MODEL=openai/gpt-4o
+GATE_MODEL=openai/gpt-4o-mini
 
-# Embeddings — required for document search (RAG)
+# API keys — the client picks a key that matches the model provider (see llm_client._api_key_for_model).
+# For OpenAI models, OPENAI_API_KEY is used first. For Anthropic models, ANTHROPIC_API_KEY first.
 OPENAI_API_KEY=sk-proj-...
+# ANTHROPIC_API_KEY=sk-ant-...   # if you use anthropic/* models instead
+
+# Optional generic override (any provider, used as fallback in key chain)
+# LLM_API_KEY=
 
 # Password gate — optional (leave empty to disable)
 VITE_BASIC_AUTH_USER=admin
@@ -61,11 +63,13 @@ DEBUG_AGENT=false
 LOGFIRE_TOKEN=
 ```
 
-> **Chat shows “Assistant temporarily unavailable”?** Confirm `ANTHROPIC_API_KEY` / `LLM_API_KEY`. Defaults in `api/config/config.yml` use **`anthropic/claude-3-5-sonnet-20241022`** — if your `.env` sets `LLM_MODEL` / `GATE_MODEL` to a model your key cannot access (e.g. newer Opus), remove those lines or switch to the 3.5 ids above, then restart the API. Run `uv sync` so LiteLLM is current. The API loads `.env` from the **repository root**. With `DEBUG_AGENT=true`, the chat error includes a scrubbed provider message; server logs record the scrubbed error text.
+> **Chat shows “Assistant temporarily unavailable”?** Ensure **`OPENAI_API_KEY`** is set if you use default **`openai/*`** models, or **`ANTHROPIC_API_KEY`** for **`anthropic/*`**. If `.env` still sets `LLM_MODEL` / `GATE_MODEL` to a provider you do not use, remove or fix those lines. **Do not** point `openai/...` models at an Anthropic-only key: the API now selects keys by provider, but the model id must still match a key you have. Restart the API after changes. With `DEBUG_AGENT=true`, errors include a scrubbed provider message.
 >
-> **Opus 4.7 / 4.8:** When you enable them, Anthropic may reject requests that set non-default `temperature` / sampling. This repo omits `temperature` automatically for those model ids in `llm_client.py`.
+> **OpenAI `RateLimitError` / TPM (tokens per minute):** Low usage tiers often cap TPM (e.g. 10k/min). The agent sends a large system prompt, tools, and optional RAG text — one turn can exceed that. **`gpt-4o-mini` does not remove that overhead** (it mainly changes model pricing/quality). Mitigations: **raise your OpenAI usage tier** or wait between requests; in this repo you can also tighten **`LLM_MAX_COMPLETION_TOKENS`** (default `2048` for `openai/*` — caps completion reservation), **`AGENT_HISTORY_MAX_MESSAGES`** (default `8` user/assistant messages kept), **`AGENT_TOOL_RESULT_MAX_CHARS`** (default `6000` per tool payload), and **`rag_n_results`** in `api/config/config.yml`; then restart the API.
 >
-> The app runs without `OPENAI_API_KEY` — document search is silently disabled and the agent falls back to financial/schedule tools only.
+> **Opus 4.7 / 4.8:** When you enable them, Anthropic may reject non-default `temperature` / sampling. This repo omits `temperature` automatically for those model ids in `llm_client.py`.
+>
+> The app runs without `OPENAI_API_KEY` only if you use **non-OpenAI** chat models **and** you skip RAG — otherwise set `OPENAI_API_KEY` for embeddings and (by default) for chat.
 >
 > If `VITE_BASIC_AUTH_USER` and `VITE_BASIC_AUTH_PASS` are both empty the password gate is disabled entirely.
 
@@ -121,19 +125,19 @@ The app has two processes. Start each in a separate terminal.
 
 **Backend (FastAPI):**
 ```bash
-uv run uvicorn api.index:app --reload --reload-dir api
+uv run uvicorn api.index:app --reload --reload-dir api --host 127.0.0.1 --port 8000
 ```
-Runs on `http://localhost:8000`.
+Runs on `http://127.0.0.1:8000` by default. If port **8000** is already in use, pick another port (e.g. **8001**) and set the same value in `.env` as **`VITE_DEV_API_PORT=8001`** so the Vite proxy forwards `/api` to the correct process.
 
 > **Note:** `--reload` without `--reload-dir` watches the whole project folder, including `.venv/`, which can cause endless reloads right after `uv sync`. Restrict reload to `api/` as above (add more `--reload-dir` paths if you edit other Python packages used by the app).
 
 **Frontend (Vite):**
 ```bash
-pnpm dev
+pnpm dev --host 127.0.0.1
 ```
-Runs on `http://localhost:5173`. The dev server proxies `/api/*` to the backend automatically — no extra config needed.
+Runs on `http://127.0.0.1:5173` (or the next free port — check the terminal). With **`VITE_API_BASE_URL` unset**, the dev server proxies `/api/*` to **`http://127.0.0.1:${VITE_DEV_API_PORT}`** (default **8000**). For production or a remote API, set **`VITE_API_BASE_URL`** to the full backend origin (no trailing slash); that bypasses the proxy.
 
-Open `http://localhost:5173` in your browser.
+Open `http://127.0.0.1:5173` in your browser (use the URL Vite prints if the port differs).
 
 ---
 
@@ -227,7 +231,7 @@ Both Vercel and Cloud Run auto-deploy from their respective branches. Cloud Run 
 
 ### Frontend → Backend connection
 
-All frontend API calls use `getApiBase()` from `src/lib/api.ts`, which reads `VITE_API_BASE_URL` (set in Vercel env vars for production). For local dev, leave it empty — the Vite dev server proxies `/api/*` to `localhost:8000`.
+All frontend API calls use `getApiBase()` from `src/lib/api.ts`, which reads `VITE_API_BASE_URL` (set in Vercel env vars for production). For local dev, leave **`VITE_API_BASE_URL` empty** — the Vite dev server proxies `/api/*` to **`127.0.0.1`**, port **`VITE_DEV_API_PORT`** (default **8000**). If your API listens on **8001**, set `VITE_DEV_API_PORT=8001` in `.env` and restart **`pnpm dev`** (Vite reads this when the dev server starts).
 
 ### API authentication
 
@@ -263,7 +267,7 @@ gcloud builds submit \
 gcloud run deploy your-backend \
   --image REGION-docker.pkg.dev/YOUR_PROJECT/YOUR_REPO/your-backend:latest \
   --region REGION --allow-unauthenticated \
-  --set-env-vars "LLM_MODEL=anthropic/claude-3-5-sonnet-20241022,GATE_MODEL=anthropic/claude-3-5-haiku-20241022,LLM_API_KEY=<KEY>,OPENAI_API_KEY=<KEY>,BACKEND_API_KEY=<KEY>" \
+  --set-env-vars "LLM_MODEL=openai/gpt-4o,GATE_MODEL=openai/gpt-4o-mini,OPENAI_API_KEY=<KEY>,BACKEND_API_KEY=<KEY>" \
   --port 8080 --memory 1Gi --timeout 900 \
   --service-account your-sa@YOUR_PROJECT.iam.gserviceaccount.com \
   --add-volume name=data-vol,type=cloud-storage,bucket=YOUR_DATA_BUCKET,readonly=true \
@@ -286,6 +290,6 @@ NODE_TLS_REJECT_UNAUTHORIZED=0 vercel deploy --prod --yes
 | Backend | FastAPI + Python 3.11+, LiteLLM |
 | Agent | Prompt-first `api/prompts/` (skills + system + runtime) + tool-calling loop (up to 15 rounds), ChromaDB RAG |
 | Tools | Excel analysis, schedule tracking, Urban Development flagship detailed schedule tools, RAG search, **arithmetic calculations (mandatory for all math)** |
-| LLM | Claude via Anthropic (configurable via `LLM_MODEL`) |
+| LLM | OpenAI or Anthropic via LiteLLM (`LLM_MODEL` / `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`) |
 | Observability | Pydantic Logfire (optional) |
 | Deployment | Frontend on Vercel (static SPA); backend on Cloud Run with GCS volume mount |

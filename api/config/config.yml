@@ -1,9 +1,10 @@
 # LiteLLM model id — must match a provider-supported slug (see README §2).
-# Default: widely available on Anthropic keys. Override with LLM_MODEL in .env (e.g. Opus 4.x when enabled).
-model: "anthropic/claude-3-5-sonnet-20241022"
+# Default: OpenAI (single OPENAI_API_KEY works for chat + embeddings). Override LLM_MODEL in .env.
+model: "openai/gpt-4o"
 temperature: 0.1
 max_rounds: 30
 pressure_soft_pct: 60
 pressure_medium_pct: 80
 pressure_hard_pct: 100
-rag_n_results: 15
+# Fewer chunks → smaller prompts (helps low OpenAI TPM tiers, e.g. 10k/min).
+rag_n_results: 4

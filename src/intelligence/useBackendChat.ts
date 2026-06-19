@@ -48,12 +48,55 @@ export function useBackendChat(): UseBackendChatResult {
   const [error, setError] = useState<string | null>(null)
   const [clarification, setClarification] = useState<string | null>(null)
   const abortRef = useRef<AbortController | null>(null)
+  /** Coalesce token updates to one React commit per frame (avoids tab freeze from markdown re-parsing). */
+  const streamRafRef = useRef<number | null>(null)
+  const activityQueueRef = useRef<AgentLogEvent[]>([])
+  const activityRafRef = useRef<number | null>(null)
+
+  const cancelStreamRaf = () => {
+    if (streamRafRef.current != null) {
+      cancelAnimationFrame(streamRafRef.current)
+      streamRafRef.current = null
+    }
+  }
+
+  const cancelActivityRaf = () => {
+    if (activityRafRef.current != null) {
+      cancelAnimationFrame(activityRafRef.current)
+      activityRafRef.current = null
+    }
+  }
+
+  const flushActivityQueue = () => {
+    const batch = activityQueueRef.current.splice(0, activityQueueRef.current.length)
+    if (batch.length) setActivityLog(prev => [...prev, ...batch])
+  }
+
+  const queueActivityEvent = (ev: AgentLogEvent) => {
+    activityQueueRef.current.push(ev)
+    if (activityRafRef.current != null) return
+    activityRafRef.current = requestAnimationFrame(() => {
+      activityRafRef.current = null
+      flushActivityQueue()
+    })
+  }
 
   // Abort any in-flight request on unmount
-  useEffect(() => () => { abortRef.current?.abort() }, [])
+  useEffect(
+    () => () => {
+      abortRef.current?.abort()
+      cancelStreamRaf()
+      cancelActivityRaf()
+      activityQueueRef.current = []
+    },
+    [],
+  )
 
   const submit = useCallback(async (messages: BackendMessage[], context?: DashboardContext): Promise<string | null> => {
     abortRef.current?.abort()
+    cancelStreamRaf()
+    cancelActivityRaf()
+    activityQueueRef.current = []
     const ctrl = new AbortController()
     abortRef.current = ctrl
 
@@ -68,6 +111,14 @@ export function useBackendChat(): UseBackendChatResult {
     let currentAgent: AgentId = 'orchestrator'
     let accumulated = ''  // mutable local — returned to caller for history append
 
+    const scheduleStreamFlush = () => {
+      if (streamRafRef.current != null) return
+      streamRafRef.current = requestAnimationFrame(() => {
+        streamRafRef.current = null
+        setStreamedAnswer(accumulated)
+      })
+    }
+
     const readSse = async (reader: ReadableStreamDefaultReader<Uint8Array>) => {
       const decoder = new TextDecoder()
       outer: while (true) {
@@ -81,10 +132,12 @@ export function useBackendChat(): UseBackendChatResult {
               const mapped = AGENT_ID_MAP[event.agent_id ?? ''] ?? 'orchestrator'
               currentAgent = mapped
               setActiveAgentId(mapped)
-              setActivityLog(prev => [...prev, { id: uid(), ts: Date.now(), agent: mapped, message: event.content ?? '' }])
+              queueActivityEvent({ id: uid(), ts: Date.now(), agent: mapped, message: event.content ?? '' })
             } else if (event.type === 'thinking') {
-              setActivityLog(prev => [...prev, { id: uid(), ts: Date.now(), agent: currentAgent, message: event.content ?? '' }])
+              queueActivityEvent({ id: uid(), ts: Date.now(), agent: currentAgent, message: event.content ?? '' })
             } else if (event.type === 'clarification') {
+              cancelStreamRaf()
+              setStreamedAnswer(accumulated)
               setClarification(event.content ?? '')
               setIsRunning(false)
               return null
@@ -94,15 +147,23 @@ export function useBackendChat(): UseBackendChatResult {
                 setCharts(prev => ({ ...prev, [spec.id]: spec }))
                 const placeholder = `\n\n<!--chart:${spec.id}-->\n\n`
                 accumulated += placeholder
-                setStreamedAnswer(prev => prev + placeholder)
+                scheduleStreamFlush()
               } catch { /* skip malformed chart events */ }
             } else if (event.type === 'token') {
               accumulated += event.content ?? ''
-              setStreamedAnswer(prev => prev + (event.content ?? ''))
+              scheduleStreamFlush()
             } else if (event.type === 'done') {
+              cancelStreamRaf()
+              setStreamedAnswer(accumulated)
+              cancelActivityRaf()
+              flushActivityQueue()
               setIsRunning(false)
               return accumulated
             } else if (event.type === 'error' || event.type === 'not_supported') {
+              cancelStreamRaf()
+              setStreamedAnswer(accumulated)
+              cancelActivityRaf()
+              flushActivityQueue()
               setError(event.content ?? 'Unknown error')
               setIsRunning(false)
               break outer
@@ -110,6 +171,10 @@ export function useBackendChat(): UseBackendChatResult {
           } catch { /* skip malformed SSE lines */ }
         }
       }
+      cancelStreamRaf()
+      setStreamedAnswer(accumulated)
+      cancelActivityRaf()
+      flushActivityQueue()
       return null
     }
 
@@ -165,6 +230,9 @@ export function useBackendChat(): UseBackendChatResult {
       setIsRunning(false)
     } catch (err) {
       if ((err as Error).name !== 'AbortError') {
+        cancelStreamRaf()
+        cancelActivityRaf()
+        activityQueueRef.current = []
         setError('Connection error — is the backend running?')
         setIsRunning(false)
       }
@@ -174,6 +242,9 @@ export function useBackendChat(): UseBackendChatResult {
 
   const reset = useCallback(() => {
     abortRef.current?.abort()
+    cancelStreamRaf()
+    cancelActivityRaf()
+    activityQueueRef.current = []
     setStreamedAnswer('')
     setCharts({})
     setActivityLog([])

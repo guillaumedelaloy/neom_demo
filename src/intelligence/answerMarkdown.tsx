@@ -1,6 +1,10 @@
-import type { ReactNode } from 'react'
+import { useMemo, type ReactNode } from 'react'
 import { AlertTriangle, Bookmark, FileText, Zap } from 'lucide-react'
 import type { Components } from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import type { ChartSpec } from './types'
+import { ChatChart } from './ChatChart'
 export { ChatChart } from './ChatChart'
 
 const CHART_RE = /<!--chart:([\w-]+)-->/g
@@ -194,4 +198,46 @@ export function createMarkdownComponents(size: Size = 'normal'): Components {
       <td className={`${s ? 'py-1.5' : 'py-2'} pr-4 text-ma-ink first:pl-0`}>{children}</td>
     ),
   }
+}
+
+type AnswerMarkdownBodyProps = {
+  text: string
+  charts: Record<string, ChartSpec>
+  size: Size
+  /** When true, text segments render as plain pre-wrap (cheap) — use for in-flight streams */
+  streaming?: boolean
+  className?: string
+}
+
+/**
+ * Renders assistant markdown with optional embedded charts.
+ * Use `streaming` while tokens arrive so ReactMarkdown does not re-parse on every chunk.
+ */
+export function AnswerMarkdownBody({
+  text,
+  charts,
+  size,
+  streaming,
+  className,
+}: AnswerMarkdownBodyProps) {
+  const mdComponents = useMemo(() => createMarkdownComponents(size), [size])
+  return (
+    <div className={className}>
+      {splitChartSegments(text).map((seg, i) =>
+        seg.type === 'chart' && charts[seg.id] ? (
+          <ChatChart key={`${seg.id}-${i}`} spec={charts[seg.id]} />
+        ) : seg.type === 'text' ? (
+          streaming ? (
+            <div key={i} className="whitespace-pre-wrap break-words">
+              {seg.content}
+            </div>
+          ) : (
+            <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} components={mdComponents}>
+              {seg.content}
+            </ReactMarkdown>
+          )
+        ) : null,
+      )}
+    </div>
+  )
 }

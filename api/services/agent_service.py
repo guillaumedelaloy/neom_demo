@@ -17,6 +17,27 @@ _CFG = load_config()
 _log = logging.getLogger(__name__)
 
 
+def _tool_result_json(tool_result: object) -> str:
+    """Keep tool payloads small — RAG / Excel dumps can blow past low OpenAI TPM limits."""
+    try:
+        cap = int(os.environ.get("AGENT_TOOL_RESULT_MAX_CHARS", "6000"))
+    except ValueError:
+        cap = 6000
+    cap = max(500, min(cap, 500_000))
+    raw = json.dumps(tool_result, default=str)
+    if len(raw) <= cap:
+        return raw
+    head = raw[: max(200, cap - 380)]
+    return json.dumps(
+        {
+            "_truncated": True,
+            "original_approx_chars": len(raw),
+            "json_prefix": head,
+            "note": "Tool output exceeded AGENT_TOOL_RESULT_MAX_CHARS; narrow the query or ask for a smaller slice.",
+        }
+    )
+
+
 def _dbg(*args) -> None:
     if _DEBUG:
         print("[agent]", *args, flush=True)
@@ -229,7 +250,7 @@ async def stream_agent_response(
                     {
                         "role": "tool",
                         "tool_call_id": tc.id,
-                        "content": json.dumps(tool_result),
+                        "content": _tool_result_json(tool_result),
                     }
                 )
 

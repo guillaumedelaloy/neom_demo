@@ -25,16 +25,10 @@ import {
   Target,
   Users,
 } from 'lucide-react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { ChatChart, createMarkdownComponents, splitChartSegments } from '../intelligence/answerMarkdown'
+import { AnswerMarkdownBody } from '../intelligence/answerMarkdown'
 import { useCeoIntelligence } from '../intelligence/CeoIntelligenceContext'
 import type { AgentId } from '../intelligence/types'
-
-const compactMdComponents = createMarkdownComponents('compact')
-
-/** Served from `public/neom-logo.png` (same asset as the shell sidebar). */
-const NEOM_LOGO_SRC = '/neom-logo.png'
+import neomLogoUrl from '../assets/neom-logo.png'
 
 /* ── nav data (mirrors Sidebar) ── */
 
@@ -183,15 +177,23 @@ function ReasoningStatusFooter({ active }: { active: boolean }) {
   )
 }
 
-function StreamedAnswer({ text, charts }: { text: string; charts: Record<string, import('../intelligence/types').ChartSpec> }) {
+function StreamedAnswer({
+  text,
+  charts,
+  streaming,
+}: {
+  text: string
+  charts: Record<string, import('../intelligence/types').ChartSpec>
+  streaming?: boolean
+}) {
   return (
-    <div className="space-y-2 text-[12px] leading-relaxed text-ma-ink">
-      {splitChartSegments(text).map((seg, i) =>
-        seg.type === 'chart' && charts[seg.id]
-          ? <ChatChart key={seg.id} spec={charts[seg.id]} />
-          : <ReactMarkdown key={i} remarkPlugins={[remarkGfm]} components={compactMdComponents}>{seg.type === 'text' ? seg.content : ''}</ReactMarkdown>,
-      )}
-    </div>
+    <AnswerMarkdownBody
+      text={text}
+      charts={charts}
+      size="compact"
+      streaming={streaming}
+      className="space-y-2 text-[12px] leading-relaxed text-ma-ink"
+    />
   )
 }
 
@@ -247,8 +249,11 @@ export function Landing() {
   }, [isRunning])
 
   useEffect(() => {
-    readoutRef.current?.scrollTo({ top: readoutRef.current.scrollHeight, behavior: 'smooth' })
-  }, [streamedAnswer, messages])
+    readoutRef.current?.scrollTo({
+      top: readoutRef.current.scrollHeight,
+      behavior: isRunning ? 'auto' : 'smooth',
+    })
+  }, [streamedAnswer, messages, isRunning])
 
   function handleSubmit(text?: string) {
     const q = (text ?? draft).trim()
@@ -268,7 +273,7 @@ export function Landing() {
       <div className="flex flex-1 flex-col overflow-y-auto px-8 py-8 lg:px-10">
         <div className="mb-8">
           <img
-            src={NEOM_LOGO_SRC}
+            src={neomLogoUrl}
             alt="NEOM"
             className="mb-5 h-16 w-auto object-contain object-left"
             width={159}
@@ -503,7 +508,7 @@ export function Landing() {
                             <Brain className="size-2.5" aria-hidden />
                           </span>
                           <div className={`min-w-0 flex-1 ${idx === messages.length - 1 ? 'ceo-intel-answer-in' : ''}`}>
-                            <StreamedAnswer text={m.streamedAnswer} charts={charts} />
+                            <StreamedAnswer text={m.streamedAnswer} charts={charts} streaming={false} />
                           </div>
                         </div>
                       )
@@ -515,7 +520,7 @@ export function Landing() {
                           <Brain className="size-2.5" aria-hidden />
                         </span>
                         <div className="ceo-intel-answer-in min-w-0 flex-1">
-                          <StreamedAnswer text={streamedAnswer} charts={charts} />
+                          <StreamedAnswer text={streamedAnswer} charts={charts} streaming={isRunning} />
                         </div>
                       </div>
                     ) : null}

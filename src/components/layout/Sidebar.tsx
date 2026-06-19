@@ -14,8 +14,7 @@ import {
 } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
-/** Served from `public/neom-logo.png` (avoids bundler path issues on some setups). */
-const NEOM_LOGO_SRC = '/neom-logo.png'
+import neomLogoUrl from '../../assets/neom-logo.png'
 
 type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; end?: boolean }
 
@@ -109,7 +108,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
           aria-label="NEOM — Strategy realization cockpit"
         >
           <img
-            src={NEOM_LOGO_SRC}
+            src={neomLogoUrl}
             alt=""
             className={
               collapsed

@@ -50,8 +50,27 @@ def _anthropic_opus_kwargs(model: str) -> dict:
     }
 
 
+def _openai_max_output_kwargs(model: str) -> dict:
+    """Cap completion reservation for OpenAI — lowers per-request TPM 'requested' on low tiers.
+
+    Override with LLM_MAX_COMPLETION_TOKENS (e.g. 1024 for very tight limits).
+    """
+    if not (model or "").lower().startswith("openai/"):
+        return {}
+    raw = os.environ.get("LLM_MAX_COMPLETION_TOKENS", "2048").strip()
+    try:
+        n = int(raw)
+    except ValueError:
+        n = 2048
+    if n < 256:
+        n = 256
+    if n > 16384:
+        n = 16384
+    return {"max_tokens": n}
+
+
 def _api_key() -> str:
-    # Backward-compatible key lookup order across docs/environments.
+    """Generic key (legacy order). Prefer `_api_key_for_model` for completions."""
     key = (
         os.environ.get("LLM_API_KEY")
         or os.environ.get("AI_API_KEY")
@@ -67,9 +86,45 @@ def _api_key() -> str:
     return key
 
 
+def _api_key_for_model(model: str) -> str:
+    """Pick an API key that matches the model's provider.
+
+    Avoids using ANTHROPIC_API_KEY (or a generic LLM_API_KEY) for `openai/*` models when
+    OPENAI_API_KEY is the only valid key — a common cause of 'model call failed' in demos.
+    """
+    m = (model or "").lower()
+    if m.startswith("openai/"):
+        key = (
+            os.environ.get("OPENAI_API_KEY")
+            or os.environ.get("LLM_API_KEY")
+            or os.environ.get("AI_API_KEY")
+        )
+        if key:
+            return key
+        raise RuntimeError(
+            "OPENAI_API_KEY is required for OpenAI models (LLM_MODEL / GATE_MODEL starting with "
+            "'openai/'). Set OPENAI_API_KEY or LLM_API_KEY to your OpenAI secret."
+        )
+    if m.startswith("anthropic/"):
+        key = (
+            os.environ.get("ANTHROPIC_API_KEY")
+            or os.environ.get("LLM_API_KEY")
+            or os.environ.get("AI_API_KEY")
+        )
+        if key:
+            return key
+        raise RuntimeError(
+            "ANTHROPIC_API_KEY (or LLM_API_KEY) is required for Anthropic models "
+            "(LLM_MODEL / GATE_MODEL starting with 'anthropic/')."
+        )
+    return _api_key()
+
+
 def _completion_kwargs(model: str, messages: list[dict], **extra: object) -> dict:
-    kwargs: dict = dict(model=model, api_key=_api_key(), messages=messages, **extra)
+    kwargs: dict = dict(model=model, api_key=_api_key_for_model(model), messages=messages, **extra)
     kwargs.update(_anthropic_opus_kwargs(model))
+    if "max_tokens" not in kwargs:
+        kwargs.update(_openai_max_output_kwargs(model))
     if not _omit_temperature(model):
         kwargs["temperature"] = _cfg.temperature
     return kwargs

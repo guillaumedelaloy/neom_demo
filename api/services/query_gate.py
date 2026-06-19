@@ -20,7 +20,7 @@ class GateResult(TypedDict):
 
 
 def _gate_model() -> str:
-    return os.environ.get("GATE_MODEL", "anthropic/claude-3-5-haiku-20241022")
+    return os.environ.get("GATE_MODEL", "openai/gpt-4o-mini")
 
 
 _PASS_RESULT: GateResult = {"outcome": "pass", "payload": None}

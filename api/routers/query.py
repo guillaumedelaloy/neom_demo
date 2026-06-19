@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import date
 
 from fastapi import APIRouter
@@ -23,6 +24,21 @@ router = APIRouter()
 class ChatRequest(BaseModel):
     messages: list[dict]
     context: dict | None = None
+
+
+def _clip_messages_for_agent(messages: list[dict]) -> list[dict]:
+    """Keep only recent user/assistant turns so long UI threads stay under low TPM ceilings."""
+    raw = os.environ.get("AGENT_HISTORY_MAX_MESSAGES", "8").strip()
+    try:
+        max_m = int(raw)
+    except ValueError:
+        max_m = 8
+    if max_m <= 0:
+        return list(messages)
+    allowed = [m for m in messages if m.get("role") in ("user", "assistant")]
+    if len(allowed) <= max_m:
+        return allowed
+    return allowed[-max_m:]
 
 
 def _is_followup(messages: list[dict]) -> bool:
@@ -105,7 +121,8 @@ def _build_system_prompt(messages: list[dict], context: dict | None = None) -> s
 async def query(req: ChatRequest):
     async def _stream():
         yield f"data: {json.dumps({'type': 'agent', 'agent_id': 'clarification-agent', 'content': 'Evaluating question scope and clarity…'})}\n\n"
-        gate = await query_gate.assess(req.messages, req.context)
+        messages = _clip_messages_for_agent(req.messages)
+        gate = await query_gate.assess(messages, req.context)
         if gate["outcome"] == "out_of_scope":
             yield f"data: {json.dumps({'type': 'not_supported', 'content': gate['payload']})}\n\n"
             return
@@ -115,13 +132,13 @@ async def query(req: ChatRequest):
         yield f"data: {json.dumps({'type': 'thinking', 'content': 'Question in scope — routing to analysis'})}\n\n"
         yield f"data: {json.dumps({'type': 'agent', 'agent_id': 'data-extraction', 'content': 'Querying data sources…'})}\n\n"
         try:
-            system_prompt = _build_system_prompt(req.messages, req.context)
+            system_prompt = _build_system_prompt(messages, req.context)
         except (SkillsConfigError, PromptConfigError) as e:
             yield f"data: {json.dumps({'type': 'error', 'content': f'Skills configuration error: {e}'})}\n\n"
             return
 
         async for chunk in agent_service.stream_agent_response(
-            req.messages,
+            messages,
             system_prompt=system_prompt,
         ):
             yield chunk
