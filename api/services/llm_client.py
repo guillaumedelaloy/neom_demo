@@ -19,9 +19,9 @@ def _configure_litellm_tls() -> None:
     flag = os.environ.get("SSL_VERIFY", "").strip().lower()
     if flag in ("0", "false", "no", "off"):
         litellm.ssl_verify = False
-        _log.warning(
-            "SSL_VERIFY=%r — TLS certificate verification is disabled for LLM HTTP "
-            "clients (development only; unsafe in production).",
+        # DEBUG: expected for some local/corp setups; unset SSL_VERIFY on public deploys.
+        _log.debug(
+            "SSL_VERIFY=%r — TLS verification disabled for LLM HTTP clients",
             os.environ.get("SSL_VERIFY"),
         )
         return

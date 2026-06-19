@@ -29,7 +29,9 @@ COPY api/ ./api/
 COPY scripts/ ./scripts/
 COPY --from=web /web/dist ./dist
 
-# Optional: mount or bake data_extract at runtime (see docs/railway-deploy.md)
+# RAG: must be present in the git repo + Docker context (see `.dockerignore`).
+COPY data_extract/rag_manifest.json ./data_extract/rag_manifest.json
+COPY data_extract/chroma_db ./data_extract/chroma_db
 
 ENV PORT=8080
 EXPOSE 8080

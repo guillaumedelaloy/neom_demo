@@ -31,9 +31,7 @@ Root **`railway.json`** targets the **FastAPI** `Dockerfile` and health-checks *
 
 \*Chat + RAG need keys per README; demo UI can use `VITE_MOCK_BACKEND=true` on the frontend without this API.
 
-5. **Data / RAG:** The image still does **not** bake in **`data_extract/`** (kept out of the build context via **`.dockerignore`** so large PDFs/XER do not slow builds). Startup warnings for missing **`schedules.json`**, Excel, or Chroma are expected until you attach data. For a full demo either:
-   - attach a **Railway volume** at **`/app/data_extract`** and upload a slim tree + run preprocessing, or  
-   - extend the Dockerfile with a **`COPY data_extract/...`** slice you are willing to ship.
+5. **Data / RAG:** The **`Dockerfile` copies `data_extract/chroma_db/`** and **`data_extract/rag_manifest.json`** into the image. They must exist in the **git repo** you deploy (Railway builds from Git). **`.dockerignore`** excludes heavy folders (`strategy/`, `processed/`, etc.) but **not** `chroma_db`. If the build fails with “file not found”, run **`uv run python scripts/build_rag_index.py`** locally, commit **`chroma_db/`** + **`rag_manifest.json`**, and redeploy. Schedules / Excel remain optional unless you add a volume or further **`COPY`** lines.
 
 6. After deploy, open **`https://<your-railway-host>/`** for the UI and **`/api/health`** for JSON **`{"status":"ok",...}`**.
 
@@ -74,6 +72,7 @@ FastAPI currently allows **origins `*`** in `api/index.py`. For production you m
 - **502 / crash on boot:** Check deploy logs — missing Python deps vs `requirements.txt`, or import errors.
 - **Chat 403:** `BACKEND_API_KEY` is set but the SPA is not sending **`x-api-key`**.
 - **`/api/health?diagnose=1`:** Use it to confirm `LLM_MODEL` / dotenv paths when debugging env.
+- **Missing `data_extract` / Chroma / Excel / schedules:** Expected on the default slim image. The API logs those conditions at **DEBUG** only so Railway’s default **INFO** deploy logs stay quiet. To see them locally, set your root logger to **DEBUG** (or use `uvicorn --log-level debug` and configure `logging` for the `api` namespace).
 
 ---
 

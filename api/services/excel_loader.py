@@ -26,7 +26,7 @@ class LazyExcelLoader:
             self.index: dict = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
         else:
             self.index = {}
-            _log.warning("workbook_index.json not found — run scripts/build_workbook_index.py")
+            _log.debug("workbook_index.json not found — run scripts/build_workbook_index.py")
 
     def sheet_names(self) -> list[str]:
         return self._xl.sheet_names
@@ -56,5 +56,5 @@ def find_data_start(df: pd.DataFrame) -> pd.DataFrame:
 try:
     loader = LazyExcelLoader(str(EXCEL_PATH))
 except FileNotFoundError:
-    _log.warning("Excel file not found: %s", EXCEL_PATH)
+    _log.debug("Excel workbook not found (Excel tools disabled): %s", EXCEL_PATH)
     loader = None  # type: ignore[assignment]

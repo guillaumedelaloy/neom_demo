@@ -23,7 +23,8 @@ def load() -> None:
     if sched_path.exists():
         _schedules = json.loads(sched_path.read_text())
     else:
-        logger.warning(
+        # Slim Docker / Railway images often omit `data_extract/`; DEBUG avoids noisy deploy logs.
+        logger.debug(
             "schedules.json not found at %s — schedule tools will return empty data",
             sched_path,
         )

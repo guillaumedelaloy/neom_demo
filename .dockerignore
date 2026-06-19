@@ -12,7 +12,12 @@ __pycache__
 .ruff_cache
 coverage
 htmlcov
-data_extract
+# Ship RAG (`chroma_db` + `rag_manifest.json`) in the image — do not ignore all of `data_extract/`.
+# Exclude heavy / regenerable paths so `docker build` context stays small.
+data_extract/strategy/**
+data_extract/project_schedules/**
+data_extract/processed/**
+data_extract/*.pdf
 _bmad-output
 context
 *.md

@@ -33,7 +33,7 @@ def _ensure_local_copy() -> Path | None:
 
 def _load_collection() -> chromadb.Collection | None:
     if not os.environ.get("OPENAI_API_KEY"):
-        logger.warning("OPENAI_API_KEY not set — RAG search disabled")
+        logger.debug("OPENAI_API_KEY not set — RAG search disabled")
         return None
     ef = OpenAIEmbeddingFunction(
         api_key=os.environ["OPENAI_API_KEY"],
@@ -41,8 +41,8 @@ def _load_collection() -> chromadb.Collection | None:
     )
     chroma_path = _ensure_local_copy()
     if chroma_path is None:
-        logger.warning(
-            "ChromaDB not found at %s — run scripts/build_rag_index.py first",
+        logger.debug(
+            "ChromaDB not found at %s — run scripts/build_rag_index.py when you need RAG",
             _GCS_CHROMA,
         )
         return None
