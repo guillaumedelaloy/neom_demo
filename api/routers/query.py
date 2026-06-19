@@ -7,6 +7,8 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from api.services import agent_service, query_gate
+from api.services.llm_client import get_resolved_chat_model
+from api.services.query_gate import get_resolved_gate_model
 from api.services.prompt_loader import (
     PromptConfigError,
     load_prompt_text,
@@ -120,6 +122,7 @@ def _build_system_prompt(messages: list[dict], context: dict | None = None) -> s
 @router.post("/api/query")
 async def query(req: ChatRequest):
     async def _stream():
+        yield f"data: {json.dumps({'type': 'meta', 'llm_model': get_resolved_chat_model(), 'gate_model': get_resolved_gate_model()})}\n\n"
         yield f"data: {json.dumps({'type': 'agent', 'agent_id': 'clarification-agent', 'content': 'Evaluating question scope and clarity…'})}\n\n"
         messages = _clip_messages_for_agent(req.messages)
         gate = await query_gate.assess(messages, req.context)

@@ -37,6 +37,8 @@ type UseBackendChatResult = {
   activeAgentId: AgentId | null
   error: string | null
   clarification: string | null
+  /** From backend SSE `meta` (or mock) — models used for the last chat turn. */
+  backendRuntime: { llm_model: string; gate_model: string } | null
 }
 
 export function useBackendChat(): UseBackendChatResult {
@@ -47,6 +49,7 @@ export function useBackendChat(): UseBackendChatResult {
   const [activeAgentId, setActiveAgentId] = useState<AgentId | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [clarification, setClarification] = useState<string | null>(null)
+  const [backendRuntime, setBackendRuntime] = useState<{ llm_model: string; gate_model: string } | null>(null)
   const abortRef = useRef<AbortController | null>(null)
   /** Coalesce token updates to one React commit per frame (avoids tab freeze from markdown re-parsing). */
   const streamRafRef = useRef<number | null>(null)
@@ -105,6 +108,7 @@ export function useBackendChat(): UseBackendChatResult {
     setActivityLog([])
     setError(null)
     setClarification(null)
+    setBackendRuntime(null)
     setActiveAgentId(null)
     setIsRunning(true)
 
@@ -127,8 +131,18 @@ export function useBackendChat(): UseBackendChatResult {
         for (const line of decoder.decode(value, { stream: true }).split('\n')) {
           if (!line.startsWith('data: ')) continue
           try {
-            const event = JSON.parse(line.slice(6)) as { type: string; agent_id?: string; content?: string }
-            if (event.type === 'agent') {
+            const event = JSON.parse(line.slice(6)) as {
+              type: string
+              agent_id?: string
+              content?: string
+              llm_model?: string
+              gate_model?: string
+            }
+            if (event.type === 'meta') {
+              if (event.llm_model && event.gate_model) {
+                setBackendRuntime({ llm_model: event.llm_model, gate_model: event.gate_model })
+              }
+            } else if (event.type === 'agent') {
               const mapped = AGENT_ID_MAP[event.agent_id ?? ''] ?? 'orchestrator'
               currentAgent = mapped
               setActiveAgentId(mapped)
@@ -197,10 +211,30 @@ export function useBackendChat(): UseBackendChatResult {
           })
           if (res.ok && res.body) {
             reader = res.body.getReader()
-          } else if (shouldUseMockOnFetchFailure()) {
+          } else if (
+            shouldUseMockOnFetchFailure() &&
+            (res.status === 502 || res.status === 503 || res.status === 504)
+          ) {
+            // Dev-only: proxy “upstream unreachable” — likely no API on the target port.
             reader = createMockQueryResponse(messages, ctrl.signal).body?.getReader() ?? null
           } else {
-            setError(`Request failed (${res.status})`)
+            let detail = ''
+            try {
+              const j = (await res.clone().json()) as { detail?: string }
+              if (typeof j?.detail === 'string') detail = j.detail
+            } catch {
+              /* ignore non-JSON error bodies */
+            }
+            const hint403 =
+              res.status === 403
+                ? ' If the API sets BACKEND_API_KEY, add VITE_BACKEND_API_KEY with the same value to .env and restart Vite.'
+                : ''
+            const base =
+              detail
+                ? `Request failed (${res.status}): ${detail}`
+                : `Request failed (${res.status})`
+            const tail = hint403 || (!detail ? ' — check the API terminal logs.' : '')
+            setError(`${base}${tail}`)
             setIsRunning(false)
             return null
           }
@@ -250,9 +284,21 @@ export function useBackendChat(): UseBackendChatResult {
     setActivityLog([])
     setError(null)
     setClarification(null)
+    setBackendRuntime(null)
     setActiveAgentId(null)
     setIsRunning(false)
   }, [])
 
-  return { submit, reset, streamedAnswer, charts, activityLog, isRunning, activeAgentId, error, clarification }
+  return {
+    submit,
+    reset,
+    streamedAnswer,
+    charts,
+    activityLog,
+    isRunning,
+    activeAgentId,
+    error,
+    clarification,
+    backendRuntime,
+  }
 }

@@ -213,6 +213,7 @@ export function Landing() {
     setDraft,
     submitQuestion,
     newChat,
+    backendRuntime,
   } = useCeoIntelligence()
   const logRef = useRef<HTMLDivElement>(null)
   const readoutRef = useRef<HTMLDivElement>(null)
@@ -268,9 +269,9 @@ export function Landing() {
   }, [activityLog])
 
   return (
-    <div className="flex min-h-[100dvh] gap-0">
+    <div className="flex min-h-[100dvh] flex-col gap-0 lg:flex-row">
       {/* ── LEFT: Navigation ── */}
-      <div className="flex flex-1 flex-col overflow-y-auto px-8 py-8 lg:px-10">
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-8 py-8 lg:min-h-[100dvh] lg:px-10">
         <div className="mb-8">
           <img
             src={neomLogoUrl}
@@ -330,8 +331,8 @@ export function Landing() {
         </div>
       </div>
 
-      {/* ── RIGHT: Inline Chat ── */}
-      <div className="sticky top-0 flex h-[100dvh] w-[36%] min-w-[380px] flex-col overflow-hidden border-l border-ma-line bg-ma-surface/20 dark:bg-ma-charcoal/15">
+      {/* ── RIGHT: Inline Chat (stack below nav on small screens; avoids wide min-w clipping) ── */}
+      <div className="flex min-h-[min(520px,70dvh)] w-full flex-col overflow-hidden border-t border-ma-line bg-ma-surface/20 dark:bg-ma-charcoal/15 lg:sticky lg:top-0 lg:h-[100dvh] lg:min-h-0 lg:w-[36%] lg:min-w-[320px] lg:border-l lg:border-t-0 xl:min-w-[380px]">
         {/* Progress shimmer */}
         {isRunning && (
           <div className="flex h-0.5 w-full shrink-0 overflow-hidden bg-ma-line" aria-hidden>
@@ -552,6 +553,15 @@ export function Landing() {
 
         {/* Input area */}
         <div className="shrink-0 border-t border-ma-line/70 bg-ma-surface/80 px-5 py-4">
+          {backendRuntime ? (
+            <p className="mb-2 font-mono text-[9px] leading-snug text-ma-muted/85" title="Models reported by the API for this turn">
+              <span className="text-ma-muted">Models</span>
+              {' · main '}
+              <span className="text-ma-ink/90">{backendRuntime.llm_model}</span>
+              {' · gate '}
+              <span className="text-ma-ink/90">{backendRuntime.gate_model}</span>
+            </p>
+          ) : null}
           <form
             onSubmit={(e) => {
               e.preventDefault()

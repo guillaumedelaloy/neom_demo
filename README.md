@@ -13,6 +13,13 @@ AI-native strategy execution cockpit for NEOM’s portfolio review cycle. Ingest
 
 ---
 
+## Deploying (Vercel, light)
+
+The root **`vercel.json`** builds **only the Vite frontend** (`dist/`). Scorecards and navigation work **without** `data_extract/` on Vercel. The analyst **chat** needs either **`VITE_MOCK_BACKEND=true`** on Vercel (demo stream, no server) or **`VITE_API_BASE_URL`** pointing at a FastAPI process you run elsewhere (still no S3/GCP required — files live next to the API). Full checklist, minimal `data_extract/` layout, and a slim RAG manifest example: **[docs/vercel-handoff.md](docs/vercel-handoff.md)**.  
+**Step-by-step (UI on Vercel, mock chat, no data_extract):** **[docs/vercel-light-deploy.md](docs/vercel-light-deploy.md)**.
+
+---
+
 ## 1. Clone and install
 
 ```bash
@@ -40,9 +47,9 @@ Edit `.env`:
 
 ```env
 # LLM — required (LiteLLM ids: openai/<model>, anthropic/<claude-id>, …)
-# Defaults in api/config/config.yml use OpenAI so one key can run chat + RAG embeddings.
-LLM_MODEL=openai/gpt-4o
-GATE_MODEL=openai/gpt-4o-mini
+# Defaults in api/config/config.yml: main agent openai/gpt-5.5; gate openai/gpt-4o (override here).
+LLM_MODEL=openai/gpt-5.5
+GATE_MODEL=openai/gpt-4o
 
 # API keys — the client picks a key that matches the model provider (see llm_client._api_key_for_model).
 # For OpenAI models, OPENAI_API_KEY is used first. For Anthropic models, ANTHROPIC_API_KEY first.
@@ -65,9 +72,17 @@ LOGFIRE_TOKEN=
 
 > **Chat shows “Assistant temporarily unavailable”?** Ensure **`OPENAI_API_KEY`** is set if you use default **`openai/*`** models, or **`ANTHROPIC_API_KEY`** for **`anthropic/*`**. If `.env` still sets `LLM_MODEL` / `GATE_MODEL` to a provider you do not use, remove or fix those lines. **Do not** point `openai/...` models at an Anthropic-only key: the API now selects keys by provider, but the model id must still match a key you have. Restart the API after changes. With `DEBUG_AGENT=true`, errors include a scrubbed provider message.
 >
-> **OpenAI `RateLimitError` / TPM (tokens per minute):** Low usage tiers often cap TPM (e.g. 10k/min). The agent sends a large system prompt, tools, and optional RAG text — one turn can exceed that. **`gpt-4o-mini` does not remove that overhead** (it mainly changes model pricing/quality). Mitigations: **raise your OpenAI usage tier** or wait between requests; in this repo you can also tighten **`LLM_MAX_COMPLETION_TOKENS`** (default `2048` for `openai/*` — caps completion reservation), **`AGENT_HISTORY_MAX_MESSAGES`** (default `8` user/assistant messages kept), **`AGENT_TOOL_RESULT_MAX_CHARS`** (default `6000` per tool payload), and **`rag_n_results`** in `api/config/config.yml`; then restart the API.
+> **`SSLCertVerificationError` / `certificate verify failed` toward `api.anthropic.com` (or other providers):** Your Python process does not trust the TLS chain — typical on **corporate inspection** proxies or some **macOS Python** installs. **Preferred:** set **`SSL_CERT_FILE`** in `.env` to a PEM bundle that includes your organization’s root (ask IT for a `.pem` / root CA export if you do not have one). To **merge** Mozilla’s public CAs (from `certifi`) with **your** corporate root, replace the second path with a real file — the snippet below uses a placeholder on purpose:
 >
-> **Opus 4.7 / 4.8:** When you enable them, Anthropic may reject non-default `temperature` / sampling. This repo omits `temperature` automatically for those model ids in `llm_client.py`.
+> `cat "$(uv run python -c "import certifi; print(certifi.where())")" /ABSOLUTE/PATH/TO/your-corp-root-or-chain.pem > "$HOME/combined-certs.pem"` then set **`SSL_CERT_FILE=$HOME/combined-certs.pem`** (absolute path) in `.env`. **Last-resort local dev only:** `SSL_VERIFY=false` (disables verification for LiteLLM HTTP clients — insecure). On python.org macOS builds, also run **Install Certificates.command** from the Python folder in **Applications**. Restart the API after any change. See [LiteLLM security settings](https://docs.litellm.ai/docs/guides/security_settings).
+>
+> **FastAPI dotenv:** The API loads **`/.env`** then **`/.env.local`** at the **repository root** (same idea as Vite). Put `LLM_MODEL` / API keys in either file. With **`DEBUG_AGENT=true`**, look for a startup log line `env after dotenv: LLM_MODEL=...` — if it is `None`, those variables were not loaded (wrong file, typo, or unsaved editor buffer). If the UI still shows **`openai/gpt-5.5`** from `config.yml`, open **`/api/health?diagnose=1`** (via the Vite URL) and check **`LLM_MODEL_in_environ`**, **`dotenv_files_loaded`**, and **`repo_root`** vs where your `.env` actually lives.
+>
+> **OpenAI `RateLimitError` / TPM (tokens per minute):** Low usage tiers often cap TPM (e.g. 10k/min). The agent sends a large system prompt, tools, and optional RAG text — one turn can exceed that. **Smaller models do not remove that overhead** (they mainly change price/quality). Mitigations: **raise your OpenAI usage tier** or wait between requests; in this repo you can also tighten **`LLM_MAX_COMPLETION_TOKENS`** (default **`8192`** when the model id contains **`gpt-5.5`**, otherwise **`2048`** — caps completion reservation), **`AGENT_HISTORY_MAX_MESSAGES`** (default `8` user/assistant messages kept), **`AGENT_TOOL_RESULT_MAX_CHARS`** (default `6000` per tool payload), and **`rag_n_results`** in `api/config/config.yml`; then restart the API.
+>
+> **Frontier OpenAI (`openai/gpt-5.5`, `openai/gpt-5.5-pro`):** This repo omits `temperature` and passes **`reasoning_effort`** for the GPT‑5.5 family via LiteLLM (`llm_client.py`). Use **`LLM_MODEL=openai/gpt-5.5-pro`** only if your account and LiteLLM version support it (pricier).
+>
+> **Anthropic `not_found_error` / `model: claude-…`:** The id is wrong for your account or **retired** on Anthropic’s API. As of mid‑2026, dated ids such as **`claude-sonnet-4-20250514`** are retired — use a current id (for example **`anthropic/claude-sonnet-4-6`** for main chat, or **`anthropic/claude-sonnet-4-5-20250929`**). Older **`claude-3-5-haiku-20241022`** is also retired for API use; prefer a current Haiku id such as **`anthropic/claude-haiku-4-5-20251001`** for a fast gate model. See Anthropic’s [model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations).
 >
 > The app runs without `OPENAI_API_KEY` only if you use **non-OpenAI** chat models **and** you skip RAG — otherwise set `OPENAI_API_KEY` for embeddings and (by default) for chat.
 >
@@ -121,13 +136,17 @@ Processed outputs land in `data_extract/processed/`. The RAG index is written to
 
 ## 5. Run the app
 
-The app has two processes. **The Vite proxy only forwards HTTP — it does not start Python.** If you see `http proxy error` / `ECONNREFUSED` on `127.0.0.1:8001`, nothing is listening on that port yet (start the backend below, or match `VITE_DEV_API_PORT` to the port you actually use).
+The app has two processes. **The Vite proxy only forwards HTTP — it does not start Python.** If you see `http proxy error` / `ECONNREFUSED` on `127.0.0.1:8001`, nothing is listening on that port yet (start the backend below, or match `VITE_DEV_API_PORT` to the port you actually use). **`ETIMEDOUT`** on the first request usually means Vite tried the proxy while the API was still importing (first load can take tens of seconds); **`pnpm dev:stack`** waits until TCP **8001** accepts before starting Vite to avoid that race.
 
 **Option A — one terminal (API + Vite together):**
 ```bash
-pnpm install   # once, after pulling (adds concurrently)
+pnpm install   # once, after pulling (adds concurrently + wait-on)
 pnpm dev:stack
 ```
+
+If **`pnpm dev`** / Vite fails with **`Cannot find package .../fdir/index.js`** (from `tinyglobby`), your **`node_modules`** is usually **incomplete** (e.g. `pnpm install` interrupted). From the repo root run **`rm -rf node_modules`** then **`pnpm install`** again. The repo **`.npmrc`** hoists `fdir` / `tinyglobby` to reduce recurrence. Prefer **Node 22 LTS** if you still see odd resolver errors on very new Node versions.
+
+If the browser shows **`cookie` … does not provide an export named `parse`**, clear Vite’s cache (**`rm -rf node_modules/.vite`**) and restart **`pnpm dev`** — `vite.config.ts` pre-bundles `cookie` with `react-router` for correct CJS/ESM interop ([upstream context](https://github.com/remix-run/react-router/issues/13949)).
 
 **Option B — two terminals (recommended for clearer logs):**
 
@@ -146,6 +165,8 @@ pnpm dev --host 127.0.0.1
 Runs on `http://127.0.0.1:5173` (or the next free port — check the terminal). With **`VITE_API_BASE_URL` unset**, the dev server proxies `/api/*` to **`http://127.0.0.1:${VITE_DEV_API_PORT}`** (default **8001** in `vite.config.ts`). For production or a remote API, set **`VITE_API_BASE_URL`** to the full backend origin (no trailing slash); that bypasses the proxy.
 
 Open `http://127.0.0.1:5173` in your browser (use the URL Vite prints if the port differs).
+
+**Which LLM is the API using?** Send any chat message: above the chat input, **Models · main … · gate …** reflects the values the backend streamed (same as `GET /api/health`, which returns `llm_model` and `gate_model`). **Environment variables win over `api/config/config.yml`:** set `LLM_MODEL` / `GATE_MODEL` in `.env`, then restart the API. If the UI still shows an old model after you edited `.env`, you likely had the same variable **exported in your terminal** (`export LLM_MODEL=…`); the app now reloads **repo `.env` with override** so the file wins—restart uvicorn once more. To see what the shell would force without that, run `echo $LLM_MODEL`.
 
 ---
 
@@ -275,7 +296,7 @@ gcloud builds submit \
 gcloud run deploy your-backend \
   --image REGION-docker.pkg.dev/YOUR_PROJECT/YOUR_REPO/your-backend:latest \
   --region REGION --allow-unauthenticated \
-  --set-env-vars "LLM_MODEL=openai/gpt-4o,GATE_MODEL=openai/gpt-4o-mini,OPENAI_API_KEY=<KEY>,BACKEND_API_KEY=<KEY>" \
+  --set-env-vars "LLM_MODEL=openai/gpt-5.5,GATE_MODEL=openai/gpt-4o,OPENAI_API_KEY=<KEY>,BACKEND_API_KEY=<KEY>" \
   --port 8080 --memory 1Gi --timeout 900 \
   --service-account your-sa@YOUR_PROJECT.iam.gserviceaccount.com \
   --add-volume name=data-vol,type=cloud-storage,bucket=YOUR_DATA_BUCKET,readonly=true \

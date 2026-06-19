@@ -1,6 +1,7 @@
 import os
+from pathlib import Path
 
-from api.bootstrap_env import load_repo_dotenv
+from api.bootstrap_env import DOTENV_LOADED, load_repo_dotenv
 
 load_repo_dotenv()  # repo-root .env — works even if uvicorn cwd is not the project root
 
@@ -14,6 +15,9 @@ data_cache.load()
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+
+from api.services.llm_client import get_resolved_chat_model
+from api.services.query_gate import get_resolved_gate_model
 
 app = FastAPI(docs_url=None, redoc_url=None)  # OpenAPI disabled in production
 
@@ -38,8 +42,26 @@ async def check_api_key(request: Request, call_next):
 
 
 @app.get("/api/health")
-def health():
-    return {"status": "ok"}
+def health(request: Request):
+    out: dict = {
+        "status": "ok",
+        "llm_model": get_resolved_chat_model(),
+        "gate_model": get_resolved_gate_model(),
+    }
+    if request.query_params.get("diagnose") == "1":
+        repo = Path(__file__).resolve().parents[1]
+        out["diagnose"] = {
+            "repo_root": str(repo),
+            "cwd": os.getcwd(),
+            "dotenv_files_loaded": list(DOTENV_LOADED),
+            "LLM_MODEL_in_environ": "LLM_MODEL" in os.environ,
+            "GATE_MODEL_in_environ": "GATE_MODEL" in os.environ,
+            "LLM_MODEL_env": os.environ.get("LLM_MODEL"),
+            "GATE_MODEL_env": os.environ.get("GATE_MODEL"),
+            "repo_dotenv_exists": (repo / ".env").is_file(),
+            "repo_dotenv_local_exists": (repo / ".env.local").is_file(),
+        }
+    return out
 
 
 from api.routers.query import router as query_router

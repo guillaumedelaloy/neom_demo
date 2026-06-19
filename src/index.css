@@ -131,6 +131,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Form controls do not always inherit `color`; avoids invisible text on dark shells if utilities lag. */
+.dark input,
+.dark textarea {
+  color: var(--ma-ink);
+}
+
 #root {
   min-height: 100vh;
 }

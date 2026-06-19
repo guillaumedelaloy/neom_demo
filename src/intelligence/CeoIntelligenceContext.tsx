@@ -25,6 +25,8 @@ export type CeoIntelligenceContextValue = {
   draft: string
   setDraft: (v: string) => void
   submitQuestion: (overrideText?: string) => void
+  /** Resolved LLM ids from the last chat response (SSE meta) or mock labels. */
+  backendRuntime: { llm_model: string; gate_model: string } | null
 }
 
 export const CeoIntelligenceContext = createContext<CeoIntelligenceContextValue | null>(null)

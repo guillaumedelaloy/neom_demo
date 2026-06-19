@@ -19,8 +19,13 @@ class GateResult(TypedDict):
     payload: str | None
 
 
+def get_resolved_gate_model() -> str:
+    """Query-gate model id (for health checks and UI). Override with GATE_MODEL."""
+    return os.environ.get("GATE_MODEL", "openai/gpt-4o")
+
+
 def _gate_model() -> str:
-    return os.environ.get("GATE_MODEL", "openai/gpt-4o-mini")
+    return get_resolved_gate_model()
 
 
 _PASS_RESULT: GateResult = {"outcome": "pass", "payload": None}

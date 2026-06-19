@@ -63,6 +63,13 @@ export function createMockQueryResponse(messages: BackendMessage[], signal: Abor
 
       try {
         push({
+          type: 'meta',
+          llm_model: '(mock — no backend)',
+          gate_model: '(mock — no backend)',
+        })
+        await delay(20, signal)
+
+        push({
           type: 'agent',
           agent_id: 'data-retrieval',
           content: 'Reading your question (mock)…',

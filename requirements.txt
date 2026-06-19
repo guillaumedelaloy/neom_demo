@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 pydantic
-litellm>=1.83.10,<2  # Claude Opus 4.7+ needs 1.83.10+ (day-0 Anthropic support)
+litellm>=1.83.14,<2  # GPT-5.5 day-0 (1.83.14+); Claude Opus 4.7+ (1.83.10+)
 python-dotenv # Epic 3 (Story 3.1): load .env at FastAPI startup
 pyyaml        # Story 3.4: load agents.yaml for agent registry
 openpyxl      # Story 2.1: Excel financial model parsing

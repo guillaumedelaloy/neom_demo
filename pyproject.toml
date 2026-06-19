@@ -10,7 +10,7 @@ dependencies = [
     "fastapi",
     "uvicorn",
     "pydantic",
-    "litellm>=1.83.10,<2",
+    "litellm>=1.83.14,<2",
     "python-dotenv",
     "pyyaml",
     "logfire[fastapi,httpx]>=4.32.0",

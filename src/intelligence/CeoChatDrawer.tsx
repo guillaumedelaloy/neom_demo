@@ -125,6 +125,8 @@ type CeoChatDrawerProps = {
   streamedAnswer: string
   error: string | null
   clarification: string | null
+  /** Shown above the composer — from backend SSE `meta` after each ask. */
+  backendRuntime: { llm_model: string; gate_model: string } | null
   draft: string
   onDraftChange: (v: string) => void
   onSubmit: (overrideText?: string) => void
@@ -144,6 +146,7 @@ export function CeoChatDrawer({
   streamedAnswer,
   error,
   clarification,
+  backendRuntime,
   draft,
   onDraftChange,
   onSubmit,
@@ -522,6 +525,15 @@ export function CeoChatDrawer({
 
             {/* ── Input area ── */}
             <div className="shrink-0 border-t border-ma-line bg-ma-surface/80 p-3 md:p-4">
+              {backendRuntime ? (
+                <p className="mb-2 font-mono text-[10px] leading-snug text-ma-muted/85" title="Models reported by the API for this turn">
+                  <span className="text-ma-muted">Models</span>
+                  {' · main '}
+                  <span className="text-ma-ink/90">{backendRuntime.llm_model}</span>
+                  {' · gate '}
+                  <span className="text-ma-ink/90">{backendRuntime.gate_model}</span>
+                </p>
+              ) : null}
               <label className="sr-only" htmlFor="ceo-chat-input">
                 Your question
               </label>

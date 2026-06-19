@@ -1,6 +1,7 @@
 from __future__ import annotations
 import json
 import os
+import sys
 from pathlib import Path
 
 import chromadb
@@ -9,13 +10,26 @@ from pypdf import PdfReader
 from pptx import Presentation
 
 REPO_ROOT = Path(__file__).parent.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+from api.bootstrap_env import load_repo_dotenv
+
+load_repo_dotenv()
+
 DATA_DIR = REPO_ROOT / "data_extract"
 # No need to specify CHROMA_PATH here — it's set by sync-and-ingest.sh script to a local temp dir on Cloud Run, and does not affect local development
 CHROMA_PATH = Path(os.environ.get("CHROMA_PATH", str(DATA_DIR / "chroma_db")))
 MANIFEST_PATH = DATA_DIR / "rag_manifest.json"
 
+_openai_key = os.environ.get("OPENAI_API_KEY")
+if not _openai_key:
+    raise SystemExit(
+        "OPENAI_API_KEY is not set. Add it to the repo .env (next to pyproject.toml) or export it, "
+        "then re-run: uv run python scripts/build_rag_index.py"
+    )
+
 _EF = OpenAIEmbeddingFunction(
-    api_key=os.environ["OPENAI_API_KEY"],
+    api_key=_openai_key,
     model_name="text-embedding-3-small",
 )
 

@@ -14,6 +14,16 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tailwindcss()],
     envPrefix: ['VITE_'],
+    // `react-router` uses `import { parse } from "cookie"` while `cookie` is CJS. If we
+    // exclude the router from `optimizeDeps`, Vite serves raw `cookie` to the browser and
+    // named ESM imports break ("does not provide an export named 'parse'"). Pre-bundle
+    // `cookie` + router packages so interop is applied (see remix-run/react-router#13949).
+    optimizeDeps: {
+      include: ['cookie', 'react-router', 'react-router-dom'],
+    },
+    resolve: {
+      dedupe: ['react-router', 'react-router-dom', 'cookie'],
+    },
     server: {
       proxy: {
         '/api': {

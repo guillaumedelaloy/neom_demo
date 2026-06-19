@@ -183,8 +183,10 @@ async def stream_agent_response(
                 safe = _safe_llm_err(str(e))
                 _log.error("chat_with_tools failed: %s — %s", type(e).__name__, safe)
                 err_text = _LLM_UNAVAILABLE
-                if _DEBUG and safe:
-                    err_text = f"{_LLM_UNAVAILABLE} (debug: {type(e).__name__}: {safe})"
+                if safe:
+                    err_text = f"{_LLM_UNAVAILABLE}\n\n**Technical detail:** {safe}"
+                if _DEBUG:
+                    err_text += f"\n\n(debug: `{type(e).__name__}`)"
                 yield f"data: {json.dumps({'type': 'error', 'content': err_text})}\n\n"
                 return
             msg = response.choices[0].message

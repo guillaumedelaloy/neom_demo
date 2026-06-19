@@ -195,7 +195,7 @@ export function CeoIntelligenceProvider({ children }: { children: ReactNode }) {
   const [contextAware, setContextAware] = useState(true)
   const [reasoningSession, setReasoningSession] = useState(0)
   const [draft, setDraft] = useState('')
-  const { submit, reset: resetBackend, streamedAnswer, charts, activityLog, isRunning, activeAgentId, error, clarification } = useBackendChat()
+  const { submit, reset: resetBackend, streamedAnswer, charts, activityLog, isRunning, activeAgentId, error, clarification, backendRuntime } = useBackendChat()
 
   const openChat = useCallback(
     (patch?: Partial<CeoContext>) => {
@@ -278,8 +278,9 @@ export function CeoIntelligenceProvider({ children }: { children: ReactNode }) {
       draft,
       setDraft,
       submitQuestion,
+      backendRuntime,
     }),
-    [openChat, closeChat, newChat, context, contextAware, setContextAware, isOpen, messages, charts, activityLog, isRunning, reasoningSession, streamedAnswer, error, clarification, draft, submitQuestion],
+    [openChat, closeChat, newChat, context, contextAware, setContextAware, isOpen, messages, charts, activityLog, isRunning, reasoningSession, streamedAnswer, error, clarification, draft, submitQuestion, backendRuntime],
   )
 
   return (
@@ -301,6 +302,7 @@ export function CeoIntelligenceProvider({ children }: { children: ReactNode }) {
           streamedAnswer={streamedAnswer}
           error={error}
           clarification={clarification}
+          backendRuntime={backendRuntime}
           draft={draft}
           onDraftChange={setDraft}
           onSubmit={submitQuestion}

@@ -11,7 +11,7 @@ _CONFIG_PATH = Path(__file__).resolve().parents[1] / "config" / "config.yml"
 class ChatbotConfig(BaseModel):
     """Chatbot configuration read from api/config/config.yml."""
 
-    model: str = "openai/gpt-4o"
+    model: str = "openai/gpt-5.5"
     temperature: float = Field(default=0.2, ge=0.0, le=1.0)
     max_rounds: int = Field(default=30, ge=1)
     pressure_soft_pct: int = Field(default=60, ge=0, le=100)

@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "note": "Example slim manifest — strategy/execution only. Copy to data_extract/rag_manifest.json, keep only these files on disk, delete data_extract/chroma_db, then run scripts/build_rag_index.py to rebuild a small ChromaDB.",
+  "documents": [
+    {"path": "strategy/execution/20260409 - Current Activities and RAG with Baseline Dates.pdf", "category": "execution"},
+    {"path": "strategy/execution/QBR Q1 2026.pptx", "category": "execution"},
+    {"path": "strategy/execution/202601 - Monthly Strategy Execution meeting _V20_08 Feb 2026.pdf", "category": "execution"},
+    {"path": "strategy/execution/Strategic Execution Update - 12 March 2025 vF.pdf", "category": "execution"},
+    {"path": "strategy/budget_bp_2030/2026 Budget and BP 2026-2030 (Presented to the Board).pdf", "category": "strategy"},
+    {"path": "strategy/full_document/NEOM Strategy Offsite Material - 6 Aug 2025 - v60.pptx", "category": "strategy"},
+    {"path": "strategy/full_document/NEOM Strategy Offsite Material - 6 Aug 2025 - v60.pdf", "category": "strategy"},
+    {"path": "strategy/enablers/20251111_Strategy Operationalization and Rewiring_Board_Enablers_v37.pptx", "category": "strategy"},
+    {"path": "strategy/enablers/20260318 Technology Update_v4-FINAL.pdf", "category": "strategy"},
+    {"path": "strategy/risk/20260409_April Excom_Risk update_vFinal.pptx", "category": "risk"}
+  ]
+}
