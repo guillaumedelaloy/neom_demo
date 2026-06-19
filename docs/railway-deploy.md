@@ -25,7 +25,10 @@ Root **`railway.json`** targets the **FastAPI** `Dockerfile` and health-checks *
 | `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` | yes* | Match your `LLM_MODEL` / `GATE_MODEL` providers. |
 | `LLM_MODEL` | no | Overrides `api/config/config.yml` (e.g. `anthropic/claude-sonnet-4-6`). |
 | `GATE_MODEL` | no | Gate model id. |
-| `BACKEND_API_KEY` | recommended | If set, the browser must send header **`x-api-key`** on `/api/*` (configure the SPA env or a reverse proxy). |
+| `BACKEND_API_KEY` | recommended | If set, the browser must send header **`x-api-key`** on `/api/*` except **`/api/health`** and **`/api/auth/login`** (configure **`VITE_BACKEND_API_KEY`** on the client or rely on same-origin env at build time). |
+| `APP_AUTH_USER` | optional | With **`APP_AUTH_PASSWORD`**, enables the **UI sign-in** form (`POST /api/auth/login`). Set both on Railway for a simple username/password gate. |
+| `APP_AUTH_PASSWORD` | optional | Must be set together with **`APP_AUTH_USER`**. Use a strong secret; store only in Railway Variables. |
+| `VITE_BASIC_AUTH_USER` / `VITE_BASIC_AUTH_PASS` | optional | Legacy names still read by the API if **`APP_AUTH_*`** are unset. Prefer **`APP_AUTH_*`** on the server. |
 | `SSL_CERT_FILE` | maybe | Corporate TLS inspection — PEM bundle path **inside the image** (mount file or bake). |
 | `SSL_VERIFY` | dev only | `false` disables TLS verification for LLM HTTP clients (insecure). |
 
@@ -34,6 +37,19 @@ Root **`railway.json`** targets the **FastAPI** `Dockerfile` and health-checks *
 5. **Data / RAG:** The **`Dockerfile` copies `data_extract/chroma_db/`** and **`data_extract/rag_manifest.json`** into the image. They must exist in the **git repo** you deploy (Railway builds from Git). **`.dockerignore`** excludes heavy folders (`strategy/`, `processed/`, etc.) but **not** `chroma_db`. If the build fails with “file not found”, run **`uv run python scripts/build_rag_index.py`** locally, commit **`chroma_db/`** + **`rag_manifest.json`**, and redeploy. Schedules / Excel remain optional unless you add a volume or further **`COPY`** lines.
 
 6. After deploy, open **`https://<your-railway-host>/`** for the UI and **`/api/health`** for JSON **`{"status":"ok",...}`**.
+
+### UI username / password (sign-in gate)
+
+The SPA shows a sign-in form until **`POST /api/auth/login`** succeeds. On Railway, set **both**:
+
+- **`APP_AUTH_USER`** — e.g. `demo` or your team username  
+- **`APP_AUTH_PASSWORD`** — use a long random string (Railway → Variables → generate or paste)
+
+Redeploy or restart after saving variables. The Docker image does **not** need `VITE_BASIC_AUTH_*` at build time for this path: the browser calls the API on the same host, and the server validates credentials.
+
+If you also set **`BACKEND_API_KEY`**, add **`VITE_BACKEND_API_KEY`** with the same value in Railway **before** the Docker build (so Vite embeds it), or the chat proxy requests will return **403** after sign-in.
+
+Legacy: **`VITE_BASIC_AUTH_USER`** / **`VITE_BASIC_AUTH_PASS`** on the API process are still honored if **`APP_AUTH_*`** are empty.
 
 ### Health check
 
@@ -70,7 +86,8 @@ FastAPI currently allows **origins `*`** in `api/index.py`. For production you m
 ## Troubleshooting
 
 - **502 / crash on boot:** Check deploy logs — missing Python deps vs `requirements.txt`, or import errors.
-- **Chat 403:** `BACKEND_API_KEY` is set but the SPA is not sending **`x-api-key`**.
+- **Chat 403:** `BACKEND_API_KEY` is set but the SPA is not sending **`x-api-key`** (set **`VITE_BACKEND_API_KEY`** at **build** time on Railway, or unset **`BACKEND_API_KEY`** for a demo-only deploy).
+- **Sign-in always skipped:** **`APP_AUTH_USER`** and **`APP_AUTH_PASSWORD`** must both be non-empty on the **API** service — check Railway Variables and restart. **`POST /api/auth/login`** should return **`{"enabled":true,"ok":true}`** for valid credentials.
 - **`/api/health?diagnose=1`:** Use it to confirm `LLM_MODEL` / dotenv paths when debugging env.
 - **Missing `data_extract` / Chroma / Excel / schedules:** Expected on the default slim image. The API logs those conditions at **DEBUG** only so Railway’s default **INFO** deploy logs stay quiet. To see them locally, set your root logger to **DEBUG** (or use `uvicorn --log-level debug` and configure `logging` for the `api` namespace).
 

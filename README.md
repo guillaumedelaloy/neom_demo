@@ -61,9 +61,13 @@ OPENAI_API_KEY=sk-proj-...
 # Optional generic override (any provider, used as fallback in key chain)
 # LLM_API_KEY=
 
-# Password gate — optional (leave empty to disable)
-VITE_BASIC_AUTH_USER=admin
-VITE_BASIC_AUTH_PASS=...
+# UI password gate — optional (both must be set to enable; omit either to disable)
+# Server (Railway / Docker / local API): preferred names
+APP_AUTH_USER=demo
+APP_AUTH_PASSWORD=...
+# Legacy / same values in .env for Vite fallback when the API is unreachable (optional)
+# VITE_BASIC_AUTH_USER=demo
+# VITE_BASIC_AUTH_PASS=...
 
 # Optional: enable verbose agent debug logs
 DEBUG_AGENT=false
@@ -88,7 +92,7 @@ LOGFIRE_TOKEN=
 >
 > The app runs without `OPENAI_API_KEY` only if you use **non-OpenAI** chat models **and** you skip RAG — otherwise set `OPENAI_API_KEY` for embeddings and (by default) for chat.
 >
-> If `VITE_BASIC_AUTH_USER` and `VITE_BASIC_AUTH_PASS` are both empty the password gate is disabled entirely.
+> The gate calls **`POST /api/auth/login`**. If **`APP_AUTH_USER`** and **`APP_AUTH_PASSWORD`** are both set on the API, credentials are checked server-side. If they are unset, the API also checks legacy **`VITE_BASIC_AUTH_USER`** / **`VITE_BASIC_AUTH_PASS`**. If the API has no credentials configured, the UI falls back to matching **`VITE_BASIC_AUTH_*`** in the browser only (useful when the static site cannot reach the API). If nothing is configured, sign-in is skipped (**fail open** for local demos).
 
 ---
 
@@ -266,7 +270,7 @@ All frontend API calls use `getApiBase()` from `src/lib/api.ts`, which reads `VI
 
 ### API authentication
 
-The backend requires an `x-api-key` header on all routes except `/api/health`. The key is set via `BACKEND_API_KEY` env var on Cloud Run. The frontend sends it via `VITE_BACKEND_API_KEY`.
+The backend requires an `x-api-key` header on all `/api/*` routes except **`/api/health`** and **`/api/auth/login`**. The key is set via `BACKEND_API_KEY` env var on Cloud Run. The frontend sends it via `VITE_BACKEND_API_KEY`.
 
 ### Data pipeline
 

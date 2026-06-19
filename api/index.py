@@ -35,7 +35,7 @@ logfire.instrument_fastapi(app)
 @app.middleware("http")
 async def check_api_key(request: Request, call_next):
     path = request.url.path
-    if request.method == "OPTIONS" or path == "/api/health":
+    if request.method == "OPTIONS" or path == "/api/health" or path == "/api/auth/login":
         return await call_next(request)
     # SPA + hashed assets live outside /api; do not require x-api-key for those paths.
     expected = os.environ.get("BACKEND_API_KEY")
@@ -66,6 +66,9 @@ def health(request: Request):
         }
     return out
 
+
+from api.routers.auth import router as auth_router
+app.include_router(auth_router)
 
 from api.routers.query import router as query_router
 app.include_router(query_router)

@@ -3,7 +3,7 @@ import { getApiBase } from '../lib/api'
 
 const STORAGE_KEY = 'ma-auth-ok'
 
-// Baked in at build time by Vercel — used as fallback if backend has no credentials set
+// Baked in at build time — optional fallback if backend has no credentials or is unreachable
 const BAKED_USER = import.meta.env.VITE_BASIC_AUTH_USER?.trim() ?? ''
 const BAKED_PASS = import.meta.env.VITE_BASIC_AUTH_PASS?.trim() ?? ''
 
