@@ -15,6 +15,7 @@ data_cache.load()
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from api.services.llm_client import get_resolved_chat_model
 from api.services.query_gate import get_resolved_gate_model
@@ -33,10 +34,12 @@ logfire.instrument_fastapi(app)
 
 @app.middleware("http")
 async def check_api_key(request: Request, call_next):
-    if request.url.path == "/api/health" or request.method == "OPTIONS":
+    path = request.url.path
+    if request.method == "OPTIONS" or path == "/api/health":
         return await call_next(request)
+    # SPA + hashed assets live outside /api; do not require x-api-key for those paths.
     expected = os.environ.get("BACKEND_API_KEY")
-    if expected and request.headers.get("x-api-key") != expected:
+    if expected and path.startswith("/api") and request.headers.get("x-api-key") != expected:
         return JSONResponse({"detail": "Invalid API key"}, status_code=403)
     return await call_next(request)
 
@@ -69,3 +72,12 @@ app.include_router(query_router)
 
 from api.routers.reprocess import router as reprocess_router
 app.include_router(reprocess_router)
+
+# Production (Docker / Railway): serve the Vite bundle from ./dist on the same port as the API.
+_dist = Path(__file__).resolve().parents[1] / "dist"
+if _dist.is_dir():
+    app.mount(
+        "/",
+        StaticFiles(directory=str(_dist), html=True),
+        name="spa",
+    )

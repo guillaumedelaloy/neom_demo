@@ -1,9 +1,10 @@
 # Deploy on Railway
 
-This repo is set up for **two common patterns**:
+This repo supports **these patterns**:
 
-1. **API only on Railway** (recommended first step) — Docker image runs FastAPI. Host the Vite SPA on Vercel (or anywhere static) and set **`VITE_API_BASE_URL`** / **`NEXT_PUBLIC_API_URL`** to your Railway service URL.
-2. **API + static UI on Railway** — two Railway services from the same repo (see below).
+1. **Single Railway service (default `Dockerfile`)** — multi-stage image builds the **Vite** app, copies **`dist/`** into the Python image, and FastAPI serves **`/`** and **`/assets/*`** from that folder (same origin as **`/api/*`**). Set **`VITE_API_BASE_URL`** empty or omit it so the browser calls your Railway host.
+2. **API on Railway, SPA elsewhere** — use a custom image or build that skips the web stage if you prefer; point **`VITE_API_BASE_URL`** / **`NEXT_PUBLIC_API_URL`** at the Railway API URL.
+3. **Two Railway services** — API Dockerfile + separate static host (see Service B below).
 
 Root **`railway.json`** targets the **FastAPI** `Dockerfile` and health-checks **`/api/health`**.
 
@@ -30,11 +31,11 @@ Root **`railway.json`** targets the **FastAPI** `Dockerfile` and health-checks *
 
 \*Chat + RAG need keys per README; demo UI can use `VITE_MOCK_BACKEND=true` on the frontend without this API.
 
-5. **Data / RAG:** The default `Dockerfile` copies **`api/`** and **`scripts/`** only. It does **not** copy gitignored **`data_extract/`** (same as the existing Cloud Run story). For a full demo you must either:
-   - attach a **Railway volume** mounted at `/app/data_extract` and upload/process data there, or  
-   - bake a slim `data_extract/` into a **custom image** (not recommended for large binaries in git).
+5. **Data / RAG:** The image still does **not** bake in **`data_extract/`** (kept out of the build context via **`.dockerignore`** so large PDFs/XER do not slow builds). Startup warnings for missing **`schedules.json`**, Excel, or Chroma are expected until you attach data. For a full demo either:
+   - attach a **Railway volume** at **`/app/data_extract`** and upload a slim tree + run preprocessing, or  
+   - extend the Dockerfile with a **`COPY data_extract/...`** slice you are willing to ship.
 
-6. After deploy, open **`https://<your-railway-host>/api/health`** — expect `{"status":"ok",...}`.
+6. After deploy, open **`https://<your-railway-host>/`** for the UI and **`/api/health`** for JSON **`{"status":"ok",...}`**.
 
 ### Health check
 

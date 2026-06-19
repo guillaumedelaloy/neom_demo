@@ -1,0 +1,19 @@
+# Smaller build context for Railway / local docker build
+.git
+.github
+node_modules
+dist
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+coverage
+htmlcov
+data_extract
+_bmad-output
+context
+*.md
+!README.md
